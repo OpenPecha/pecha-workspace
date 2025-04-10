@@ -1,3 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.text-pecha-primary{
+    color:#12dfec
+}
+.text-pecha-secondary{
+    color:#8e57f1
+}
+.text-pecha-tertiary{
+    color:#f2f4f4
+}
+
+
+.bg-pecha-primary {
+    background-color:#12dfec;
+}
+.bg-pecha-secondary {
+    background-color:#8e57f1;
+}
+.bg-pecha-tertiary {
+    background-color:#f2f4f4;
+}
+
+@layer components {
+    .tool-card {
+      @apply bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col items-center justify-center gap-3;
+    }
+    
+    .tool-icon {
+      @apply w-16 h-16 flex items-center justify-center rounded-full;
+    }
+  }
