@@ -6,6 +6,7 @@ import Callback from "./page/Callback";
 import Profile from "./page/Profile";
 import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./page/Login";
+import Logout from "./page/Logout";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/callback" element={<Callback />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Logout />} />
             </Routes>
           </Layout>
         </AuthProvider>
