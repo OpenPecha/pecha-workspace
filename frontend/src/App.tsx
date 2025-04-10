@@ -5,6 +5,7 @@ import Home from "./page/Home";
 import Callback from "./page/Callback";
 import Profile from "./page/Profile";
 import { AuthProvider } from "./contexts/AuthContext";
+import Login from "./page/Login";
 
 function App() {
   return (
