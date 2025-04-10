@@ -13,7 +13,7 @@ function App() {
       clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
       authorizationParams={{
         redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
-        scope: "openid profile email"
+        scope: "openid profile email",
       }}
       useRefreshTokens={true}
       useRefreshTokensFallback={true}
@@ -26,6 +26,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/callback" element={<Callback />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </Layout>
         </AuthProvider>
