@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-jose
+python-multipart
+pydantic
+python-dotenv
+requests
+itsdangerous
+python3-saml==1.15.0
