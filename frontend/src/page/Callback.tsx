@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Callback = () => {
   const navigate = useNavigate();
-  const { isLoading, error: auth0Error, isAuthenticated } = useAuth0();
+  const { isLoading, error: auth0Error, isAuthenticated, login } = useAuth();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -13,16 +13,17 @@ const Callback = () => {
     if (!isLoading && isAuthenticated) {
       // Navigate to the home page after a short delay
       const timer = setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 1500);
       return () => clearTimeout(timer);
     }
 
     // If there's an error from Auth0, capture it
-    if (auth0Error) {
-      setError(auth0Error.message);
+    if (auth0Error?.message.includes("login_required")) {
+      console.log("Silent login failed: user must log in manually.");
+      login(false);
     }
-  }, [isLoading, isAuthenticated, auth0Error, navigate]);
+  }, [isLoading, isAuthenticated, auth0Error, navigate, login]);
 
   // Determine which content to display based on the current state
   const renderContent = () => {
@@ -30,7 +31,7 @@ const Callback = () => {
       return (
         <div className="text-red-500">
           <h1 className="text-2xl font-bold mb-4">Authentication Error</h1>
-          <p>{error ?? (auth0Error ? auth0Error.message : '')}</p>
+          <p>{error ?? (auth0Error ? auth0Error.message : "")}</p>
           <button
             onClick={() => navigate("/")}
             className="mt-4 px-4 py-2 bg-pecha-secondary text-white rounded hover:bg-pecha-secondary/90"

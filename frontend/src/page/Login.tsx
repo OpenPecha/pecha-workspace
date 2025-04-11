@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 function Login() {
   const { login } = useAuth();
   useEffect(() => {
-    login();
+    login(true);
   }, [login]);
   return <div></div>;
 }
