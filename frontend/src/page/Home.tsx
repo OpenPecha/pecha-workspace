@@ -53,26 +53,6 @@ const Home: React.FC = () => {
           providing specialized tools for translation, transcription, and
           proofreading.
         </p>
-
-        {!isAuthenticated && (
-          <div className="mt-8 flex flex-col items-center space-y-4">
-            <p className="text-gray-700">Sign in to access all tools</p>
-            <Button
-              onClick={() =>
-                loginWithRedirect({
-                  authorizationParams: {
-                    redirect_uri: window.location.origin + "/callback",
-                    scope: "openid profile email",
-                  },
-                })
-              }
-              className="bg-pecha-primary hover:bg-pecha-primary/90 text-white flex items-center gap-2 px-6 py-2"
-            >
-              <LogIn size={18} />
-              Login with Auth0
-            </Button>
-          </div>
-        )}
       </section>
 
       <section className="mb-16">
@@ -88,12 +68,10 @@ const Home: React.FC = () => {
             >
               <ToolCard
                 title={tool.title}
-                description={tool.description}
                 icon={tool.icon}
                 iconColor={tool.iconColor}
                 bgColor={tool.bgColor}
                 path={tool.path}
-                isLoggedIn={isAuthenticated}
               />
             </div>
           ))}
