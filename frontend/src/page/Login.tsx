@@ -3,8 +3,11 @@ import React, { useEffect } from "react";
 
 function Login() {
   const { login } = useAuth();
+
   useEffect(() => {
-    login(true);
+    const queryParams = new URLSearchParams(location.search);
+    const redirect = queryParams.get("redirect");
+    login(true, redirect);
   }, [login]);
   return <div></div>;
 }

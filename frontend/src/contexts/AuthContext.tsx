@@ -45,10 +45,10 @@ export const useAuth = () => {
   };
 
   // Wrap login to match our previous API
-  const login = (auto: boolean) => {
+  const login = (auto: boolean, redirect: string | null = null) => {
     loginWithRedirect({
       authorizationParams: {
-        redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
+        redirect_uri: redirect ?? import.meta.env.VITE_AUTH0_REDIRECT_URI,
         scope: "openid profile email",
         prompt: auto ? "none" : "login",
       },
