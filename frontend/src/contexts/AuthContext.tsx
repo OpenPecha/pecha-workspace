@@ -39,7 +39,6 @@ export const useAuth = () => {
     auth0Logout({
       logoutParams: {
         returnTo: window.location.origin,
-        federated: true,
       },
     });
   };
