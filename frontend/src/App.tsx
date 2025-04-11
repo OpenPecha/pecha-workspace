@@ -16,6 +16,7 @@ function App() {
       authorizationParams={{
         redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
         scope: "openid profile email",
+        prompt: "none",
       }}
       useRefreshTokens={true}
       useRefreshTokensFallback={true}

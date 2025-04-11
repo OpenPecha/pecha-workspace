@@ -27,7 +27,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
         <div className={cn("tool-icon", bgColor)}>
           <Icon size={32} className={iconColor} />
         </div>
-        <h3 className="font-bold text-lg mt-2">{title}</h3>
+        <h3 className="font-bold text-lg mt-2 text-gray-600">{title}</h3>
       </Card>
     </a>
   );

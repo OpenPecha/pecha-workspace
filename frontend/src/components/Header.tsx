@@ -11,9 +11,8 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <a href="/" className="flex items-center gap-2">
           <div className="flex items-center">
-            <span className="text-pecha-primary font-bold text-2xl">pecha</span>
             <span className="text-pecha-secondary font-bold text-2xl">
-              .tools
+              Workspace
             </span>
           </div>
         </a>
