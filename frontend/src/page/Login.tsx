@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 function Login() {
   const { login } = useAuth();
@@ -7,7 +7,7 @@ function Login() {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const redirect = queryParams.get("redirect");
-    login(true, redirect);
+    login(false, redirect);
   }, [login]);
   return <div></div>;
 }
