@@ -27,18 +27,18 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         setLoading(true);
-        
+
         if (user) {
           // Use user data from our Auth context
           setProfile({
             id: user.id,
             name: user.name,
             email: user.email,
-            picture: user.picture
+            picture: user.picture,
           });
           setError(null);
         } else {
-          throw new Error('No user data available');
+          throw new Error("No user data available");
         }
       } catch (err) {
         console.error("Error fetching profile:", err);
@@ -81,8 +81,10 @@ const Profile = () => {
   return (
     <div className="container mx-auto mt-10 p-6">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-pecha-primary">User Profile</h1>
-        
+        <h1 className="text-2xl font-bold mb-6 text-pecha-primary">
+          User Profile
+        </h1>
+
         {profile && (
           <div className="flex flex-col md:flex-row gap-6">
             {profile.picture && (
@@ -94,7 +96,7 @@ const Profile = () => {
                 />
               </div>
             )}
-            
+
             <div className="flex-grow">
               <div className="mb-4">
                 <h2 className="text-xl font-semibold text-gray-800">
@@ -104,9 +106,11 @@ const Profile = () => {
                   <p className="text-gray-600">{profile.email}</p>
                 )}
               </div>
-              
+
               <div className="border-t pt-4 mt-4">
-                <h3 className="text-md font-medium text-gray-700 mb-2">Account Information</h3>
+                <h3 className="text-md font-medium text-gray-700 mb-2">
+                  Account Information
+                </h3>
                 <p className="text-sm text-gray-600">
                   <span className="font-medium">User ID:</span> {profile.id}
                 </p>
@@ -114,10 +118,11 @@ const Profile = () => {
                   <span className="font-medium">Authentication:</span> Okta SSO
                 </p>
                 <p className="text-sm text-gray-600 mt-1">
-                  <span className="font-medium">Issuer:</span> {import.meta.env.VITE_OKTA_ISSUER}
+                  <span className="font-medium">Issuer:</span>{" "}
+                  {import.meta.env.VITE_OKTA_ISSUER}
                 </p>
               </div>
-              
+
               <div className="mt-6">
                 <button
                   onClick={() => navigate("/")}
