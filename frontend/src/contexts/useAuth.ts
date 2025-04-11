@@ -22,11 +22,12 @@ export const useAuth = () => {
   };
 
   // Wrap login to match our previous API
-  const login = () => {
+  const login = (auto:boolean) => {
     loginWithRedirect({
       authorizationParams: {
         redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
-        scope: 'openid profile email'
+        scope: 'openid profile email',
+        prompt:auto?"none":"login"
       }
     });
   };

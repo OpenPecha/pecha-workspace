@@ -10,12 +10,9 @@ const Callback = () => {
   useEffect(() => {
     // Auth0 will handle the token processing automatically
     // We just need to redirect once authentication is complete
-    if (!isLoading && isAuthenticated) {
+    if (isAuthenticated) {
       // Navigate to the home page after a short delay
-      const timer = setTimeout(() => {
-        navigate("/");
-      }, 1500);
-      return () => clearTimeout(timer);
+      navigate("/");
     }
 
     // If there's an error from Auth0, capture it

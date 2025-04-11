@@ -1,10 +1,25 @@
 // This file is kept for backward compatibility but now just re-exports Auth0 hooks
-import { useAuth0 } from "@auth0/auth0-react";
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import { ReactNode } from "react";
 
 // Component wrapper for backward compatibility
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>;
+  return (
+    <Auth0Provider
+      domain={import.meta.env.VITE_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+      authorizationParams={{
+        redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
+        scope: "openid profile email",
+        prompt: "none",
+      }}
+      useRefreshTokens={true}
+      useRefreshTokensFallback={true}
+      cacheLocation="localstorage"
+    >
+      {children}
+    </Auth0Provider>
+  );
 };
 
 // Auth hook for backward compatibility - moved to separate export
@@ -24,6 +39,7 @@ export const useAuth = () => {
     auth0Logout({
       logoutParams: {
         returnTo: window.location.origin,
+        federated: true,
       },
     });
   };
