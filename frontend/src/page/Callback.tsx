@@ -17,6 +17,7 @@ const Callback = () => {
   const createUserMutation = useMutation({
     mutationFn: async () => {
       const token = await getToken();
+      localStorage.setItem("access_token", token!);
       return create_user(token!);
     },
     onSuccess: () => {

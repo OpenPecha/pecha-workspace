@@ -8,8 +8,8 @@ from utils import UnauthorizedException, VerifyToken
 from config import get_settings
 import requests
 import time
-import model
-from routes import user
+import models
+from routes import user,tools
 # Load environment variables
 load_dotenv()
 from database import engine, SessionLocal
@@ -36,7 +36,7 @@ app = FastAPI(
     docs_url=None,  # Disable default Swagger UI
     redoc_url=None  # Disable default ReDoc UI
 )
-model.Base.metadata.create_all(engine)
+models.Base.metadata.create_all(engine)
 
 app.add_middleware(
     CORSMiddleware,
@@ -95,6 +95,7 @@ async def get_token():
 
 # Include routes
 app.include_router(user.router)
+app.include_router(tools.router)
 
 # Custom Swagger UI endpoint
 @app.get("/docs", include_in_schema=False)

@@ -1,23 +1,14 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ToolCardProps {
   title: string;
-  icon: LucideIcon;
-  iconColor: string;
-  bgColor: string;
+  icon: string;
   path: string;
 }
 
-const ToolCard: React.FC<ToolCardProps> = ({
-  title,
-  icon: Icon,
-  iconColor,
-  bgColor,
-  path,
-}) => {
+const ToolCard: React.FC<ToolCardProps> = ({ title, icon, path }) => {
   return (
     <a
       href={path}
@@ -25,10 +16,8 @@ const ToolCard: React.FC<ToolCardProps> = ({
     >
       <Card>
         <CardHeader>
-          <CardTitle
-            className={`${bgColor} ${iconColor} rounded-full p-3 text-center w-fit mx-auto`}
-          >
-            <Icon />
+          <CardTitle className={`rounded-full p-3 text-center w-fit mx-auto`}>
+            <img src={icon} alt={title} />
           </CardTitle>
           {/* <CardDescription>Card Description</CardDescription> */}
         </CardHeader>

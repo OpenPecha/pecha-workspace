@@ -46,6 +46,7 @@ export const useAuth = () => {
         clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
       },
     });
+    localStorage.removeItem("access_token");
   };
 
   // Wrap login to match our previous API

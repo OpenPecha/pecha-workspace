@@ -4,7 +4,7 @@ import time
 from utils import UnauthorizedException, VerifyToken
 from database import db_dependency
 from pydantic import BaseModel
-import model 
+import models
 class UserBase(BaseModel):
     id: str
     email: str
@@ -39,12 +39,12 @@ async def create_user(db: db_dependency, auth_result: dict = Security(auth.verif
     user_picture = auth_result.get("https://pecha-tool/picture")
     
     # Check if user already exists
-    existing_user = db.query(model.User).filter(model.User.id == user_id).first()
+    existing_user = db.query(models.User).filter(models.User.id == user_id).first()
     if existing_user:
         return existing_user
     
     # Create new user
-    db_user = model.User(
+    db_user = models.User(
         id=user_id,
         email=user_email,
         picture=user_picture,
@@ -59,13 +59,13 @@ async def create_user(db: db_dependency, auth_result: dict = Security(auth.verif
 async def get_user(user_id: str, db: db_dependency, auth_result: dict = Security(auth.verify)):
     """Get a specific user by ID."""
     auth_user_id = auth_result.get("sub")
-    auth_user = db.query(model.User).filter(model.User.id == auth_user_id).first()
+    auth_user = db.query(models.User).filter(models.User.id == auth_user_id).first()
     
     # Allow access only if requesting own profile or is admin
     if auth_user_id != user_id and (not auth_user or not auth_user.isAdmin):
         raise HTTPException(status_code=403, detail="Not authorized to access this user")
     
-    user = db.query(model.User).filter(model.User.id == user_id).first()
+    user = db.query(models.User).filter(models.User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
@@ -75,11 +75,11 @@ async def get_all_users(db: db_dependency, auth_result: dict = Security(auth.ver
     """Get all users (admin only)."""
     # Check if user is admin
     user_id = auth_result.get("sub")
-    user = db.query(model.User).filter(model.User.id == user_id).first()
+    user = db.query(models.User).filter(models.User.id == user_id).first()
     if not user or not user.isAdmin:
         raise HTTPException(status_code=403, detail="Not authorized to access this resource")
     
-    users = db.query(model.User).all()
+    users = db.query(models.User).all()
     return users
 
 @router.patch("/", tags=["user"])
@@ -92,7 +92,7 @@ async def update_user(
     # Get user ID from token
     user_id = auth_result.get("sub")
     
-    db_user = db.query(model.User).filter(model.User.id == user_id).first()
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     
@@ -112,12 +112,12 @@ async def delete_user(
     """Delete a user (admin only)."""
     # Check if user is admin
     auth_user_id = auth_result.get("sub")
-    auth_user = db.query(model.User).filter(model.User.id == auth_user_id).first()
+    auth_user = db.query(models.User).filter(models.User.id == auth_user_id).first()
     
     if not auth_user or not auth_user.isAdmin:
         raise HTTPException(status_code=403, detail="Not authorized to delete users")
     
-    db_user = db.query(model.User).filter(model.User.id == user_id).first()
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     
