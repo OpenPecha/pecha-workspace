@@ -6,7 +6,6 @@ pydantic
 python-dotenv
 requests
 itsdangerous
-python3-saml==1.15.0
-PyJWT
+PyJWT[crypto]
 sqlalchemy
 psycopg2-binary
