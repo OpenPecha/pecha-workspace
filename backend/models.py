@@ -23,9 +23,8 @@ class Tools(Base):
     description = Column(String, nullable=True)
     category = Column(String, nullable=True)
     price = Column(Float, nullable=True)
-    image = Column(String, nullable=True)
+    icon = Column(String, nullable=True)
     link = Column(String, nullable=True)
     demo = Column(String, nullable=True)
-    icon =Column(String,nullable=True)
     
     
