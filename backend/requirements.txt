@@ -10,3 +10,4 @@ PyJWT[crypto]
 sqlalchemy
 psycopg2-binary
 pydantic_settings
+alembic
