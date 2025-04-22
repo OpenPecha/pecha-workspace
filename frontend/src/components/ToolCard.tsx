@@ -17,7 +17,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ title, icon, path }) => {
       <Card>
         <CardHeader>
           <CardTitle className={`rounded-full p-3 text-center w-fit mx-auto`}>
-            <img src={icon} alt={title} />
+            <img src={icon} alt={title} className="max-h-12" />
           </CardTitle>
           {/* <CardDescription>Card Description</CardDescription> */}
         </CardHeader>

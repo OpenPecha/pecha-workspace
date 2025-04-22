@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { addTool, getTools, deleteTool, Tool } from "@/api/tools";
+import { addTool, getTools, deleteTool, updateTool, Tool } from "@/api/tools";
 import { getUsers, updateUserAdmin, User } from "@/api/user";
 import { Trash2, Search, UserCog } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,6 +21,7 @@ const Admin: React.FC = () => {
 
   // Tool form state
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     description: "",
     category: "",
@@ -29,6 +30,9 @@ const Admin: React.FC = () => {
     demo: "",
     icon: "",
   });
+  
+  // Edit mode state
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -66,15 +70,20 @@ const Admin: React.FC = () => {
     mutationFn: addTool,
     onSuccess: () => {
       // Reset form
-      setFormData({
-        name: "",
-        description: "",
-        category: "",
-        price: "",
-        link: "",
-        demo: "",
-        icon: "",
-      });
+      resetForm();
+
+      // Invalidate and refetch tools
+      queryClient.invalidateQueries({ queryKey: ["toolsList"] });
+    },
+  });
+  
+  // Update tool mutation
+  const updateToolMutation = useMutation({
+    mutationFn: ({ id, tool }: { id: string; tool: Partial<Tool> }) => 
+      updateTool(id, tool),
+    onSuccess: () => {
+      // Reset form
+      resetForm();
 
       // Invalidate and refetch tools
       queryClient.invalidateQueries({ queryKey: ["toolsList"] });
@@ -171,6 +180,37 @@ const Admin: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Reset form to initial state
+  const resetForm = () => {
+    setFormData({
+      id: "",
+      name: "",
+      description: "",
+      category: "",
+      price: "",
+      link: "",
+      demo: "",
+      icon: "",
+    });
+    setIsEditMode(false);
+    setErrors({});
+  };
+  
+  // Handle edit tool
+  const handleEditTool = (tool: Tool) => {
+    setFormData({
+      id: tool.id ?? "",
+      name: tool.name ?? "",
+      description: tool.description ?? "",
+      category: tool.category ?? "",
+      price: tool.price ? tool.price.toString() : "",
+      link: tool.link ?? "",
+      demo: tool.demo ?? "",
+      icon: tool.icon ?? "",
+    });
+    setIsEditMode(true);
+  };
+  
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -183,7 +223,14 @@ const Admin: React.FC = () => {
       price: formData.price ? parseFloat(formData.price) : undefined,
     };
 
-    addToolMutation.mutate(toolData);
+    if (isEditMode && formData.id) {
+      // Update existing tool
+      const { id, ...toolWithoutId } = toolData;
+      updateToolMutation.mutate({ id, tool: toolWithoutId });
+    } else {
+      // Add new tool
+      addToolMutation.mutate(toolData);
+    }
   };
 
   // Fetch and store token when authenticated
@@ -235,9 +282,11 @@ const Admin: React.FC = () => {
           {/* Add Tool Form */}
           <Card>
             <CardHeader>
-              <CardTitle>Add New Tool</CardTitle>
+              <CardTitle>{isEditMode ? "Edit Tool" : "Add New Tool"}</CardTitle>
               <CardDescription>
-                Create a new tool that will appear on the homepage
+                {isEditMode 
+                  ? "Edit an existing tool" 
+                  : "Create a new tool that will appear on the homepage"}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -381,23 +430,41 @@ const Admin: React.FC = () => {
 
 
 
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={addToolMutation.isPending}
-                >
-                  {addToolMutation.isPending ? "Adding..." : "Add Tool"}
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    type="submit"
+                    className="flex-1"
+                    disabled={addToolMutation.isPending || updateToolMutation.isPending}
+                  >
+                    {(() => {
+                      if (addToolMutation.isPending || updateToolMutation.isPending) {
+                        return isEditMode ? "Updating..." : "Adding...";
+                      }
+                      return isEditMode ? "Update Tool" : "Add Tool";
+                    })()}
+                  </Button>
+                  
+                  {isEditMode && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={resetForm}
+                      className="w-24"
+                    >
+                      Cancel
+                    </Button>
+                  )}
+                </div>
 
-                {addToolMutation.isError && (
+                {(addToolMutation.isError || updateToolMutation.isError) && (
                   <p className="text-red-500 text-sm mt-2">
-                    Error adding tool. Please try again.
+                    Error {isEditMode ? "updating" : "adding"} tool. Please try again.
                   </p>
                 )}
 
-                {addToolMutation.isSuccess && (
+                {(addToolMutation.isSuccess || updateToolMutation.isSuccess) && (
                   <p className="text-green-500 text-sm mt-2">
-                    Tool added successfully!
+                    Tool {isEditMode ? "updated" : "added"} successfully!
                   </p>
                 )}
               </form>
@@ -437,15 +504,29 @@ const Admin: React.FC = () => {
                                 )}
                                 <h3 className="font-medium">{tool.name}</h3>
                               </div>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-red-500 hover:text-red-700 hover:bg-red-50"
-                                onClick={() => handleDeleteTool(tool.id!)}
-                                title="Delete tool"
-                              >
-                                <Trash2 size={16} />
-                              </Button>
+                              <div className="flex gap-1">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-blue-500 hover:text-blue-700 hover:bg-blue-50"
+                                  onClick={() => handleEditTool(tool)}
+                                  title="Edit tool"
+                                >
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                  </svg>
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                                  onClick={() => handleDeleteTool(tool.id!)}
+                                  title="Delete tool"
+                                >
+                                  <Trash2 size={16} />
+                                </Button>
+                              </div>
                             </div>
                             {tool.description && (
                               <p className="text-sm text-gray-600 mt-1">
