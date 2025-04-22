@@ -43,6 +43,7 @@ export const useAuth = () => {
     auth0Logout({
       logoutParams: {
         returnTo: window.location.origin,
+        clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
       },
     });
   };
