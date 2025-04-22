@@ -6,6 +6,7 @@ import Profile from "./page/Profile";
 import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./page/Login";
 import Logout from "./page/Logout";
+import Admin from "./page/Admin";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 function AppContainer() {
   return (
@@ -17,6 +18,7 @@ function AppContainer() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Layout>
     </BrowserRouter>
