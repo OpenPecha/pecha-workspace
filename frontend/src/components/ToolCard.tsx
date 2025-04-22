@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,11 +23,18 @@ const ToolCard: React.FC<ToolCardProps> = ({
       href={path}
       className={cn("block transition-transform duration-300 hover:scale-105")}
     >
-      <Card className="tool-card h-full">
-        <div className={cn("tool-icon", bgColor)}>
-          <Icon size={32} className={iconColor} />
-        </div>
-        <h3 className="font-bold text-lg mt-2 text-gray-600">{title}</h3>
+      <Card>
+        <CardHeader>
+          <CardTitle
+            className={`${bgColor} ${iconColor} rounded-full p-3 text-center w-fit mx-auto`}
+          >
+            <Icon />
+          </CardTitle>
+          {/* <CardDescription>Card Description</CardDescription> */}
+        </CardHeader>
+        <CardContent className="text-center">
+          <h3 className="font-bold text-lg mt-2 text-gray-600">{title}</h3>
+        </CardContent>
       </Card>
     </a>
   );

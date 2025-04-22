@@ -57,7 +57,11 @@ export const useAuth = () => {
   // Provide a getToken method for backward compatibility
   const getToken = async (): Promise<string | null> => {
     try {
-      return await getAccessTokenSilently();
+      return await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        },
+      });
     } catch (e) {
       console.error("Error getting token:", e);
       return null;
