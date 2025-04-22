@@ -4,13 +4,17 @@ import { ReactNode } from "react";
 
 // Component wrapper for backward compatibility
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const redirectUri =
+    import.meta.env.VITE_AUTH0_REDIRECT_URI || window.location.origin;
+
   return (
     <Auth0Provider
       domain={import.meta.env.VITE_AUTH0_DOMAIN}
       clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
       authorizationParams={{
-        redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
+        redirect_uri: redirectUri,
         scope: "openid profile email",
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
         prompt: "none",
       }}
       useRefreshTokens={true}
