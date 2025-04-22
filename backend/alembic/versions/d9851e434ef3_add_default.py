@@ -1,8 +1,8 @@
-"""Add default uuid2
+"""Add default
 
-Revision ID: 5dff7149013b
+Revision ID: d9851e434ef3
 Revises: 
-Create Date: 2025-04-22 17:03:08.619508
+Create Date: 2025-04-22 17:16:35.057234
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '5dff7149013b'
+revision: str = 'd9851e434ef3'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
