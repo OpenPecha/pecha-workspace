@@ -25,7 +25,7 @@ router = APIRouter(
 auth = VerifyToken()
 
 @router.get("/", tags=["tools"])
-async def get_all_tools(db: db_dependency, auth_result: dict = Security(auth.verify)):
+async def get_all_tools(db: db_dependency):
     """Get all available tools."""
     tools = db.query(models.Tools).all()
     return tools
