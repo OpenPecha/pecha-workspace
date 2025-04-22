@@ -25,7 +25,6 @@ const Admin: React.FC = () => {
     description: "",
     category: "",
     price: "",
-    image: "",
     link: "",
     demo: "",
     icon: "",
@@ -72,7 +71,6 @@ const Admin: React.FC = () => {
         description: "",
         category: "",
         price: "",
-        image: "",
         link: "",
         demo: "",
         icon: "",
@@ -381,22 +379,7 @@ const Admin: React.FC = () => {
                   />
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="image"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Image URL
-                  </label>
-                  <input
-                    type="text"
-                    id="image"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                  />
-                </div>
+
 
                 <Button
                   type="submit"

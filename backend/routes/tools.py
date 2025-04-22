@@ -11,7 +11,6 @@ class ToolBase(BaseModel):
     description: Optional[str] = None
     category: Optional[str] = None
     price: Optional[float] = None
-    image: Optional[str] = None
     link: Optional[str] = None
     demo: Optional[str] = None
     icon: Optional[str] = None
@@ -57,7 +56,6 @@ async def create_tool(
         description=tool.description,
         category=tool.category,
         price=tool.price,
-        image=tool.image,
         link=tool.link,
         demo=tool.demo,
         icon=tool.icon

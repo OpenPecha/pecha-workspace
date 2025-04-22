@@ -11,7 +11,6 @@ export interface Tool {
     description?: string;
     category?: string;
     price?: number;
-    image?: string;
     link?: string;
     demo?: string;
     icon?: string;
