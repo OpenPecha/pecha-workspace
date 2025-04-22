@@ -1,46 +1,9 @@
 import React from "react";
 import ToolCard from "@/components/ToolCard";
-import { FileText, Image, Headphones, Edit, LogIn } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getTools } from "@/api/tools";
-import { useAuth } from "@/contexts/AuthContext";
 
 const Home: React.FC = () => {
-  // const tools = [
-  //   {
-  //     title: "Translator Editor",
-  //     description: "Computer-Assisted Translation (CAT) tool for Tibetan texts",
-  //     icon: FileText,
-  //     iconColor: "text-white",
-  //     bgColor: "bg-pecha-primary",
-  //     path: import.meta.env.VITE_TRANSLATOR_URL,
-  //   },
-  //   {
-  //     title: "Image Transcriber",
-  //     description: "Transcribe text from Tibetan manuscript images",
-  //     icon: Image,
-  //     iconColor: "text-white",
-  //     bgColor: "bg-pecha-secondary",
-  //     path: "/image-transcriber",
-  //   },
-  //   {
-  //     title: "Audio Transcriber",
-  //     description: "Convert Tibetan audio recordings to text",
-  //     icon: Headphones,
-  //     iconColor: "text-white",
-  //     bgColor: "bg-blue-500",
-  //     path: "/audio-transcriber",
-  //   },
-  //   {
-  //     title: "Proofreading Editor",
-  //     description: "Review and correct Tibetan manuscripts",
-  //     icon: Edit,
-  //     iconColor: "text-white",
-  //     bgColor: "bg-purple-500",
-  //     path: "/proofreading",
-  //   },
-  // ];
-
   const { data: toolsList, isLoading } = useQuery({
     queryKey: ["toolsList"],
     queryFn: () => getTools(),
@@ -51,7 +14,6 @@ const Home: React.FC = () => {
     icon: tool.icon,
     path: tool.link,
   }));
-  console.log(tools);
   return (
     <div className="container mx-auto px-4 py-12">
       <section className="text-center mb-16 space-y-4 animate-fade-in">
