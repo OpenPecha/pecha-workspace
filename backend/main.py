@@ -45,6 +45,7 @@ app.add_middleware(
         f"https://{AUTH0_DOMAIN}",  # Add Auth0 domain
         FRONTEND_URL,  # Add the frontend URL from env
         "http://localhost:8000",  # Add backend URL for Swagger UI
+        "http://localhost:3000"
     ],
     allow_credentials=True,
     allow_methods=["*"],
