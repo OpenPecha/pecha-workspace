@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     path: tool.link,
   }));
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto max-w-6xl px-4 py-12">
       <section className="text-center mb-16 space-y-4 animate-fade-in">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           <span className="text-pecha-primary">pecha</span>
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="rounded-xl p-8 max-w-6xl mx-auto">
+      <section className="rounded-xl mx-auto">
         <h2 className="text-2xl font-bold mb-4">About Pecha Tools</h2>
         <p className="text-gray-600 mb-4">
           Pecha.tools is a specialized platform designed for scholars,
