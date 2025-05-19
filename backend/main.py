@@ -21,6 +21,10 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "")
+origins = [origin.strip() for origin in allowed_origins.split(",") if origin.strip()]
+
+
 # Auth0 Configuration
 AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN", "dev-vz6o17motc18g45h.us.auth0.com")
 AUTH0_CLIENT_ID = os.getenv("AUTH0_CLIENT_ID", "kuIntldrGYaj1BeONppc9zMUbBe2PCSf")
@@ -40,13 +44,7 @@ models.Base.metadata.create_all(engine)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://trial-1570778.okta.com",  # Add Okta domain
-        f"https://{AUTH0_DOMAIN}",  # Add Auth0 domain
-        FRONTEND_URL,  # Add the frontend URL from env
-        "http://localhost:8000",  # Add backend URL for Swagger UI
-        "http://localhost:3000"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
