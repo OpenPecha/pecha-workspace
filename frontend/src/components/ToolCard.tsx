@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ToolCardProps {
   title: string;
@@ -9,9 +10,11 @@ interface ToolCardProps {
 }
 
 const ToolCard: React.FC<ToolCardProps> = ({ title, icon, path }) => {
+  const { isAuthenticated } = useAuth();
+
   return (
     <a
-      href={path}
+      href={isAuthenticated ? path : "/login"}
       className={cn("block transition-transform duration-300 hover:scale-105")}
     >
       <Card>
