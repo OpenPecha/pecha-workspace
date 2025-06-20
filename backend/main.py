@@ -4,12 +4,10 @@ from fastapi.openapi.docs import get_swagger_ui_html
 import os
 import secrets
 from dotenv import load_dotenv
-from utils import UnauthorizedException, VerifyToken
 from config import get_settings
 import requests
-import time
 import models
-from routes import user,tools
+from routes import user,tools,pecha
 # Load environment variables
 load_dotenv()
 from database import engine, SessionLocal
@@ -95,6 +93,7 @@ async def get_token():
 # Include routes
 app.include_router(user.router)
 app.include_router(tools.router)
+app.include_router(pecha.router)
 
 # Custom Swagger UI endpoint
 @app.get("/docs", include_in_schema=False)

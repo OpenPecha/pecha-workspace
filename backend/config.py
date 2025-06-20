@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY:str
     FRONTEND_URL:str
     DATABASE_URL:str
+    ALLOWED_ORIGINS: str = ""
+    OPENPECHA_API_URL: str 
     
     @property
     def auth0_domain(self):
