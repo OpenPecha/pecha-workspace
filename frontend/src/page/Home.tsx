@@ -1,19 +1,52 @@
 import React from "react";
 import ToolCard from "@/components/ToolCard";
 import { useQuery } from "@tanstack/react-query";
-import { getTools } from "@/api/tools";
+import { getTools, Tool } from "@/api/tools";
+import { useUmamiTracking, getUserContext } from "@/hooks/use-umami-tracking";
+import { useAuth } from "@/contexts/AuthContext";
+
+interface TransformedTool {
+  id?: string;
+  title: string;
+  description?: string;
+  category?: string;
+  icon?: string;
+  path?: string;
+  price?: number;
+}
 
 const Home: React.FC = () => {
+  const { user } = useAuth();
+  const { trackToolListViewed } = useUmamiTracking();
+
   const { data: toolsList, isLoading } = useQuery({
     queryKey: ["toolsList"],
     queryFn: () => getTools(),
   });
-  const tools = toolsList?.map((tool, index) => ({
+
+  const tools = toolsList?.map((tool: Tool) => ({
+    id: tool.id,
     title: tool.name,
     description: tool.description,
+    category: tool.category,
     icon: tool.icon,
     path: tool.link,
+    price: tool.price,
   }));
+
+  // Track tool list viewed when tools are loaded
+  React.useEffect(() => {
+    if (tools && tools.length > 0) {
+      trackToolListViewed(tools.length, {
+        ...getUserContext(user),
+        metadata: {
+          page: "home",
+          tools_loaded: true,
+        },
+      });
+    }
+  }, [tools, trackToolListViewed, user]);
+
   return (
     <div className="container mx-auto max-w-6xl px-4 py-12">
       <section className="text-center mb-16 space-y-4 animate-fade-in">
@@ -32,9 +65,9 @@ const Home: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {isLoading && <div>loading</div>}
           {!isLoading &&
-            tools.map((tool, index) => (
+            tools?.map((tool: TransformedTool, index: number) => (
               <div
-                key={tool.title}
+                key={tool.id || tool.title}
                 className="animate-slide-up"
                 title={tool.description}
                 style={{
@@ -43,15 +76,18 @@ const Home: React.FC = () => {
               >
                 <ToolCard
                   title={tool.title}
-                  icon={tool.icon}
-                  path={tool.path}
+                  icon={tool.icon || ""}
+                  path={tool.path || "#"}
+                  toolId={tool.id}
+                  category={tool.category}
+                  description={tool.description}
                 />
               </div>
             ))}
         </div>
       </section>
 
-      <section className="rounded-xl mx-auto">
+      <section className="text-center">
         <h2 className="text-2xl font-bold mb-4">About Pecha Tools</h2>
         <p className="text-gray-600 mb-4">
           Pecha.tools is a specialized platform designed for scholars,

@@ -13,11 +13,14 @@ import { addTool, getTools, deleteTool, updateTool, Tool } from "@/api/tools";
 import { getUsers, updateUserAdmin, User } from "@/api/user";
 import { Trash2, Search, UserCog } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useUmamiTracking, getUserContext } from "@/hooks/use-umami-tracking";
 
 const Admin: React.FC = () => {
   const { user, isAuthenticated, isLoading, getToken } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { trackToolCreated, trackToolUpdated, trackToolDeleted } =
+    useUmamiTracking();
 
   // Tool form state
   const [formData, setFormData] = useState({
@@ -30,7 +33,7 @@ const Admin: React.FC = () => {
     demo: "",
     icon: "",
   });
-  
+
   // Edit mode state
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -74,12 +77,22 @@ const Admin: React.FC = () => {
 
       // Invalidate and refetch tools
       queryClient.invalidateQueries({ queryKey: ["toolsList"] });
+
+      // Track tool creation
+      trackToolCreated(formData.name, formData.category, {
+        ...getUserContext(user),
+        metadata: {
+          admin_action: true,
+          tool_has_price: !!formData.price,
+          tool_has_demo: !!formData.demo,
+        },
+      });
     },
   });
-  
+
   // Update tool mutation
   const updateToolMutation = useMutation({
-    mutationFn: ({ id, tool }: { id: string; tool: Partial<Tool> }) => 
+    mutationFn: ({ id, tool }: { id: string; tool: Partial<Tool> }) =>
       updateTool(id, tool),
     onSuccess: () => {
       // Reset form
@@ -87,15 +100,34 @@ const Admin: React.FC = () => {
 
       // Invalidate and refetch tools
       queryClient.invalidateQueries({ queryKey: ["toolsList"] });
+
+      // Track tool update
+      trackToolUpdated(formData.id, formData.name, {
+        ...getUserContext(user),
+        metadata: {
+          admin_action: true,
+          was_edit_mode: true,
+        },
+      });
     },
   });
 
   // Delete tool mutation
   const deleteToolMutation = useMutation({
     mutationFn: deleteTool,
-    onSuccess: () => {
+    onSuccess: (_, toolId) => {
       // Invalidate and refetch tools
       queryClient.invalidateQueries({ queryKey: ["toolsList"] });
+
+      // Find the deleted tool name for tracking
+      const deletedTool = tools?.find((tool: Tool) => tool.id === toolId);
+      trackToolDeleted(toolId, deletedTool?.name || "Unknown Tool", {
+        ...getUserContext(user),
+        metadata: {
+          admin_action: true,
+          tool_category: deletedTool?.category,
+        },
+      });
     },
   });
 
@@ -195,7 +227,7 @@ const Admin: React.FC = () => {
     setIsEditMode(false);
     setErrors({});
   };
-  
+
   // Handle edit tool
   const handleEditTool = (tool: Tool) => {
     setFormData({
@@ -210,7 +242,7 @@ const Admin: React.FC = () => {
     });
     setIsEditMode(true);
   };
-  
+
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -284,8 +316,8 @@ const Admin: React.FC = () => {
             <CardHeader>
               <CardTitle>{isEditMode ? "Edit Tool" : "Add New Tool"}</CardTitle>
               <CardDescription>
-                {isEditMode 
-                  ? "Edit an existing tool" 
+                {isEditMode
+                  ? "Edit an existing tool"
                   : "Create a new tool that will appear on the homepage"}
               </CardDescription>
             </CardHeader>
@@ -428,22 +460,25 @@ const Admin: React.FC = () => {
                   />
                 </div>
 
-
-
                 <div className="flex gap-2">
                   <Button
                     type="submit"
                     className="flex-1"
-                    disabled={addToolMutation.isPending || updateToolMutation.isPending}
+                    disabled={
+                      addToolMutation.isPending || updateToolMutation.isPending
+                    }
                   >
                     {(() => {
-                      if (addToolMutation.isPending || updateToolMutation.isPending) {
+                      if (
+                        addToolMutation.isPending ||
+                        updateToolMutation.isPending
+                      ) {
                         return isEditMode ? "Updating..." : "Adding...";
                       }
                       return isEditMode ? "Update Tool" : "Add Tool";
                     })()}
                   </Button>
-                  
+
                   {isEditMode && (
                     <Button
                       type="button"
@@ -458,11 +493,13 @@ const Admin: React.FC = () => {
 
                 {(addToolMutation.isError || updateToolMutation.isError) && (
                   <p className="text-red-500 text-sm mt-2">
-                    Error {isEditMode ? "updating" : "adding"} tool. Please try again.
+                    Error {isEditMode ? "updating" : "adding"} tool. Please try
+                    again.
                   </p>
                 )}
 
-                {(addToolMutation.isSuccess || updateToolMutation.isSuccess) && (
+                {(addToolMutation.isSuccess ||
+                  updateToolMutation.isSuccess) && (
                   <p className="text-green-500 text-sm mt-2">
                     Tool {isEditMode ? "updated" : "added"} successfully!
                   </p>
@@ -512,7 +549,17 @@ const Admin: React.FC = () => {
                                   onClick={() => handleEditTool(tool)}
                                   title="Edit tool"
                                 >
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
                                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                   </svg>

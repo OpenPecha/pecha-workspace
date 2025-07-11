@@ -7,7 +7,13 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./page/Login";
 import Logout from "./page/Logout";
 import Admin from "./page/Admin";
+import { injectUmami } from "./analytics";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+if (import.meta.env.VITE_ENVIRONMENT === "production") {
+  injectUmami();
+}
+
 function AppContainer() {
   return (
     <BrowserRouter>

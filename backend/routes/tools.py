@@ -4,6 +4,8 @@ from utils import UnauthorizedException, VerifyToken
 from database import db_dependency
 from pydantic import BaseModel
 import models
+from datetime import datetime
+import json
 
 class ToolBase(BaseModel):
     id: Optional[str] = None
@@ -14,7 +16,17 @@ class ToolBase(BaseModel):
     link: Optional[str] = None
     demo: Optional[str] = None
     icon: Optional[str] = None
-    
+
+class ToolAnalytics(BaseModel):
+    tool_id: str
+    tool_name: str
+    event_type: str  # "clicked", "accessed", "viewed"
+    user_id: Optional[str] = None
+    user_role: Optional[str] = None
+    access_type: Optional[str] = None  # "click", "redirect", "direct"
+    referrer_page: Optional[str] = None
+    metadata: Optional[dict] = None
+
 router = APIRouter(
     prefix="/api/tools",
     tags=["tools"],
@@ -110,3 +122,39 @@ async def delete_tool(
     db.delete(db_tool)
     db.commit()
     return {"message": "Tool deleted successfully"}
+
+@router.post("/analytics", tags=["tools"])
+async def track_tool_usage(
+    analytics: ToolAnalytics,
+    db: db_dependency,
+    auth_result: dict = Security(auth.verify)
+):
+    """Track tool usage analytics."""
+    try:
+        # Log analytics data (you can store this in a database table if needed)
+        analytics_data = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "tool_id": analytics.tool_id,
+            "tool_name": analytics.tool_name,
+            "event_type": analytics.event_type,
+            "user_id": analytics.user_id or auth_result.get("sub"),
+            "user_role": analytics.user_role,
+            "access_type": analytics.access_type,
+            "referrer_page": analytics.referrer_page,
+            "metadata": analytics.metadata or {}
+        }
+        
+        # Log to console/file (you can extend this to store in database)
+        print(f"[TOOL_ANALYTICS] {json.dumps(analytics_data, indent=2)}")
+        
+        # Optional: Store in database
+        # You can create a ToolAnalytics model and store this data
+        
+        return {
+            "message": "Analytics tracked successfully",
+            "data": analytics_data
+        }
+        
+    except Exception as e:
+        print(f"Error tracking analytics: {str(e)}")
+        return {"message": "Analytics tracking failed", "error": str(e)}
