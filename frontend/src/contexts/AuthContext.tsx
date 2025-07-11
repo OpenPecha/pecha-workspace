@@ -1,6 +1,7 @@
 // This file is kept for backward compatibility but now just re-exports Auth0 hooks
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+import { setUmamiUser, clearUmamiUser } from "../analytics";
 
 // Component wrapper for backward compatibility
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -37,6 +38,33 @@ export const useAuth = () => {
     logout: auth0Logout,
     getAccessTokenSilently,
   } = useAuth0();
+
+  // Transform user data for our app
+  const transformedUser = user
+    ? {
+        id: user.sub ?? "",
+        email: user.email ?? "",
+        name: user.name,
+        picture: user.picture,
+      }
+    : null;
+
+  // Handle Umami user identification
+  useEffect(() => {
+    if (isAuthenticated && transformedUser) {
+      // Set user for Umami identification
+      setUmamiUser({
+        email: transformedUser.email,
+        id: transformedUser.id,
+        name: transformedUser.name,
+        // Add additional properties if available
+        sub: user?.sub,
+      });
+    } else if (!isAuthenticated) {
+      // Clear user identification when logged out
+      clearUmamiUser();
+    }
+  }, [isAuthenticated, transformedUser, user]);
 
   // Wrap the Auth0 logout to match our previous API
   const logout = () => {
@@ -77,14 +105,7 @@ export const useAuth = () => {
   return {
     isAuthenticated,
     isLoading,
-    user: user
-      ? {
-          id: user.sub ?? "",
-          email: user.email ?? "",
-          name: user.name,
-          picture: user.picture,
-        }
-      : null,
+    user: transformedUser,
     error: error ? error.message : null,
     login,
     logout,

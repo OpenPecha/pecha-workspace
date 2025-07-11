@@ -24,9 +24,9 @@ const ToolCard: React.FC<ToolCardProps> = ({
   const { isAuthenticated, user } = useAuth();
   const { trackToolClicked } = useUmamiTracking({ userEmail: user?.email });
 
-  const handleToolClick = () => {
+  const handleToolClick = async () => {
     // Track tool click event first and wait for it to complete
-    trackToolClicked(
+    await trackToolClicked(
       toolId || title.toLowerCase().replace(/\s+/g, "-"),
       title,
       category,

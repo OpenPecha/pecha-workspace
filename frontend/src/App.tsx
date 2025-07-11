@@ -9,12 +9,15 @@ import Logout from "./page/Logout";
 import Admin from "./page/Admin";
 import { injectUmami } from "./analytics";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-if (import.meta.env.VITE_ENVIRONMENT === "production") {
-  injectUmami();
-}
+import { useEffect } from "react";
 
 function AppContainer() {
+  // Initialize Umami analytics
+  useEffect(() => {
+    // Always inject Umami in production, and in development if enabled
+    injectUmami();
+  }, []);
+
   return (
     <BrowserRouter>
       <Layout>

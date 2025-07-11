@@ -2,8 +2,6 @@ import React from "react";
 import ToolCard from "@/components/ToolCard";
 import { useQuery } from "@tanstack/react-query";
 import { getTools, Tool } from "@/api/tools";
-import { useUmamiTracking, getUserContext } from "@/hooks/use-umami-tracking";
-import { useAuth } from "@/contexts/AuthContext";
 
 interface TransformedTool {
   id?: string;
@@ -16,9 +14,6 @@ interface TransformedTool {
 }
 
 const Home: React.FC = () => {
-  const { user } = useAuth();
-  const { trackToolListViewed } = useUmamiTracking({ userEmail: user?.email });
-
   const { data: toolsList, isLoading } = useQuery({
     queryKey: ["toolsList"],
     queryFn: () => getTools(),
@@ -33,19 +28,6 @@ const Home: React.FC = () => {
     path: tool.link,
     price: tool.price,
   }));
-
-  // Track tool list viewed when tools are loaded
-  React.useEffect(() => {
-    if (tools && tools.length > 0) {
-      trackToolListViewed(tools.length, {
-        ...getUserContext(user),
-        metadata: {
-          page: "home",
-          tools_loaded: true,
-        },
-      });
-    }
-  }, [tools, trackToolListViewed, user]);
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-12">

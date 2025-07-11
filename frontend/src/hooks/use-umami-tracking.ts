@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 
 // Define all trackable event types
 export type UmamiEventType =
@@ -66,6 +66,7 @@ interface UmamiEventProperties {
   // Common properties
   user_id?: string;
   user_role?: string;
+  user_email?: string;
   page_path?: string;
   timestamp?: number;
   session_id?: string;
@@ -145,6 +146,10 @@ declare global {
         event: string,
         properties?: Record<string, string | number | boolean | null>
       ) => void;
+      identify: (
+        userId: string,
+        properties?: Record<string, string | number | boolean | null>
+      ) => void;
     };
   }
 }
@@ -154,6 +159,22 @@ declare global {
  * Provides a clean interface for tracking user interactions
  */
 export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
+  // Identify user if email is provided
+  React.useEffect(() => {
+    if (userEmail && window.umami?.identify) {
+      const userId = userEmail; // Use email as unique identifier
+      window.umami.identify(userId, {
+        email: userEmail,
+        identified_at: Date.now(),
+      });
+
+      // Log identification in development
+      if (import.meta.env.DEV) {
+        console.log("🔍 Umami Identify:", userId, { email: userEmail });
+      }
+    }
+  }, [userEmail]);
+
   const track = useCallback(
     (
       eventType: UmamiEventType,
@@ -164,7 +185,8 @@ export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
         const defaultProperties: UmamiEventProperties = {
           timestamp: Date.now(),
           page_path: window.location.pathname,
-          session_id: userEmail ?? generateSessionId(),
+          session_id: generateSessionId(),
+          user_email: userEmail, // Add user email to all events
           ...properties,
         };
 
@@ -183,12 +205,17 @@ export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
           window.umami.track(eventType, convertedProperties);
         }
 
+        // Fallback to console in development
+        if (import.meta.env.DEV) {
+          console.log("🔍 Umami Track:", eventType, defaultProperties);
+        }
+
         // Resolve immediately since Umami tracking is synchronous
         // Add a small delay to ensure tracking is processed
         setTimeout(resolve, 100);
       });
     },
-    []
+    [userEmail]
   );
 
   // Annotation tracking methods
@@ -608,6 +635,45 @@ export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
     trackToolUpdated,
     trackToolDeleted,
   };
+};
+
+// Helper function to identify user with comprehensive data
+export const identifyUser = (
+  user: {
+    email?: string;
+    id?: string;
+    sub?: string;
+    name?: string;
+    role?: string;
+    isAdmin?: boolean;
+  } | null
+) => {
+  if (!user || !window.umami?.identify) return;
+
+  const userId = user.email || user.id || user.sub;
+  if (!userId) return;
+
+  const userProperties: Record<string, string | number | boolean | null> = {
+    email: user.email || null,
+    name: user.name || null,
+    role: user.role || null,
+    isAdmin: user.isAdmin || false,
+    identified_at: Date.now(),
+  };
+
+  // Remove null values
+  Object.keys(userProperties).forEach((key) => {
+    if (userProperties[key] === null) {
+      delete userProperties[key];
+    }
+  });
+
+  window.umami.identify(userId, userProperties);
+
+  // Log identification in development
+  if (import.meta.env.DEV) {
+    console.log("🔍 Umami Identify User:", userId, userProperties);
+  }
 };
 
 // Helper function to generate session ID
