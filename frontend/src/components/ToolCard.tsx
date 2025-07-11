@@ -25,7 +25,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
   const { trackToolClicked } = useUmamiTracking();
 
   const handleToolClick = () => {
-    // Track tool click event
+    // Track tool click event first and wait for it to complete
     trackToolClicked(
       toolId || title.toLowerCase().replace(/\s+/g, "-"),
       title,
@@ -40,13 +40,18 @@ const ToolCard: React.FC<ToolCardProps> = ({
         },
       }
     );
+
+    // Then redirect to the appropriate URL after tracking is done
+    const redirectUrl = isAuthenticated ? path : "/login";
+    window.location.href = redirectUrl;
   };
 
   return (
-    <a
-      href={isAuthenticated ? path : "/login"}
+    <button
       onClick={handleToolClick}
-      className={cn("block transition-transform duration-300 hover:scale-105")}
+      className={cn(
+        "block w-full transition-transform duration-300 hover:scale-105 cursor-pointer border-none bg-transparent p-0"
+      )}
     >
       <Card>
         <CardHeader>
@@ -59,7 +64,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
           <h3 className="font-bold text-lg mt-2 text-gray-600">{title}</h3>
         </CardContent>
       </Card>
-    </a>
+    </button>
   );
 };
 
