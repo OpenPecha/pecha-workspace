@@ -17,7 +17,7 @@ interface TransformedTool {
 
 const Home: React.FC = () => {
   const { user } = useAuth();
-  const { trackToolListViewed } = useUmamiTracking();
+  const { trackToolListViewed } = useUmamiTracking({ userEmail: user?.email });
 
   const { data: toolsList, isLoading } = useQuery({
     queryKey: ["toolsList"],

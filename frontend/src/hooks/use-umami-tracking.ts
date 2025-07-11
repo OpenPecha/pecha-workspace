@@ -153,36 +153,40 @@ declare global {
  * Custom hook for umami analytics tracking
  * Provides a clean interface for tracking user interactions
  */
-export const useUmamiTracking = () => {
+export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
   const track = useCallback(
-    (eventType: UmamiEventType, properties: UmamiEventProperties = {}) => {
-      // Add default properties
-      const defaultProperties: UmamiEventProperties = {
-        timestamp: Date.now(),
-        page_path: window.location.pathname,
-        session_id: generateSessionId(),
-        ...properties,
-      };
+    (
+      eventType: UmamiEventType,
+      properties: UmamiEventProperties = {}
+    ): Promise<void> => {
+      return new Promise((resolve) => {
+        // Add default properties
+        const defaultProperties: UmamiEventProperties = {
+          timestamp: Date.now(),
+          page_path: window.location.pathname,
+          session_id: userEmail ?? generateSessionId(),
+          ...properties,
+        };
 
-      // Track with umami if available
-      if (window.umami?.track) {
-        // Convert properties to the expected format
-        const convertedProperties: Record<
-          string,
-          string | number | boolean | null
-        > = {};
-        Object.entries(defaultProperties).forEach(([key, value]) => {
-          if (value !== undefined) {
-            convertedProperties[key] = value;
-          }
-        });
-        window.umami.track(eventType, convertedProperties);
-      }
+        // Track with umami if available
+        if (window.umami?.track) {
+          // Convert properties to the expected format
+          const convertedProperties: Record<
+            string,
+            string | number | boolean | null
+          > = {};
+          Object.entries(defaultProperties).forEach(([key, value]) => {
+            if (value !== undefined) {
+              convertedProperties[key] = value;
+            }
+          });
+          window.umami.track(eventType, convertedProperties);
+        }
 
-      // Fallback to console in development
-      if (import.meta.env.DEV) {
-        console.log("🔍 Umami Track:", eventType, defaultProperties);
-      }
+        // Resolve immediately since Umami tracking is synchronous
+        // Add a small delay to ensure tracking is processed
+        setTimeout(resolve, 100);
+      });
     },
     []
   );
@@ -464,14 +468,14 @@ export const useUmamiTracking = () => {
 
   // Tool tracking methods
   const trackToolClicked = useCallback(
-    (
+    async (
       toolId: string,
       toolName: string,
       toolCategory?: string,
       toolLink?: string,
       properties: Partial<UmamiEventProperties> = {}
-    ) => {
-      track("tool-clicked", {
+    ): Promise<void> => {
+      return track("tool-clicked", {
         tool_id: toolId,
         tool_name: toolName,
         tool_category: toolCategory,

@@ -76,7 +76,7 @@ The tracking is automatically initialized when the application starts. Use the `
 import { useUmamiTracking, getUserContext } from "@/hooks/use-umami-tracking";
 
 const MyComponent = () => {
-  const { trackToolClicked } = useUmamiTracking();
+  const { trackToolClicked } = useUmamiTracking({ userEmail });
   const { user } = useAuth();
 
   const handleToolClick = (toolId: string, toolName: string) => {

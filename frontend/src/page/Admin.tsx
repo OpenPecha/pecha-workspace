@@ -20,7 +20,7 @@ const Admin: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { trackToolCreated, trackToolUpdated, trackToolDeleted } =
-    useUmamiTracking();
+    useUmamiTracking({ userEmail: user?.email });
 
   // Tool form state
   const [formData, setFormData] = useState({
