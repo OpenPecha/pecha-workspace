@@ -92,7 +92,7 @@ const Hero = () => {
             for the Digital Age
           </h1>
 
-          <p className="text-xl md:text-2xl mb-8 text-white/95 leading-relaxed drop-shadow-md">
+          <p className="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed drop-shadow-md">
             A centralized hub for working with Buddhist manuscripts (Pecha),
             providing specialized tools for translation, transcription, and
             proofreading.

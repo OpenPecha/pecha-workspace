@@ -1,4 +1,5 @@
 import { BookOpen, Mail, Github, Twitter } from "lucide-react";
+import heroImage from "@/assets/favicon.png";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <div className="p-2 bg-accent rounded-lg">
-                <BookOpen className="h-6 w-6 text-white" />
+                <img src={heroImage} alt="pecha.tools" className="h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-xl font-bold">pecha.tools</h3>

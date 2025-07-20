@@ -30,13 +30,19 @@ const visionPoints = [
 
 const VisionSection = () => {
   return (
-    <section id="vision" className="py-20 bg-sacred-white">
-      <div className="container mx-auto px-4">
+    <section
+      id="vision"
+      className="py-20 bg-gradient-to-br from-purple-100 via-indigo-100 to-purple-50 relative"
+    >
+      {/* Seamless top transition from Tools */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-purple-100/40 to-transparent"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Our Vision & Mission
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-gray-500 max-w-3xl mx-auto">
             Bridging ancient wisdom with modern technology to create a more
             mindful and compassionate digital world.
           </p>
@@ -59,7 +65,7 @@ const VisionSection = () => {
                       <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                         {point.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-gray-500 leading-relaxed">
                         {point.description}
                       </p>
                     </div>
