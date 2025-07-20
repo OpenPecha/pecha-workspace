@@ -1,5 +1,72 @@
 @import "tailwindcss";
 
+@theme {
+    /* Primary colors */
+    --primary: 210 100% 50%;        /* Blue */
+    --primary-foreground: 0 0% 100%; /* White */
+    
+    /* Secondary colors */
+    --secondary: 270 70% 65%;        /* Purple */
+    --secondary-foreground: 0 0% 100%; /* White */
+    
+    /* Tertiary colors */
+    --tertiary: 220 30% 95%;         /* Light gray */
+    --tertiary-foreground: 225 15% 20%; /* Dark gray */
+    
+    /* Background colors */
+    --background: 0 0% 100%;          /* White */
+    --foreground: 0 0% 3.9%;          /* Dark text */
+    
+    /* Muted colors */
+    --muted: 210 40% 96%;             /* Light gray */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Gray text */
+    
+    /* Accent colors */
+    --accent: 210 40% 96%;            /* Light accent */
+    --accent-foreground: 222.2 84% 4.9%; /* Dark accent text */
+    
+    /* Border and input */
+    --border: 214.3 31.8% 91.4%;     /* Light border */
+    --input: 214.3 31.8% 91.4%;      /* Input border */
+    --ring: 210 100% 50%;             /* Focus ring (primary) */
+    
+    /* Card colors */
+    --card: 0 0% 100%;                /* Card background */
+    --card-foreground: 222.2 84% 4.9%; /* Card text */
+    
+    /* Popover colors */
+    --popover: 0 0% 100%;             /* Popover background */
+    --popover-foreground: 222.2 84% 4.9%; /* Popover text */
+    
+    /* Destructive colors */
+    --destructive: 0 84.2% 60.2%;     /* Red */
+    --destructive-foreground: 210 40% 98%; /* Light text on red */
+    
+    /* Custom Hero colors */
+    --peace-lavender: 270 50% 80%;    /* Light purple */
+    --sacred-white: 0 0% 98%;         /* Off-white */
+    
+    /* Additional utility colors */
+    --success: 120 60% 50%;           /* Green */
+    --success-foreground: 0 0% 100%;  /* White */
+    
+    --warning: 45 100% 60%;           /* Yellow */
+    --warning-foreground: 0 0% 0%;    /* Black */
+    
+    --info: 200 100% 50%;             /* Light blue */
+    --info-foreground: 0 0% 100%;     /* White */
+    
+    /* Radius */
+    --radius: 0.5rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
 .container {
     width: 100%;
     margin-right: auto;
@@ -8,6 +75,7 @@
     padding-left: 2rem;
 }
 
+/* Legacy pecha colors - you can keep these for specific use cases */
 .text-pecha-primary{
     color:#12dfec
 }
@@ -18,7 +86,6 @@
     color:#f2f4f4
 }
 
-
 .bg-pecha-primary {
     background-color:#12dfec;
 }
@@ -28,4 +95,66 @@
 .bg-pecha-tertiary {
     background-color:#f2f4f4;
 }
+
+/* Define keyframes for animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+    0% { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animation classes */
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Custom gradients for consistency */
+.bg-gradient-serenity {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+}
+
+.bg-gradient-wisdom {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
+/* Shadow utilities */
+.shadow-gentle {
+    box-shadow: var(--shadow);
+}
+
+.shadow-elevated {
+    box-shadow: var(--shadow-lg);
+}
+
+.shadow-lotus {
+    box-shadow: var(--shadow-xl);
+}
+
 

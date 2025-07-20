@@ -76,7 +76,12 @@ function identifyUserInUmami(user: UmamiUser) {
   if (user.role) userProperties.role = user.role;
   if (user.isAdmin !== undefined) userProperties.isAdmin = user.isAdmin;
 
-  // window.umami.identify(userId, userProperties);
+  window.umami.identify(userId, userProperties);
+
+  // Log identification in development
+  if (import.meta.env.DEV) {
+    console.log("🔍 Umami User Identified:", userId, userProperties);
+  }
 }
 
 // Public function to set user for identification
