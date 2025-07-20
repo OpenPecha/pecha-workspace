@@ -92,12 +92,14 @@ const VisionSection = () => {
               rather than navigating complex software.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-              <button className="bg-sacred-white px-6 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors shadow-gentle">
-                Subscribe to Updates
-              </button>
-              <button className="border border-white/30 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+              <a
+                href="https://forum.openpecha.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-white/30 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors text-center inline-block"
+              >
                 Join Discussion
-              </button>
+              </a>
             </div>
           </div>
         </div>

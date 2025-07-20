@@ -1,4 +1,4 @@
-import { BookOpen, Heart, Globe, Users } from "lucide-react";
+import { BookOpen, Heart, Globe, Users, Brain, Sparkles } from "lucide-react";
 import heroImage from "@/assets/favicon.png";
 
 const Footer = () => {
@@ -15,17 +15,22 @@ const Footer = () => {
               <div>
                 <h3 className="text-2xl font-bold text-white">pecha.tools</h3>
                 <p className="text-sm text-purple-200">
-                  Buddhist Manuscript Tools
+                  AI-Enhanced Buddhist Manuscript Tools
                 </p>
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed mb-6">
               Dedicated to preserving and sharing the wisdom of Buddhist
-              teachings through innovative digital tools and technologies.
+              teachings through innovative AI-powered digital tools and modern
+              technologies.
             </p>
-            <div className="flex items-center space-x-2 text-purple-200">
+            <div className="flex items-center space-x-2 text-purple-200 mb-3">
               <Heart className="h-4 w-4" />
               <span className="text-sm">Created with compassion</span>
+            </div>
+            <div className="flex items-center space-x-2 text-blue-200">
+              <Brain className="h-4 w-4" />
+              <span className="text-sm">Powered by AI technology</span>
             </div>
           </div>
 
@@ -39,7 +44,7 @@ const Footer = () => {
                   className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-400 rounded-full group-hover:bg-white transition-colors"></span>
-                  <span>Tools</span>
+                  <span>AI Tools</span>
                 </a>
               </li>
               <li>
@@ -86,7 +91,7 @@ const Footer = () => {
                 <div>
                   <h5 className="font-medium text-white mb-1">Global Access</h5>
                   <p className="text-sm text-gray-300">
-                    Making Buddhist wisdom accessible worldwide
+                    Making Buddhist wisdom accessible worldwide through AI
                   </p>
                 </div>
               </div>
@@ -97,7 +102,18 @@ const Footer = () => {
                 <div>
                   <h5 className="font-medium text-white mb-1">Community</h5>
                   <p className="text-sm text-gray-300">
-                    Building bridges between tradition and technology
+                    Building bridges between tradition and AI technology
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="p-2 bg-indigo-500/20 rounded-lg mt-1">
+                  <Sparkles className="h-4 w-4 text-indigo-300" />
+                </div>
+                <div>
+                  <h5 className="font-medium text-white mb-1">AI Innovation</h5>
+                  <p className="text-sm text-gray-300">
+                    Leveraging artificial intelligence for manuscript analysis
                   </p>
                 </div>
               </div>
@@ -112,8 +128,14 @@ const Footer = () => {
             <div className="flex items-center space-x-6 text-sm text-gray-400">
               <span>Made with</span>
               <Heart className="h-4 w-4 text-red-400" />
-              <span>for all beings</span>
+              <span>and AI for all beings</span>
             </div>
+          </div>
+          <div className="mt-4 text-xs text-gray-500">
+            <p>
+              Some tools utilize artificial intelligence to enhance manuscript
+              processing and analysis capabilities.
+            </p>
           </div>
         </div>
       </div>
