@@ -1,91 +1,120 @@
-import { BookOpen, Mail, Github, Twitter } from "lucide-react";
+import { BookOpen, Heart, Globe, Users } from "lucide-react";
 import heroImage from "@/assets/favicon.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground py-12">
+    <footer className="bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 text-white py-16">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Logo and Description */}
-          <div className="md:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-accent rounded-lg">
-                <img src={heroImage} alt="pecha.tools" className="h-6 w-6" />
+          <div className="md:col-span-1">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
+                <img src={heroImage} alt="pecha.tools" className="h-8 w-8" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">pecha.tools</h3>
-                <p className="text-sm text-primary-foreground/80">
-                  Buddhist Text Tools
+                <h3 className="text-2xl font-bold text-white">pecha.tools</h3>
+                <p className="text-sm text-purple-200">
+                  Buddhist Manuscript Tools
                 </p>
               </div>
             </div>
-            <p className="text-primary-foreground/80 leading-relaxed max-w-md">
+            <p className="text-gray-300 leading-relaxed mb-6">
               Dedicated to preserving and sharing the wisdom of Buddhist
               teachings through innovative digital tools and technologies.
             </p>
+            <div className="flex items-center space-x-2 text-purple-200">
+              <Heart className="h-4 w-4" />
+              <span className="text-sm">Created with compassion</span>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-primary-foreground/80">
+            <h4 className="font-bold text-lg mb-6 text-white">Quick Links</h4>
+            <ul className="space-y-4">
               <li>
-                <a href="#tools" className="hover:text-white transition-colors">
-                  Tools
+                <a
+                  href="#tools"
+                  className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2 group"
+                >
+                  <span className="w-1 h-1 bg-purple-400 rounded-full group-hover:bg-white transition-colors"></span>
+                  <span>Tools</span>
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-white transition-colors">
-                  About
+                <a
+                  href="#about"
+                  className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2 group"
+                >
+                  <span className="w-1 h-1 bg-purple-400 rounded-full group-hover:bg-white transition-colors"></span>
+                  <span>About</span>
                 </a>
               </li>
               <li>
                 <a
                   href="#vision"
-                  className="hover:text-white transition-colors"
+                  className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2 group"
                 >
-                  Vision
+                  <span className="w-1 h-1 bg-purple-400 rounded-full group-hover:bg-white transition-colors"></span>
+                  <span>Vision</span>
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Contact
+                <a
+                  href="https://forum.openpecha.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center space-x-2 group"
+                >
+                  <span className="w-1 h-1 bg-purple-400 rounded-full group-hover:bg-white transition-colors"></span>
+                  <span>Forum</span>
+                  <BookOpen className="h-3 w-3 opacity-70" />
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Connect */}
+          {/* Community & Mission */}
           <div>
-            <h4 className="font-semibold mb-4">Connect</h4>
-            <div className="flex space-x-3">
-              <a
-                href="#"
-                className="p-2 bg-primary-foreground/10 rounded-lg hover:bg-primary-foreground/20 transition-colors"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="p-2 bg-primary-foreground/10 rounded-lg hover:bg-primary-foreground/20 transition-colors"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="p-2 bg-primary-foreground/10 rounded-lg hover:bg-primary-foreground/20 transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
+            <h4 className="font-bold text-lg mb-6 text-white">Our Mission</h4>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <div className="p-2 bg-purple-500/20 rounded-lg mt-1">
+                  <Globe className="h-4 w-4 text-purple-300" />
+                </div>
+                <div>
+                  <h5 className="font-medium text-white mb-1">Global Access</h5>
+                  <p className="text-sm text-gray-300">
+                    Making Buddhist wisdom accessible worldwide
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="p-2 bg-blue-500/20 rounded-lg mt-1">
+                  <Users className="h-4 w-4 text-blue-300" />
+                </div>
+                <div>
+                  <h5 className="font-medium text-white mb-1">Community</h5>
+                  <p className="text-sm text-gray-300">
+                    Building bridges between tradition and technology
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-primary-foreground/60">
-          <p>
-            &copy; 2024 pecha.tools. Created with compassion for the benefit of
-            all beings.
-          </p>
+        {/* Bottom Section */}
+        <div className="border-t border-white/10 mt-12 pt-8 text-center">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-gray-400 text-sm">&copy; 2025 pecha.tools.</p>
+            <div className="flex items-center space-x-6 text-sm text-gray-400">
+              <span>Made with</span>
+              <Heart className="h-4 w-4 text-red-400" />
+              <span>for all beings</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
