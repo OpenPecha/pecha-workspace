@@ -65,14 +65,9 @@ const ToolsSection = () => {
   return (
     <section
       id="tools"
-      className="py-20 bg-gradient-to-br from-blue-100 via-purple-100 to-indigo-100 relative -mt-20 pt-40"
+      className="py-20 bg-gradient-to-br from-blue-100 via-purple-100 to-indigo-100"
     >
-      {/* Seamless curved transition from Hero */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent via-blue-100/60 to-blue-100"></div>
-      {/* Seamless bottom transition to Vision */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-purple-100/60"></div>
-
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Digital Tools for Buddhist Studies
