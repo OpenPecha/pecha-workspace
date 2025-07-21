@@ -158,6 +158,9 @@ declare global {
  * Custom hook for umami analytics tracking
  * Provides a clean interface for tracking user interactions
  */
+
+type NoPrefix = `tool-clicked-${string}` | `tool-accessed-${string}`;
+
 export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
   // Identify user if email is provided
   React.useEffect(() => {
@@ -177,7 +180,7 @@ export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
 
   const track = useCallback(
     (
-      eventType: UmamiEventType,
+      eventType: UmamiEventType | NoPrefix,
       properties: UmamiEventProperties = {}
     ): Promise<void> => {
       return new Promise((resolve) => {
@@ -502,7 +505,7 @@ export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
       toolLink?: string,
       properties: Partial<UmamiEventProperties> = {}
     ): Promise<void> => {
-      return track("tool-clicked", {
+      return track(`tool-clicked-${toolName}`, {
         tool_id: toolId,
         tool_name: toolName,
         tool_category: toolCategory,
@@ -522,7 +525,7 @@ export const useUmamiTracking = ({ userEmail }: { userEmail?: string }) => {
       accessType: "click" | "redirect" | "direct" = "direct",
       properties: Partial<UmamiEventProperties> = {}
     ) => {
-      track("tool-accessed", {
+      track(`tool-accessed-${toolName}`, {
         tool_id: toolId,
         tool_name: toolName,
         access_type: accessType,
