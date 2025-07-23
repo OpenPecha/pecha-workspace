@@ -1,4 +1,5 @@
 import React from "react";
+ADS;
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -29,7 +30,6 @@ const getStatusColor = (status: string) => {
       return "bg-gray-100 text-gray-800 hover:bg-gray-200";
   }
 };
-
 const ToolCard: React.FC<ToolCardProps> = ({
   title,
   icon,
@@ -66,8 +66,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
     const redirectUrl = isAuthenticated ? path : "/login";
     window.location.href = redirectUrl;
   };
-
-  const isDisabled = status === "Coming Soon";
+  const isDisabled = status !== "Available";
 
   // Simple test version first
 
