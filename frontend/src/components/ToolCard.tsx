@@ -70,9 +70,10 @@ const ToolCard: React.FC<ToolCardProps> = ({
   const isDisabled = status === "Coming Soon";
 
   // Simple test version first
+
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 h-full flex flex-col">
-      <CardHeader className="pb-4">
+      <CardHeader className="">
         <div className="flex items-start justify-between">
           <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300">
             {icon ? (
@@ -81,17 +82,13 @@ const ToolCard: React.FC<ToolCardProps> = ({
               <div className="h-6 w-6 bg-white/20 rounded" />
             )}
           </div>
-          <Badge className={getStatusColor(status)}>{status}</Badge>
+          <Badge className={getStatusColor(status) + " capitalize"}>
+            {status}
+          </Badge>
         </div>
         <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
           {title}
         </CardTitle>
-
-        {price && price > 0 && (
-          <Badge variant="secondary" className="w-fit text-xs">
-            ${price}
-          </Badge>
-        )}
       </CardHeader>
 
       <CardContent className="pt-0 flex-1 flex flex-col">

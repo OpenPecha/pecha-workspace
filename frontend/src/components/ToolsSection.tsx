@@ -28,14 +28,18 @@ const ToolsSection = () => {
   });
   const tools = toolsList?.map((tool: Tool) => ({
     id: tool.id,
-    title: tool.name, // API uses 'name' field
+    title: tool.name?.split("-")[0] || tool.name, // API uses 'name' field
     description: tool.description,
     category: tool.category || "General", // Default category if empty
     icon: tool.icon, // Base64 encoded icon data
     path: tool.link, // API uses 'link' field
     price: tool.price,
     demo: tool.demo,
-    status: "Available", // Default status for API tools
+    status:
+      tool.name?.split("-").length > 1
+        ? tool.name?.split("-").pop()
+        : "Available",
+    //default status for API tools
   }));
 
   // Track tool list viewed when tools are loaded
