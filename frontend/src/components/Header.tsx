@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { Avatar, AvatarImage } from "./ui/avatar";
+import { formatUserName } from "@/lib/utils";
 // No props needed as we'll use the auth context
 const Header: React.FC = () => {
   const { login, logout, user, isAuthenticated } = useAuth();
@@ -45,7 +46,7 @@ const Header: React.FC = () => {
                 <Avatar title={user?.name}>
                   <AvatarImage src={user?.picture} />
                 </Avatar>
-                <span>{user?.name ?? "Profile"}</span>
+                <span>{formatUserName(user?.name) ?? "Profile"}</span>
               </div>
               {showDropdown && (
                 <div className="absolute right-0 top-10 bg-white shadow-md rounded-md py-2 w-48 z-50 border border-gray-100">

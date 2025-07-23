@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { formatUserName } from "@/lib/utils";
 
 interface UserProfile {
   id: string;
@@ -100,7 +101,7 @@ const Profile = () => {
             <div className="flex-grow">
               <div className="mb-4">
                 <h2 className="text-xl font-semibold text-gray-800">
-                  {profile.name ?? "Anonymous User"}
+                  {formatUserName(profile.name) ?? "Anonymous User"}
                 </h2>
                 {profile.email && (
                   <p className="text-gray-600">{profile.email}</p>

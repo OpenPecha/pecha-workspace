@@ -14,6 +14,7 @@ import { getUsers, updateUserAdmin, User } from "@/api/user";
 import { Trash2, Search, UserCog } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useUmamiTracking, getUserContext } from "@/hooks/use-umami-tracking";
+import { formatUserName } from "@/lib/utils";
 
 const Admin: React.FC = () => {
   const { user, isAuthenticated, isLoading, getToken } = useAuth();
@@ -688,7 +689,7 @@ const Admin: React.FC = () => {
                                 ) : (
                                   <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
                                     <span className="text-gray-500">
-                                      {(user.name ?? user.email ?? "?")
+                                      {(formatUserName(user.name) ?? user.email ?? "?")
                                         .charAt(0)
                                         .toUpperCase()}
                                     </span>
@@ -696,7 +697,7 @@ const Admin: React.FC = () => {
                                 )}
                                 <div>
                                   <div className="text-sm font-medium text-gray-900">
-                                    {user.name ?? "(No name)"}
+                                    {formatUserName(user.name) ?? "(No name)"}
                                   </div>
                                   <div className="text-sm text-gray-500 truncate max-w-[200px]">
                                     ID: {user.id}
