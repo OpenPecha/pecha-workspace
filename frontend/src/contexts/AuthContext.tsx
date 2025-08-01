@@ -51,20 +51,19 @@ export const useAuth = () => {
 
   // Handle Umami user identification
   useEffect(() => {
-    if (isAuthenticated && transformedUser) {
-      // Set user for Umami identification
-      setUmamiUser({
-        email: transformedUser.email,
-        id: transformedUser.id,
-        name: transformedUser.name,
-        // Add additional properties if available
-        sub: user?.sub,
-      });
-    } else if (!isAuthenticated) {
+    if (!isAuthenticated) {
       // Clear user identification when logged out
       clearUmamiUser();
+      return;
     }
-  }, [isAuthenticated, transformedUser, user]);
+    if (user) {
+      setUmamiUser({
+        email: user.email,
+        id: user.sub,
+        name: user.name,
+      });
+    }
+  }, [isAuthenticated, user]);
 
   // Wrap the Auth0 logout to match our previous API
   const logout = () => {
