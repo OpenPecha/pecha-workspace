@@ -116,20 +116,6 @@ const ToolsSection = () => {
             })
           ) : (
             <div className="col-span-full text-center py-8">
-              <div className="bg-red-100 p-4 rounded">
-                <p className="text-red-800 font-semibold">
-                  Debug: Not rendering tools
-                </p>
-                <p className="text-red-600">
-                  isLoading: {isLoading ? "true" : "false"}
-                </p>
-                <p className="text-red-600">
-                  tools exists: {tools ? "true" : "false"}
-                </p>
-                <p className="text-red-600">
-                  tools.length: {tools?.length || "N/A"}
-                </p>
-              </div>
               {!isLoading && (!tools || tools.length === 0) && (
                 <div className="mt-4">
                   <p className="text-muted-foreground">
