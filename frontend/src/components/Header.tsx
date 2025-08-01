@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
-import { Avatar, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 // No props needed as we'll use the auth context
 const Header: React.FC = () => {
   const { login, logout, user, isAuthenticated } = useAuth();
@@ -44,6 +44,7 @@ const Header: React.FC = () => {
               >
                 <Avatar title={user?.name}>
                   <AvatarImage src={user?.picture} />
+                  <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <span>{user?.name ?? "Profile"}</span>
               </div>
