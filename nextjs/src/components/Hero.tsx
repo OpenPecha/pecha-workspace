@@ -49,7 +49,7 @@ const TypewriterText = () => {
   }, [currentText, isDeleting, isPaused, currentWordIndex, words]);
 
   return (
-    <span className="block text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg leading-tight py-2">
+    <span className="block text-4xl sm:text-5xl lg:text-6xl leading-[normal] font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg ">
       {currentText}
       <span className="animate-pulse text-indigo-600">|</span>
     </span>
@@ -221,14 +221,12 @@ const Hero = () => {
               </div>
 
               {/* Main Heading */}
-              <div className="space-y-6">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <div className="space-y-2">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-none">
                   Preserving Ancient
                 </h1>
-                <div className="py-2">
-                  <TypewriterText />
-                </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                <TypewriterText />
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-none">
                   <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
                     for the Digital Age
                   </span>
@@ -236,10 +234,10 @@ const Hero = () => {
               </div>
 
               {/* Description */}
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl">
-                A centralized hub for working with Buddhist manuscripts (Pecha),
+              <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                A comprehensive digital platform for Buddhist manuscripts,
                 providing specialized tools for translation, transcription, and
-                proofreading.
+                preservation of ancient Pecha texts.
               </p>
 
               {/* CTA Buttons */}
@@ -262,22 +260,6 @@ const Hero = () => {
                   <Heart className="mr-2 h-5 w-5" />
                   Our Mission
                 </Button>
-              </div>
-
-              {/* Stats */}
-              <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-8">
-                <div className="text-center lg:text-left">
-                  <div className="text-2xl font-bold text-gray-900">10K+</div>
-                  <div className="text-sm text-gray-600">Manuscripts</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-2xl font-bold text-gray-900">50+</div>
-                  <div className="text-sm text-gray-600">Tools</div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="text-2xl font-bold text-gray-900">1K+</div>
-                  <div className="text-sm text-gray-600">Users</div>
-                </div>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Heart, Globe, Lightbulb } from "lucide-react";
+import ScrollFadeIn from "@/components/ScrollFadeIn";
 
 const visionPoints = [
   {
@@ -38,40 +39,47 @@ const VisionSection = () => {
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-purple-100/40 to-transparent"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Our Vision & Mission
-          </h2>
-          <p className="text-xl text-gray-500 max-w-3xl mx-auto">
-            Bridging ancient wisdom with modern technology to create a more
-            mindful and compassionate digital world.
-          </p>
-        </div>
+        <ScrollFadeIn direction="up" delay={0} triggerOnce={true}>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
+              Our Vision & Mission
+            </h2>
+            <p className="text-xl text-gray-500 max-w-3xl mx-auto">
+              Bridging ancient wisdom with modern technology to create a more
+              mindful and compassionate digital world.
+            </p>
+          </div>
+        </ScrollFadeIn>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {visionPoints.map((point, index) => {
             const IconComponent = point.icon;
             return (
-              <Card
+              <ScrollFadeIn
                 key={index}
-                className="group hover:shadow-gentle transition-all duration-300 border-border/30"
+                direction="up"
+                delay={index * 200}
+                threshold={0.1}
+                triggerOnce={false}
               >
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-gradient-wisdom rounded-lg shadow-gentle shrink-0">
-                      <IconComponent className="h-6 w-6 text-white" />
+                <Card className="group hover:shadow-gentle transition-all duration-300 border-border/30">
+                  <CardContent className="p-8">
+                    <div className="flex items-start space-x-4">
+                      <div className="p-3 bg-gradient-wisdom rounded-lg shadow-gentle shrink-0">
+                        <IconComponent className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                          {point.title}
+                        </h3>
+                        <p className="text-gray-500 leading-relaxed">
+                          {point.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                        {point.title}
-                      </h3>
-                      <p className="text-gray-500 leading-relaxed">
-                        {point.description}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </ScrollFadeIn>
             );
           })}
         </div>
