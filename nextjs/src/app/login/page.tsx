@@ -1,10 +1,10 @@
 "use client";
 
 import { useAuth } from "@/contexts/AuthContext";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-function Login() {
+function LoginComponent() {
   const { login, isAuthenticated } = useAuth();
   const searchParams = useSearchParams();
 
@@ -15,6 +15,14 @@ function Login() {
   }, [login, isAuthenticated, searchParams]);
 
   return <div></div>;
+}
+
+function Login() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginComponent />
+    </Suspense>
+  );
 }
 
 export default Login;

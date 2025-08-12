@@ -3,13 +3,13 @@ import { verifyToken, createErrorResponse } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 interface RouteParams {
-  params: { toolId: string };
+  params: Promise<{ toolId: string }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     await verifyToken(request);
-    const { toolId } = params;
+    const { toolId } = await params;
 
     const tool = await prisma.tools.findUnique({
       where: { id: toolId },
@@ -29,7 +29,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
     const authResult = await verifyToken(request);
     const userId = authResult.sub;
-    const { toolId } = params;
+    const { toolId } = await params;
 
     // Check if user is admin
     const user = await prisma.user.findUnique({
@@ -65,7 +65,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const authResult = await verifyToken(request);
     const userId = authResult.sub;
-    const { toolId } = params;
+    const { toolId } = await params;
 
     // Check if user is admin
     const user = await prisma.user.findUnique({

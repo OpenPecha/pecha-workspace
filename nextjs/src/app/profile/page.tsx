@@ -6,9 +6,9 @@ import { useAuth } from "@/contexts/AuthContext";
 
 interface UserProfile {
   id: string;
-  name?: string;
-  email?: string;
-  picture?: string;
+  name?: string | null;
+  email?: string | null;
+  picture?: string | null;
 }
 
 const Profile = () => {
@@ -83,9 +83,7 @@ const Profile = () => {
   return (
     <div className="container mx-auto mt-10 p-6">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-pecha-primary">
-          User Profile
-        </h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">User Profile</h1>
 
         {profile && (
           <div className="flex flex-col md:flex-row gap-6">

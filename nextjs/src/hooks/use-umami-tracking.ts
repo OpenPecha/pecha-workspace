@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 
 interface User {
-  id?: string;
-  email?: string;
-  name?: string;
+  id: string;
+  email?: string | null;
+  name?: string | null;
 }
 
 interface TrackingOptions {
@@ -13,7 +13,7 @@ interface TrackingOptions {
 interface UserContext {
   user_id?: string;
   user_role?: string;
-  user_email?: string;
+  user_email?: string | null;
 }
 
 interface TrackingPayload {

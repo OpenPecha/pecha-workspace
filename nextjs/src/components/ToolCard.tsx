@@ -43,7 +43,9 @@ const ToolCard: React.FC<ToolCardProps> = ({
   price,
 }) => {
   const { isAuthenticated, user } = useAuth();
-  const { trackToolClicked } = useUmamiTracking({ userEmail: user?.email });
+  const { trackToolClicked } = useUmamiTracking({
+    userEmail: user?.email || undefined,
+  });
 
   const handleToolClick = async () => {
     // Track tool click event first and wait for it to complete

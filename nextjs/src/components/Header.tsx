@@ -52,8 +52,8 @@ const Header: React.FC = () => {
                 onClick={() => setShowDropdown(!showDropdown)}
                 className="text-gray-600 hover:text-pecha-secondary transition-colors flex items-center gap-1 cursor-pointer"
               >
-                <Avatar title={user?.name}>
-                  <AvatarImage src={user?.picture} />
+                <Avatar title={user?.name || undefined}>
+                  <AvatarImage src={user?.picture || undefined} />
                   <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <span>{user?.name ?? "Profile"}</span>

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 interface RouteParams {
-  params: { pechaId: string };
+  params: Promise<{ pechaId: string }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
-  const { pechaId } = params;
+  const { pechaId } = await params;
 
   try {
     // Note: This would need the actual pecha_parser implementation

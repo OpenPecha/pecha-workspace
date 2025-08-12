@@ -6,9 +6,9 @@ import { setUmamiUser, clearUmamiUser, injectUmami } from "@/lib/analytics";
 
 interface User {
   id: string;
-  email?: string;
-  name?: string;
-  picture?: string;
+  email?: string | null;
+  name?: string | null;
+  picture?: string | null;
 }
 
 interface AuthContextType {

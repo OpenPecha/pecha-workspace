@@ -3,14 +3,14 @@ import { verifyToken, createErrorResponse } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 interface RouteParams {
-  params: { userId: string };
+  params: Promise<{ userId: string }>;
 }
 
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
     const authResult = await verifyToken(request);
     const authUserId = authResult.sub;
-    const { userId } = params;
+    const { userId } = await params;
     const { isAdmin } = await request.json();
 
     // Check if the requester is admin

@@ -1,9 +1,9 @@
 // Analytics utility functions for Umami tracking
 
 interface UmamiUser {
-  email?: string;
+  email?: string | null;
   id?: string;
-  name?: string;
+  name?: string | null;
 }
 
 export const setUmamiUser = (user: UmamiUser) => {

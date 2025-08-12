@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { getSession } from "@auth0/nextjs-auth0";
+import { headers } from "next/headers";
 
 export interface AuthUser {
   sub: string;
@@ -13,7 +14,7 @@ export interface AuthUser {
 
 export async function verifyToken(request: NextRequest): Promise<AuthUser> {
   try {
-    const session = await getSession(request as any);
+    const session = await getSession();
 
     if (!session?.user) {
       throw new Error("No authenticated user");

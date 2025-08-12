@@ -11,38 +11,41 @@ interface TransformedTool {
   id?: string;
   title: string;
   description?: string;
-  category?: string;
+  category: string;
   icon?: string;
   path?: string;
   price?: number;
-  status?: string;
+  status: string;
   demo?: string;
 }
 
 const ToolsSection = () => {
   const { user } = useAuth();
-  const { trackToolListViewed } = useUmamiTracking({ userEmail: user?.email });
+  const { trackToolListViewed } = useUmamiTracking({
+    userEmail: user?.email || undefined,
+  });
 
   // Fetch tools from API
   const { data: toolsList, isLoading } = useQuery({
     queryKey: ["toolsList"],
     queryFn: () => getTools(),
   });
-  const tools = toolsList?.map((tool: Tool) => ({
-    id: tool.id,
-    title: tool.name?.split("-")[0] || tool.name, // API uses 'name' field
-    description: tool.description,
-    category: tool.category || "General", // Default category if empty
-    icon: tool.icon, // Base64 encoded icon data
-    path: tool.link, // API uses 'link' field
-    price: tool.price,
-    demo: tool.demo,
-    status:
-      tool.name?.split("-").length > 1
-        ? tool.name?.split("-").pop()
-        : "Available",
-    //default status for API tools
-  }));
+  const tools: TransformedTool[] =
+    toolsList?.map((tool: Tool) => ({
+      id: tool.id,
+      title: tool.name?.split("-")[0] || tool.name || "Untitled Tool", // API uses 'name' field
+      description: tool.description,
+      category: tool.category || "General", // Default category if empty
+      icon: tool.icon, // Base64 encoded icon data
+      path: tool.link, // API uses 'link' field
+      price: tool.price,
+      demo: tool.demo,
+      status:
+        tool.name && tool.name.split("-").length > 1
+          ? tool.name.split("-").pop() || "Available"
+          : "Available",
+      //default status for API tools
+    })) || [];
 
   // Track tool list viewed when tools are loaded
   React.useEffect(() => {
@@ -54,15 +57,10 @@ const ToolsSection = () => {
           tools_count: tools.length,
           tools_loaded: true,
           has_categories: tools.some(
-            (tool: TransformedTool) =>
-              tool.category && tool.category !== "General"
+            (tool) => tool.category && tool.category !== "General"
           ),
-          has_demos: tools.some(
-            (tool: TransformedTool) => tool.demo && tool.demo.trim() !== ""
-          ),
-          has_pricing: tools.some(
-            (tool: TransformedTool) => tool.price && tool.price > 0
-          ),
+          has_demos: tools.some((tool) => tool.demo && tool.demo.trim() !== ""),
+          has_pricing: tools.some((tool) => tool.price && tool.price > 0),
         },
       });
     }
@@ -94,7 +92,7 @@ const ToolsSection = () => {
             </div>
           )}
           {!isLoading && tools && tools.length > 0 ? (
-            tools.map((tool: TransformedTool, index: number) => {
+            tools.map((tool, index: number) => {
               return (
                 <div
                   key={tool.id || tool.title}
