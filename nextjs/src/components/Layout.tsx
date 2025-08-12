@@ -24,7 +24,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
-      <main className="flex-grow pt-20">{children}</main>
+      <main className={`flex-grow ${pathname === "/" ? "pt-0" : "pt-20"}`}>
+        {children}
+      </main>
       <Footer />
       <Marquee />
     </div>

@@ -11,7 +11,19 @@ const nextConfig: NextConfig = {
     AUTH0_AUDIENCE: process.env.AUTH0_AUDIENCE,
   },
   images: {
-    domains: ["lh3.googleusercontent.com", "s.gravatar.com", "cdn.auth0.com"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "s.gravatar.com",
+      "cdn.auth0.com",
+      "live.staticflickr.com",
+      "melong.com",
+      "i.etsystatic.com",
+      "i.sstatic.net",
+      "www.melong.com",
+      "imgcdn.stablediffusionweb.com",
+      "img.freepik.com",
+      "images.squarespace-cdn.com",
+    ],
   },
 };
 

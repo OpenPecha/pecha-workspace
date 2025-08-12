@@ -56,6 +56,137 @@ const TypewriterText = () => {
   );
 };
 
+const HeroImageCarousel = () => {
+  const images = [
+    {
+      src: "https://live.staticflickr.com/6230/6326246420_817d3e3dd4_b.jpg",
+      alt: "Buddhist Manuscripts - Traditional Pecha",
+      title: "Traditional Pecha",
+    },
+    {
+      src: "https://imgcdn.stablediffusionweb.com/2024/5/3/fe7cdb0d-7721-4ed3-901a-e8603a93106a.jpg",
+      alt: "Tibetan Buddhist Texts",
+      title: "Tibetan Texts",
+    },
+    {
+      src: "https://images.squarespace-cdn.com/content/v1/555547c4e4b0ee228d0fd235/351c3465-3ab3-498f-a702-9eb7835ecfa6/tibetan-buddhist-texts.jpg",
+      alt: "Ancient Buddhist Scriptures",
+      title: "Ancient Scriptures",
+    },
+    {
+      src: "https://img.freepik.com/premium-photo/ancient-tibetan-buddhist-text-hands-brahman-monk_1105604-25647.jpg",
+      alt: "Traditional Buddhist Literature",
+      title: "Buddhist Literature",
+    },
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+        setIsTransitioning(false);
+      }, 500);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  const currentImage = images[currentImageIndex];
+
+  return (
+    <div className="relative">
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-gradient-to-r from-indigo-400/20 to-purple-400/20 rounded-3xl blur-3xl transform scale-110"></div>
+
+      {/* Main Container */}
+      <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-1 shadow-2xl border border-white/20">
+        {/* Image Container */}
+        <div className="relative rounded-[22px] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+          <div className="aspect-[4/5] relative">
+            {/* Current Image */}
+            <div
+              className={`absolute inset-0 transition-all duration-700 ease-out ${
+                isTransitioning
+                  ? "opacity-0 scale-105"
+                  : "opacity-100 scale-100"
+              }`}
+            >
+              <Image
+                src={currentImage.src}
+                alt={currentImage.alt}
+                fill
+                className="object-cover"
+                priority={currentImageIndex === 0}
+              />
+              {/* Image Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            </div>
+          </div>
+        </div>
+
+        {/* Modern Progress Bar */}
+        <div className="flex justify-center mt-6 space-x-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (index !== currentImageIndex) {
+                  setIsTransitioning(true);
+                  setTimeout(() => {
+                    setCurrentImageIndex(index);
+                    setIsTransitioning(false);
+                  }, 350);
+                }
+              }}
+              className="group relative"
+              aria-label={`View ${images[index].title}`}
+            >
+              <div
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentImageIndex
+                    ? "w-8 bg-gradient-to-r from-indigo-500 to-purple-500"
+                    : "w-2 bg-gray-300 group-hover:bg-gray-400"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Modern Feature Cards */}
+      <div className="absolute -top-6 -left-6 z-10">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg border border-white/20 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium text-gray-700">
+              AI Powered
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute -bottom-6 -right-6 z-10">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg border border-white/20 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full animate-pulse delay-500"></div>
+            <span className="text-sm font-medium text-gray-700">
+              Translation Ready
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute top-1/4 -right-8 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-60 animate-float"></div>
+      <div className="absolute bottom-1/3 -left-8 w-6 h-6 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-40 animate-float-delayed"></div>
+    </div>
+  );
+};
+
 // Smooth scroll function
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
@@ -69,67 +200,98 @@ const scrollToSection = (sectionId: string) => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[800px] flex items-center justify-center overflow-hidden">
-      {/* Background Image with Purple/Blue Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/icon_logo.png"
-          alt="Pecha Tools Logo"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* Dark base overlay for text contrast */}
-        <div className="absolute inset-0 bg-black/30"></div>
-        {/* Beautiful purple to blue gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-blue-900/70 to-indigo-900/80"></div>
-        {/* Additional subtle dark overlay for extra text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20"></div>
+    <section className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden pt-10">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C7D2FE,transparent)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_300px_at_80%_300px,#DBEAFE,transparent)]"></div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center text-white">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
-            Preserving Ancient
-            <TypewriterText />
-            for the Digital Age
-          </h1>
+      {/* Container */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-64px)] py-4 lg:py-0">
+          {/* Left Side - Content */}
+          <div className="flex-1 max-w-2xl lg:pr-12 text-center lg:text-left">
+            <div className="space-y-8">
+              {/* Badge */}
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-indigo-200 shadow-sm">
+                <span className="text-sm font-medium text-indigo-600">
+                  🧘 Buddhist Manuscripts Platform
+                </span>
+              </div>
 
-          <p className="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed drop-shadow-md">
-            A centralized hub for working with Buddhist manuscripts (Pecha),
-            providing specialized tools for translation, transcription, and
-            proofreading.
-          </p>
+              {/* Main Heading */}
+              <div className="space-y-4">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                  Preserving Ancient
+                  <br />
+                  <TypewriterText />
+                  <br />
+                  <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    for the Digital Age
+                  </span>
+                </h1>
+              </div>
 
-          <div className="flex flex-col pt-3 sm:flex-row gap-4 justify-center items-center">
-            <Button
-              size="lg"
-              onClick={() => scrollToSection("tools")}
-              className="bg-white text-purple-700 hover:bg-purple-50 hover:text-purple-800 shadow-lg font-semibold px-8 transition-all duration-300 cursor-pointer"
-            >
-              Explore Tools
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+              {/* Description */}
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl">
+                A centralized hub for working with Buddhist manuscripts (Pecha),
+                providing specialized tools for translation, transcription, and
+                proofreading.
+              </p>
 
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => scrollToSection("vision")}
-              className="border-white/50 text-white hover:bg-white/15 hover:border-white/70 px-8 transition-all duration-300 backdrop-blur-sm cursor-pointer"
-            >
-              <Heart className="mr-2 h-5 w-5" />
-              Our Mission
-            </Button>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button
+                  size="lg"
+                  onClick={() => scrollToSection("tools")}
+                  className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
+                >
+                  Explore Tools
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => scrollToSection("vision")}
+                  className="border-2 border-indigo-300 text-indigo-700 hover:bg-indigo-50 hover:border-indigo-400 px-8 py-3 transition-all duration-300"
+                >
+                  <Heart className="mr-2 h-5 w-5" />
+                  Our Mission
+                </Button>
+              </div>
+
+              {/* Stats */}
+              <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-8">
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl font-bold text-gray-900">10K+</div>
+                  <div className="text-sm text-gray-600">Manuscripts</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl font-bold text-gray-900">50+</div>
+                  <div className="text-sm text-gray-600">Tools</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl font-bold text-gray-900">1K+</div>
+                  <div className="text-sm text-gray-600">Users</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Hero Image Carousel */}
+          <div className="flex-1 max-w-lg lg:max-w-xl mt-12 lg:mt-0">
+            <HeroImageCarousel />
           </div>
         </div>
       </div>
 
-      {/* Floating Elements with Purple/Blue theme */}
-      <div className="absolute top-20 left-20 w-2 h-2 bg-purple-300 rounded-full animate-pulse"></div>
-      <div className="absolute top-40 right-32 w-3 h-3 bg-blue-300 rounded-full animate-pulse delay-300"></div>
-      <div className="absolute bottom-32 left-1/4 w-1 h-1 bg-purple-400 rounded-full animate-pulse delay-700"></div>
-      <div className="absolute bottom-20 right-20 w-2 h-2 bg-blue-400/70 rounded-full animate-pulse delay-500"></div>
+      {/* Animated Background Elements */}
+      <div className="absolute top-20 left-10 w-2 h-2 bg-indigo-400 rounded-full animate-pulse"></div>
+      <div className="absolute top-40 right-20 w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-300"></div>
+      <div className="absolute bottom-32 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-pulse delay-700"></div>
+      <div className="absolute bottom-20 right-32 w-2 h-2 bg-indigo-300 rounded-full animate-pulse delay-500"></div>
     </section>
   );
 };
