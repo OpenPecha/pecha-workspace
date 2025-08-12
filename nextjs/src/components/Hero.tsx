@@ -49,9 +49,9 @@ const TypewriterText = () => {
   }, [currentText, isDeleting, isPaused, currentWordIndex, words]);
 
   return (
-    <span className="block bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent drop-shadow-lg">
+    <span className="block text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg leading-tight py-2">
       {currentText}
-      <span className="animate-pulse">|</span>
+      <span className="animate-pulse text-indigo-600">|</span>
     </span>
   );
 };
@@ -221,12 +221,14 @@ const Hero = () => {
               </div>
 
               {/* Main Heading */}
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   Preserving Ancient
-                  <br />
+                </h1>
+                <div className="py-2">
                   <TypewriterText />
-                  <br />
+                </div>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
                     for the Digital Age
                   </span>
