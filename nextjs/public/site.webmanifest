@@ -1,0 +1,29 @@
+{
+  "name": "Pecha Tools - Buddhist Manuscript Digital Workspace",
+  "short_name": "Pecha Tools",
+  "description": "AI-Enhanced Buddhist Manuscript Tools for scholars, translators, and practitioners",
+  "theme_color": "#12dfec",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icon_logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon_logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education", "books", "reference"],
+  "lang": "en",
+  "dir": "ltr"
+}
+

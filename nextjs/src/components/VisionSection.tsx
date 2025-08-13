@@ -34,24 +34,34 @@ const VisionSection = () => {
     <section
       id="vision"
       className="py-20 bg-gradient-to-br from-purple-100 via-indigo-100 to-purple-50 relative"
+      aria-labelledby="vision-heading"
     >
       {/* Seamless top transition from Tools */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-purple-100/40 to-transparent"></div>
+      <div
+        className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-purple-100/40 to-transparent"
+        aria-hidden="true"
+      ></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <ScrollFadeIn direction="up" delay={0} triggerOnce={true}>
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
+          <header className="text-center mb-16">
+            <h2
+              id="vision-heading"
+              className="text-4xl font-bold text-foreground mb-4"
+            >
               Our Vision & Mission
             </h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto">
               Bridging ancient wisdom with modern technology to create a more
               mindful and compassionate digital world.
             </p>
-          </div>
+          </header>
         </ScrollFadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto"
+          role="list"
+        >
           {visionPoints.map((point, index) => {
             const IconComponent = point.icon;
             return (
@@ -62,31 +72,44 @@ const VisionSection = () => {
                 threshold={0.1}
                 triggerOnce={false}
               >
-                <Card className="group hover:shadow-gentle transition-all duration-300 border-border/30">
-                  <CardContent className="p-8">
-                    <div className="flex items-start space-x-4">
-                      <div className="p-3 bg-gradient-wisdom rounded-lg shadow-gentle shrink-0">
-                        <IconComponent className="h-6 w-6 text-white" />
+                <article
+                  role="listitem"
+                  className="group hover:shadow-gentle transition-all duration-300"
+                >
+                  <Card className="border-border/30 h-full">
+                    <CardContent className="p-8">
+                      <div className="flex items-start space-x-4">
+                        <div
+                          className="p-3 bg-gradient-wisdom rounded-lg shadow-gentle shrink-0"
+                          aria-hidden="true"
+                        >
+                          <IconComponent className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                            {point.title}
+                          </h3>
+                          <p className="text-gray-500 leading-relaxed">
+                            {point.description}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                          {point.title}
-                        </h3>
-                        <p className="text-gray-500 leading-relaxed">
-                          {point.description}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </article>
               </ScrollFadeIn>
             );
           })}
         </div>
 
-        <div className="mt-16 text-center">
+        <aside
+          className="mt-16 text-center"
+          aria-labelledby="community-heading"
+        >
           <div className="bg-gradient-serenity p-8 rounded-2xl shadow-elevated max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold  mb-4">Join Our Community</h3>
+            <h3 id="community-heading" className="text-2xl font-bold mb-4">
+              Join Our Community
+            </h3>
             <p className="text-gray-600 mb-4">
               Pecha.tools is a specialized platform designed for scholars,
               researchers, and practitioners working with Buddhist manuscripts.
@@ -99,18 +122,25 @@ const VisionSection = () => {
               intuitive interface ensures that users can focus on their work
               rather than navigating complex software.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+            <nav
+              className="flex flex-col sm:flex-row gap-4 justify-center mt-4"
+              aria-label="Community links"
+            >
               <a
                 href="https://forum.openpecha.org"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border border-white/30 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors text-center inline-block"
+                aria-describedby="forum-description"
               >
                 Join Discussion
               </a>
-            </div>
+              <span id="forum-description" className="sr-only">
+                Opens OpenPecha forum in a new tab for community discussions
+              </span>
+            </nav>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
   );

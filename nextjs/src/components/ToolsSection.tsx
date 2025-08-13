@@ -83,11 +83,15 @@ const ToolsSection = () => {
     <section
       id="tools"
       className="py-20 bg-gradient-to-br from-blue-100 via-purple-100 to-indigo-100"
+      aria-labelledby="tools-heading"
     >
       <div className="container mx-auto px-4">
         <ScrollFadeIn direction="up" delay={0} triggerOnce={true}>
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
+          <header className="text-center mb-16">
+            <h2
+              id="tools-heading"
+              className="text-4xl font-bold text-foreground mb-4"
+            >
               Digital Tools for Buddhist Studies
             </h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto">
@@ -95,7 +99,7 @@ const ToolsSection = () => {
               scholars, translators, and practitioners in their study and
               preservation of Buddhist texts.
             </p>
-          </div>
+          </header>
         </ScrollFadeIn>
 
         {/* Tools from API */}

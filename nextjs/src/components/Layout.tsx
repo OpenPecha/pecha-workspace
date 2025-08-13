@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
 import Marquee from "./Marquee";
+import Breadcrumbs from "./Breadcrumbs";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
+      <Breadcrumbs />
       <main className={`flex-grow ${pathname === "/" ? "pt-0" : "pt-20"}`}>
         {children}
       </main>

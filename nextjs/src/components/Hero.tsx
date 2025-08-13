@@ -200,83 +200,115 @@ const scrollToSection = (sectionId: string) => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden pt-10">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C7D2FE,transparent)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_300px_at_80%_300px,#DBEAFE,transparent)]"></div>
-      </div>
+    <main role="main">
+      <section
+        className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden pt-10"
+        aria-labelledby="hero-heading"
+      >
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-30" aria-hidden="true">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C7D2FE,transparent)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_300px_at_80%_300px,#DBEAFE,transparent)]"></div>
+        </div>
 
-      {/* Container */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-64px)] py-4 lg:py-0">
-          {/* Left Side - Content */}
-          <div className="flex-1 max-w-2xl lg:pr-12 text-center lg:text-left">
-            <div className="space-y-8">
-              {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-indigo-200 shadow-sm">
-                <span className="text-sm font-medium text-indigo-600">
-                  🧘 Buddhist Manuscripts Platform
-                </span>
-              </div>
-
-              {/* Main Heading */}
-              <div className="space-y-2">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-none">
-                  Preserving Ancient
-                </h1>
-                <TypewriterText />
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-none">
-                  <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-                    for the Digital Age
+        {/* Container */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-64px)] py-4 lg:py-0">
+            {/* Left Side - Content */}
+            <header className="flex-1 max-w-2xl lg:pr-12 text-center lg:text-left">
+              <div className="space-y-8">
+                {/* Badge */}
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-indigo-200 shadow-sm">
+                  <span className="text-sm font-medium text-indigo-600">
+                    🧘 Buddhist Manuscripts Platform
                   </span>
-                </h1>
+                </div>
+
+                {/* Main Heading */}
+                <div className="space-y-2">
+                  <h1
+                    id="hero-heading"
+                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-none"
+                  >
+                    <span className="block">Preserving Ancient</span>
+                    <TypewriterText />
+                    <span className="block bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                      for the Digital Age
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Description */}
+                <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                  A comprehensive digital platform for Buddhist manuscripts,
+                  providing specialized tools for translation, transcription,
+                  and preservation of ancient Pecha texts.
+                </p>
+
+                {/* CTA Buttons */}
+                <nav aria-label="Primary actions">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <Button
+                      size="lg"
+                      onClick={() => scrollToSection("tools")}
+                      className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
+                      aria-describedby="tools-description"
+                    >
+                      Explore Tools
+                      <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                    </Button>
+                    <span id="tools-description" className="sr-only">
+                      Navigate to the tools section to explore our Buddhist
+                      manuscript processing tools
+                    </span>
+
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => scrollToSection("vision")}
+                      className="border-2 border-indigo-300 text-indigo-700 hover:bg-indigo-50 hover:border-indigo-400 px-8 py-3 transition-all duration-300"
+                      aria-describedby="mission-description"
+                    >
+                      <Heart className="mr-2 h-5 w-5" aria-hidden="true" />
+                      Our Mission
+                    </Button>
+                    <span id="mission-description" className="sr-only">
+                      Learn about our mission to preserve Buddhist manuscripts
+                    </span>
+                  </div>
+                </nav>
               </div>
+            </header>
 
-              {/* Description */}
-              <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-                A comprehensive digital platform for Buddhist manuscripts,
-                providing specialized tools for translation, transcription, and
-                preservation of ancient Pecha texts.
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button
-                  size="lg"
-                  onClick={() => scrollToSection("tools")}
-                  className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
-                >
-                  Explore Tools
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => scrollToSection("vision")}
-                  className="border-2 border-indigo-300 text-indigo-700 hover:bg-indigo-50 hover:border-indigo-400 px-8 py-3 transition-all duration-300"
-                >
-                  <Heart className="mr-2 h-5 w-5" />
-                  Our Mission
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side - Hero Image Carousel */}
-          <div className="flex-1 max-w-lg lg:max-w-xl mt-12 lg:mt-0">
-            <HeroImageCarousel />
+            {/* Right Side - Hero Image Carousel */}
+            <aside
+              className="flex-1 max-w-lg lg:max-w-xl mt-12 lg:mt-0"
+              aria-label="Buddhist manuscript showcase"
+            >
+              <HeroImageCarousel />
+            </aside>
           </div>
         </div>
-      </div>
 
-      {/* Animated Background Elements */}
-      <div className="absolute top-20 left-10 w-2 h-2 bg-indigo-400 rounded-full animate-pulse"></div>
-      <div className="absolute top-40 right-20 w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-300"></div>
-      <div className="absolute bottom-32 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-pulse delay-700"></div>
-      <div className="absolute bottom-20 right-32 w-2 h-2 bg-indigo-300 rounded-full animate-pulse delay-500"></div>
-    </section>
+        {/* Animated Background Elements */}
+        <div
+          className="absolute top-20 left-10 w-2 h-2 bg-indigo-400 rounded-full animate-pulse"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute top-40 right-20 w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-300"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute bottom-32 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-pulse delay-700"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute bottom-20 right-32 w-2 h-2 bg-indigo-300 rounded-full animate-pulse delay-500"
+          aria-hidden="true"
+        ></div>
+      </section>
+    </main>
   );
 };
 
