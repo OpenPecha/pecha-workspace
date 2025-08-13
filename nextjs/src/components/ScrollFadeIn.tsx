@@ -53,7 +53,7 @@ const ScrollFadeIn = ({
 
   return (
     <div
-      ref={ref}
+      ref={ref as React.RefObject<HTMLDivElement>}
       className={`${getDirectionClasses()} ${className}`}
       style={{
         transitionDelay: `${delay}ms`,
