@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface StructuredDataProps {
   type?: "organization" | "website" | "tools";
@@ -10,6 +11,16 @@ const StructuredData: React.FC<StructuredDataProps> = ({
   type = "organization",
 }) => {
   const pathname = usePathname();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Don't render on server to avoid hydration issues
+  if (!isClient) {
+    return null;
+  }
 
   const getOrganizationData = () => ({
     "@context": "https://schema.org",
@@ -178,4 +189,3 @@ const StructuredData: React.FC<StructuredDataProps> = ({
 };
 
 export default StructuredData;
-

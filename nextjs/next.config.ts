@@ -39,15 +39,7 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-slot",
     ],
   },
-  // Turbopack configuration (moved from experimental)
-  turbopack: {
-    rules: {
-      "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
-      },
-    },
-  },
+
   // Webpack optimizations
   webpack: (config: any, { isServer }: { isServer: boolean }) => {
     // Fix for "self is not defined" error in SSR
@@ -60,27 +52,6 @@ const nextConfig: NextConfig = {
         crypto: false,
       };
     }
-
-    // Bundle optimization
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: "all",
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
-          },
-        },
-      },
-    };
-
-    // Handle SVG imports
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
 
     return config;
   },

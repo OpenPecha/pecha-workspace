@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface BreadcrumbItem {
   name: string;
@@ -12,6 +13,16 @@ interface BreadcrumbItem {
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Don't render on server to avoid hydration issues
+  if (!isClient) {
+    return null;
+  }
 
   // Don't show breadcrumbs on home page
   if (pathname === "/") return null;

@@ -16,9 +16,16 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
   } = options;
 
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Check if we're on the client side and IntersectionObserver is available
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      // On server or browsers without IntersectionObserver support, just show the element
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
