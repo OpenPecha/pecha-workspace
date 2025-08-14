@@ -232,7 +232,7 @@ const Hero = () => {
                   >
                     <span className="block">Preserving Ancient</span>
                     <TypewriterText />
-                    <span className="block bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r leading-[normal] from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
                       for the Digital Age
                     </span>
                   </h1>
