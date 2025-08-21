@@ -14,16 +14,13 @@ export async function loader({ request }: Route.LoaderArgs) {
   try {
     const session = await getSession(request.headers.get('Cookie'));
     
-    if (!session) {
-      throw new Error('No session found');
-    }
-    const logoutUrl = auth0Service.getLogoutUrl();
     const headers = new Headers();
     headers.append('Set-Cookie', await destroySession(session));
-    return redirect(logoutUrl, { headers });
+    return redirect('/', { headers });
   } catch (error) {
     console.error('Error during logout:', error);
-    return redirect(`/auth/login?returnTo=${encodeURIComponent(request.url)}`);
+    // Redirect to homepage with logout flag instead of login page
+    return redirect('/');
   }
 }
 

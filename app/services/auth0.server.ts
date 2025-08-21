@@ -117,7 +117,7 @@ export class Auth0Service {
    */
   getLogoutUrl(): string {
     const baseUrl = new URL(auth0Config.callbackUrl).origin;
-    const returnTo = `${baseUrl}/auth/login`;
+    const returnTo = `${baseUrl}/?logout=true`;
     const params = new URLSearchParams({
       client_id: auth0Config.clientId,
       returnTo: returnTo,
