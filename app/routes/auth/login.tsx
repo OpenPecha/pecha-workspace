@@ -1,5 +1,6 @@
 import { Form, redirect } from 'react-router';
 import { auth0Service } from '../../services/auth0.server';
+import { useEffect, useRef } from 'react';
 
 export function meta() {
   return [
@@ -23,19 +24,18 @@ export async function action() {
 }
 
 export default function Login() {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if(buttonRef.current){
+      buttonRef.current.click();
+    }
+  }, []);
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      <div className="p-10 bg-white rounded-xl shadow-2xl w-full max-w-md transform transition-all hover:scale-[1.02]">
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mb-4">
-            <span className="text-3xl font-bold text-white">A</span>
-          </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
-          <p className="text-gray-600 text-center">Please sign in to continue to your account</p>
-        </div>
-        
+
         <Form method="post" className="space-y-6">
           <button
+            ref={buttonRef}
             type="submit"
             className="w-full px-6 py-3 text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transform transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           >
@@ -47,7 +47,5 @@ export default function Login() {
             </div>
           </button>
         </Form>
-      </div>
-    </div>
   );
 }

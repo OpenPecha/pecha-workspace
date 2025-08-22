@@ -3,6 +3,9 @@ export default [
   // Homepage - accessible to all users
   index('routes/index.tsx'),
   
+  // Top-level logout route for convenience
+  route('logout', 'routes/logout.tsx'),
+  
   // Protected routes that require authentication
   layout('routes/layouts/authLayout.tsx', [
     route('profile', 'routes/profile.tsx'),

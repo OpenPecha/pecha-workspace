@@ -7,11 +7,11 @@ import { commitSession, getSession } from './sessions.server';
 dotenv.config();
 
 // Destructure and validate required Auth0 configuration
-const { AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET, AUTH0_DOMAIN, AUTH0_CALLBACK_URL, AUTH0_AUDIENCE } = process.env;
+const { AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET, AUTH0_DOMAIN, AUTH0_CALLBACK, AUTH0_AUDIENCE } = process.env;
 if (!AUTH0_DOMAIN) throw new Error('Missing Auth0 domain.');
 if (!AUTH0_CLIENT_ID) throw new Error('Missing Auth0 client id.');
 if (!AUTH0_CLIENT_SECRET) throw new Error('Missing Auth0 client secret.');
-if (!AUTH0_CALLBACK_URL) throw new Error('Missing Auth0 callback url.');
+if (!AUTH0_CALLBACK) throw new Error('Missing Auth0 callback url.');
 if (!AUTH0_AUDIENCE) throw new Error('Missing Auth0 audience.');
 
 // Object containing Auth0 configuration values
@@ -19,7 +19,7 @@ const auth0Config = {
   clientId: AUTH0_CLIENT_ID,
   clientSecret: AUTH0_CLIENT_SECRET,
   domain: AUTH0_DOMAIN,
-  callbackUrl: AUTH0_CALLBACK_URL,
+  callbackUrl: AUTH0_CALLBACK,
   audience: AUTH0_AUDIENCE,
 };
 
@@ -61,7 +61,10 @@ export class Auth0Service {
    */
   private constructor() {
     log('Service instance created', 'debug');
-    this.auth0Url = `https://${auth0Config.domain}`;
+    // Handle domains that may or may not include the protocol
+    this.auth0Url = auth0Config.domain.startsWith('http') 
+      ? auth0Config.domain 
+      : `https://${auth0Config.domain}`;
     this.auth0Api = axios.create({
       baseURL: this.auth0Url,
       headers: {
