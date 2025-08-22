@@ -110,7 +110,6 @@ export class Auth0Service {
       audience: auth0Config.audience,
     });
     const loginUrl = `${this.auth0Url}/authorize?${params.toString()}`;
-    log(`Generated login URL with state: ${state.substring(0, 8)}...`, 'debug');
     return loginUrl;
   }
 

@@ -3,13 +3,103 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  /* Design System Colors */
+  --color-primary: #4f46e5;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f1f5f9;
+  --color-secondary-foreground: #0f172a;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-muted: #f8fafc;
+  --color-muted-foreground: #64748b;
+  --color-accent: #f1f5f9;
+  --color-accent-foreground: #0f172a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #4f46e5;
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  
+  /* Dark mode colors */
+  --color-primary-dark: #6366f1;
+  --color-primary-foreground-dark: #ffffff;
+  --color-secondary-dark: #1e293b;
+  --color-secondary-foreground-dark: #f8fafc;
+  --color-destructive-dark: #ef4444;
+  --color-destructive-foreground-dark: #ffffff;
+  --color-muted-dark: #1e293b;
+  --color-muted-foreground-dark: #94a3b8;
+  --color-accent-dark: #1e293b;
+  --color-accent-foreground-dark: #f8fafc;
+  --color-popover-dark: #0f172a;
+  --color-popover-foreground-dark: #f8fafc;
+  --color-card-dark: #0f172a;
+  --color-card-foreground-dark: #f8fafc;
+  --color-border-dark: #334155;
+  --color-input-dark: #334155;
+  --color-ring-dark: #6366f1;
+  --color-background-dark: #0f172a;
+  --color-foreground-dark: #f8fafc;
+}
+
+/* Root color mapping */
+:root {
+  --primary: var(--color-primary);
+  --primary-foreground: var(--color-primary-foreground);
+  --secondary: var(--color-secondary);
+  --secondary-foreground: var(--color-secondary-foreground);
+  --destructive: var(--color-destructive);
+  --destructive-foreground: var(--color-destructive-foreground);
+  --muted: var(--color-muted);
+  --muted-foreground: var(--color-muted-foreground);
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-accent-foreground);
+  --popover: var(--color-popover);
+  --popover-foreground: var(--color-popover-foreground);
+  --card: var(--color-card);
+  --card-foreground: var(--color-card-foreground);
+  --border: var(--color-border);
+  --input: var(--color-input);
+  --ring: var(--color-ring);
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+}
+
+/* Dark mode color mapping */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: var(--color-primary-dark);
+    --primary-foreground: var(--color-primary-foreground-dark);
+    --secondary: var(--color-secondary-dark);
+    --secondary-foreground: var(--color-secondary-foreground-dark);
+    --destructive: var(--color-destructive-dark);
+    --destructive-foreground: var(--color-destructive-foreground-dark);
+    --muted: var(--color-muted-dark);
+    --muted-foreground: var(--color-muted-foreground-dark);
+    --accent: var(--color-accent-dark);
+    --accent-foreground: var(--color-accent-foreground-dark);
+    --popover: var(--color-popover-dark);
+    --popover-foreground: var(--color-popover-foreground-dark);
+    --card: var(--color-card-dark);
+    --card-foreground: var(--color-card-foreground-dark);
+    --border: var(--color-border-dark);
+    --input: var(--color-input-dark);
+    --ring: var(--color-ring-dark);
+    --background: var(--color-background-dark);
+    --foreground: var(--color-foreground-dark);
+  }
+  
+  html {
+    color-scheme: dark;
+  }
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+  @apply bg-background text-foreground;
 }

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://workspace.pecha.tools/sitemap.xml
+
+# Disallow crawling of sensitive areas
+Disallow: /auth/
+Disallow: /api/
+
+# Allow specific Buddhist/AI content
+Allow: /tools/
+Allow: /about/
+Allow: /contact/
+
+# Crawl-delay to be respectful
+Crawl-delay: 1

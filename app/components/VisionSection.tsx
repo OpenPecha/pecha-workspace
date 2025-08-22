@@ -32,18 +32,18 @@ const VisionSection = () => {
   return (
     <section
       id="vision"
-      className="py-20 bg-gradient-to-br from-purple-100 via-indigo-100 to-purple-50 relative"
+      className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 relative"
       aria-labelledby="vision-heading"
     >
       <div className="container mx-auto px-4 relative z-10">
         <header className="text-center mb-16">
           <h2
             id="vision-heading"
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-4xl font-bold text-foreground mb-4"
           >
             Our Vision & Mission
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Bridging ancient wisdom with modern technology to create a more
             mindful and compassionate digital world.
           </p>
@@ -57,24 +57,22 @@ const VisionSection = () => {
                 key={`vision-point-${point.title.toLowerCase().replace(/\s+/g, '-')}`}
                 className="group hover:shadow-lg transition-all duration-300"
               >
-                <Card className="border-gray-200 h-full">
+                <Card className="border-border h-full pt-4 bg-card">
                   <CardContent className="p-8">
-                    <div className="flex items-start space-x-4">
+                    <div className="text-center mb-6">
                       <div
-                        className="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg shadow-sm shrink-0"
+                        className="inline-flex p-4 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-sm mb-4"
                         aria-hidden="true"
                       >
-                        <IconComponent className="h-6 w-6 text-white" />
+                        <IconComponent className="h-8 w-8 text-primary-foreground" />
                       </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">
-                          {point.title}
-                        </h3>
-                        <p className="text-gray-600 leading-relaxed">
-                          {point.description}
-                        </p>
-                      </div>
+                      <h3 className="text-xl font-semibold text-card-foreground mb-3 group-hover:text-primary transition-colors">
+                        {point.title}
+                      </h3>
                     </div>
+                    <p className="text-muted-foreground leading-relaxed text-center">
+                      {point.description}
+                    </p>
                   </CardContent>
                 </Card>
               </li>
@@ -86,17 +84,17 @@ const VisionSection = () => {
           className="mt-16 text-center"
           aria-labelledby="community-heading"
         >
-          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-2xl shadow-lg max-w-4xl mx-auto border border-indigo-100">
-            <h3 id="community-heading" className="text-2xl font-bold mb-4 text-gray-900">
+          <div className="bg-gradient-to-br from-accent/50 to-secondary/50 p-8 rounded-2xl shadow-lg max-w-4xl mx-auto border border-border">
+            <h3 id="community-heading" className="text-2xl font-bold mb-4 text-foreground">
               Join Our Community
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Pecha.tools is a specialized platform designed for scholars,
               researchers, and practitioners working with Buddhist manuscripts.
               Our suite of tools helps streamline the process of translating,
               transcribing, and proofreading these valuable cultural artifacts.
             </p>
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               With a centralized login system, users can seamlessly access all
               tools and maintain consistency across their projects. Our modern,
               intuitive interface ensures that users can focus on their work
@@ -110,7 +108,7 @@ const VisionSection = () => {
                 href="https://forum.openpecha.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-indigo-300 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors text-center inline-block text-indigo-700"
+                className="border border-border px-6 py-3 rounded-lg font-semibold hover:bg-accent transition-colors text-center inline-block text-primary"
                 aria-describedby="forum-description"
               >
                 Join Discussion

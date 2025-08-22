@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
 import { ExternalLink } from "lucide-react";
 import { useLoaderData } from "react-router";
 import { useUserStore } from "../store/user";
@@ -18,18 +17,7 @@ interface ToolCardProps {
   price?: number;
 }
 
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case "Available":
-      return "bg-green-100 text-green-800 hover:bg-green-200";
-    case "Beta":
-      return "bg-yellow-100 text-yellow-800 hover:bg-yellow-200";
-    case "Coming Soon":
-      return "bg-blue-100 text-blue-800 hover:bg-blue-200";
-    default:
-      return "bg-gray-100 text-gray-800 hover:bg-gray-200";
-  }
-};
+
 
 const ToolCard: React.FC<ToolCardProps> = ({
   title,
@@ -58,28 +46,25 @@ const ToolCard: React.FC<ToolCardProps> = ({
   };
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 h-full flex flex-col">
+    <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 h-full flex flex-col bg-card">
       <CardHeader>
-        <div className="flex items-start justify-between">
-          <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300 shrink-0">
             {icon ? (
-              <img src={icon} alt={title} className="h-6 w-6 text-white" />
+              <img src={icon} alt={title} className="h-5 w-5 text-primary-foreground" />
             ) : (
-              <div className="h-6 w-6 bg-white/20 rounded" />
+              <div className="h-5 w-5 bg-primary-foreground/20 rounded" />
             )}
           </div>
-          <Badge className={getStatusColor(status) + " capitalize"}>
-            {status}
-          </Badge>
+          <CardTitle className="text-lg text-card-foreground group-hover:text-primary transition-colors">
+            {title}
+          </CardTitle>
         </div>
-        <CardTitle className="text-xl text-gray-900 group-hover:text-indigo-600 transition-colors">
-          {title}
-        </CardTitle>
       </CardHeader>
 
       <CardContent className="pt-0 flex-1 flex flex-col">
         {description && (
-          <p className="text-gray-600 mb-6 leading-relaxed flex-1">
+          <p className="text-muted-foreground mb-6 leading-relaxed flex-1 text-sm">
             {description}
           </p>
         )}
@@ -87,7 +72,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
         <Button
           onClick={handleToolClick}
           variant="outline"
-          className="w-full group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300"
+          className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300"
           disabled={isDisabled}
         >
           {getButtonText()}
@@ -114,7 +99,7 @@ interface TransformedTool {
 
 const ToolsSection = () => {
   const loaderData = useLoaderData();
-  const rawTools = (loaderData as any)?.tools || [];
+  const rawTools = loaderData?.tools || [];
 
   // Transform tools data to match NextJS format
   const tools: TransformedTool[] = rawTools
@@ -148,7 +133,7 @@ const ToolsSection = () => {
   return (
     <section
       id="tools"
-      className="py-20 bg-gradient-to-br from-blue-100 via-purple-100 to-indigo-100"
+      className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5"
       aria-labelledby="tools-heading"
     >
       <div className="container mx-auto px-4">
@@ -156,11 +141,11 @@ const ToolsSection = () => {
           <header className="text-center mb-16">
             <h2
               id="tools-heading"
-              className="text-4xl font-bold text-gray-900 mb-4"
+              className="text-4xl font-bold text-foreground mb-4"
             >
               Digital Tools for Buddhist Studies
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Discover our comprehensive suite of tools designed to support
               scholars, translators, and practitioners in their study and
               preservation of Buddhist texts.
@@ -196,10 +181,10 @@ const ToolsSection = () => {
           ) : (
             <div className="col-span-full text-center py-8">
               <div className="mt-4">
-                <p className="text-gray-600">
+                <p className="text-muted-foreground">
                   No tools available at the moment.
                 </p>
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-muted-foreground/70 mt-2">
                   Check back later or contact an administrator to add tools.
                 </p>
               </div>

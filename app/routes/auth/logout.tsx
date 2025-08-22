@@ -1,6 +1,5 @@
-import { redirect } from 'react-router';
 import { destroySession, getSession } from '../../services/sessions.server';
-import type { Route } from './+types/logout';
+import { auth0Service } from '~/services/auth0.server';
 
 export function meta() {
   return [
@@ -9,19 +8,22 @@ export function meta() {
   ];
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  try {
-    const session = await getSession(request.headers.get('Cookie'));
-    
-    const headers = new Headers();
-    headers.append('Set-Cookie', await destroySession(session));
-    return redirect('/', { headers });
-  } catch (error) {
-    console.error('Error during logout:', error);
-    // Redirect to homepage with logout flag instead of login page
-    return redirect('/');
-  }
+export async function loader({ request }: { request: Request }) {
+  const session = await getSession(request.headers.get('Cookie'));
+  const headers = new Headers();
+
+  // Clean session
+  await auth0Service['cleanSession'](session);
+
+  // Commit empty session
+  headers.append('Set-Cookie', await destroySession(session));
+
+
+  // Redirect to Auth0 logout
+  return Response.redirect(auth0Service.getLogoutUrl(), 302, { headers });
 }
+
+
 
 export default function Logout() {
   return null;

@@ -46,9 +46,9 @@ const TypewriterText = () => {
   }, [currentText, isDeleting, isPaused, currentWordIndex, words]);
 
   return (
-    <span className="block text-4xl sm:text-5xl lg:text-6xl leading-[normal] font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg ">
+    <span className="block text-4xl sm:text-5xl lg:text-6xl leading-[normal] font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent drop-shadow-lg ">
       {currentText}
-      <span className="animate-pulse text-indigo-600">|</span>
+      <span className="animate-pulse text-primary">|</span>
     </span>
   );
 };
@@ -197,7 +197,7 @@ const Hero = () => {
   return (
     <main role="main">
       <section
-        className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden pt-10"
+        className="relative min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent/10 overflow-hidden pt-20"
         aria-labelledby="hero-heading"
       >
         {/* Background Pattern */}
@@ -213,8 +213,8 @@ const Hero = () => {
             <header className="flex-1 max-w-2xl lg:pr-12 text-center lg:text-left">
               <div className="space-y-8">
                 {/* Badge */}
-                <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-indigo-200 shadow-sm">
-                  <span className="text-sm font-medium text-indigo-600">
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-card/80 backdrop-blur-sm border border-border shadow-sm">
+                  <span className="text-sm font-medium text-primary">
                     🧘 Buddhist Manuscripts Platform
                   </span>
                 </div>
@@ -223,18 +223,18 @@ const Hero = () => {
                 <div className="space-y-2">
                   <h1
                     id="hero-heading"
-                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-none"
+                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-none"
                   >
                     <span className="block">Preserving Ancient</span>
                     <TypewriterText />
-                    <span className="block bg-gradient-to-r leading-[normal] from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <span className="block bg-gradient-to-r leading-[normal] from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
                       for the Digital Age
                     </span>
                   </h1>
                 </div>
 
                 {/* Description */}
-                <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
                   🧘 Comprehensive digital platform for Buddhist manuscripts,
                   providing specialized AI-powered tools for translation, transcription,
                   and preservation of ancient Pecha texts. Bridging ancient wisdom with modern technology
@@ -247,7 +247,7 @@ const Hero = () => {
                     <Button
                       size="lg"
                       onClick={() => scrollToSection("tools")}
-                      className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 px-8 py-3"
                       aria-describedby="tools-description"
                     >
                       Explore Tools
@@ -262,7 +262,7 @@ const Hero = () => {
                       variant="outline"
                       size="lg"
                       onClick={() => scrollToSection("vision")}
-                      className="border-2 border-indigo-300 text-indigo-700 hover:bg-indigo-50 hover:border-indigo-400 px-8 py-3 transition-all duration-300"
+                      className="border-2 border-border text-primary hover:bg-accent hover:border-border px-8 py-3 transition-all duration-300"
                       aria-describedby="mission-description"
                     >
                       <Heart className="mr-2 h-5 w-5" aria-hidden="true" />
