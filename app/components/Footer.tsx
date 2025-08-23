@@ -1,8 +1,12 @@
 import { BookOpen, Heart, Globe, Users, Brain, Sparkles } from "lucide-react";
 
-const Footer = () => {
+interface FooterProps {
+  className?: string;
+}
+
+const Footer = ({ className = "" }: FooterProps) => {
   return (
-    <footer className="bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 text-white py-16">
+    <footer className={`bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 text-white py-16 ${className}`}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Logo and Description */}

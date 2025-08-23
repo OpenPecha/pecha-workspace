@@ -199,9 +199,9 @@ const Hero = () => {
       <section
         className="relative min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent/10 overflow-hidden pt-20"
         aria-labelledby="hero-heading"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-30" aria-hidden="true">
+              >
+          {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-30 z-[1]" aria-hidden="true">
           <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C7D2FE,transparent)]"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_300px_at_80%_300px,#DBEAFE,transparent)]"></div>
         </div>
@@ -286,23 +286,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Animated Background Elements */}
-        <div
-          className="absolute top-20 left-10 w-2 h-2 bg-indigo-400 rounded-full animate-pulse"
-          aria-hidden="true"
-        ></div>
-        <div
-          className="absolute top-40 right-20 w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-300"
-          aria-hidden="true"
-        ></div>
-        <div
-          className="absolute bottom-32 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-pulse delay-700"
-          aria-hidden="true"
-        ></div>
-        <div
-          className="absolute bottom-20 right-32 w-2 h-2 bg-indigo-300 rounded-full animate-pulse delay-500"
-          aria-hidden="true"
-        ></div>
+
       </section>
     </main>
   );

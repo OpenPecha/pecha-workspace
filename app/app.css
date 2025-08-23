@@ -99,7 +99,30 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
 html,
 body {
   @apply bg-background text-foreground;
+}
+
+/* Smooth performance optimizations */
+body {
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling optimization */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Performance optimization for particles */
+#tsparticles {
+  transform: translateZ(0);
+  will-change: transform;
+  contain: layout style paint;
 }
