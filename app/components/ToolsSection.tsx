@@ -49,14 +49,14 @@ const ToolCard: React.FC<ToolCardProps> = ({
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 h-full flex flex-col bg-card">
       <CardHeader>
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300 shrink-0">
+          <div className="p-2 duration-300 shrink-0">
             {icon ? (
               <img src={icon} alt={title} className="h-5 w-5 text-primary-foreground" />
             ) : (
               <div className="h-5 w-5 bg-primary-foreground/20 rounded" />
             )}
           </div>
-          <CardTitle className="text-lg text-card-foreground group-hover:text-primary transition-colors">
+          <CardTitle className="text-xl text-card-foreground group-hover:text-primary transition-colors">
             {title}
           </CardTitle>
         </div>
