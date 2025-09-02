@@ -1,30 +1,53 @@
-import { Card, CardContent } from "./ui/card";
-import { Target, Heart, Globe, Lightbulb } from "lucide-react";
+import { Target, Heart, Globe, Lightbulb, Users, MessageCircle, ThumbsUp, Share2, Clock } from "lucide-react";
 
-const visionPoints = [
+const visionPosts = [
   {
     icon: Target,
     title: "Our Mission",
+    author: "Ngawang Thinley",
+    role: "Founder & Buddhist Scholar",
+    avatar: "https://picsum.photos/40/40?random=10",
+    timeAgo: "2h",
+    likes: 127,
+    comments: 23,
     description:
-      "To preserve and make accessible the profound wisdom of Buddhist teachings through innovative digital technologies, ensuring ancient knowledge remains relevant for future generations.",
+      "🎯 Our mission is to preserve and make accessible the profound wisdom of Buddhist teachings through innovative digital technologies. We're ensuring ancient knowledge remains relevant for future generations.",
   },
   {
     icon: Heart,
     title: "Our Values",
+    author: "Karma Tsering",
+    role: "Software Engineer",
+    avatar: "https://picsum.photos/40/40?random=11",
+    timeAgo: "4h",
+    likes: 89,
+    comments: 16,
     description:
-      "We are guided by compassion, mindfulness, and the pursuit of wisdom. Every tool we create is designed with respect for the sacred nature of these texts and their transformative power.",
+      "❤️ We are guided by compassion, mindfulness, and the pursuit of wisdom. Every tool we create is designed with respect for the sacred nature of these texts and their transformative power.",
   },
   {
     icon: Globe,
     title: "Our Vision",
+    author: "Tashi Tsering",
+    role: "AI Engineer",
+    avatar: "https://picsum.photos/40/40?random=12",
+    timeAgo: "6h",
+    likes: 156,
+    comments: 31,
     description:
-      "A world where Buddhist wisdom is freely accessible to all seekers, transcending geographical, linguistic, and technological barriers through thoughtfully crafted digital tools.",
+      "🌍 Envisioning a world where Buddhist wisdom is freely accessible to all seekers, transcending geographical, linguistic, and technological barriers through thoughtfully crafted digital tools.",
   },
   {
     icon: Lightbulb,
     title: "Our Approach",
+    author: "Tenzin Kunsang",
+    role: "DevOps Engineer",
+    avatar: "https://picsum.photos/40/40?random=13",
+    timeAgo: "8h",
+    likes: 94,
+    comments: 19,
     description:
-      "We combine cutting-edge technology with traditional scholarship, ensuring our tools honor the depth and nuance of Buddhist teachings while embracing modern learning methods.",
+      "💡 We combine cutting-edge technology with traditional scholarship, ensuring our tools honor the depth and nuance of Buddhist teachings while embracing modern learning methods.",
   },
 ];
 
@@ -32,91 +55,135 @@ const VisionSection = () => {
   return (
     <section
       id="vision"
-      className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 relative"
+      className="py-16 bg-gradient-to-br from-purple-50/50 via-white to-indigo-50/30 relative overflow-hidden"
       aria-labelledby="vision-heading"
     >
+      {/* Simplified background decorations */}
+      <div className="absolute top-0 right-0 w-60 h-60 bg-gradient-to-br from-purple-200/10 to-indigo-200/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tl from-blue-100/20 to-purple-100/20 rounded-full blur-3xl"></div>
+      
       <div className="container mx-auto px-4 relative z-10">
-        <header className="text-center mb-16">
+        <header className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-purple-100/60 text-purple-700 px-3 py-1 rounded-full text-xs font-medium mb-4 backdrop-blur-sm">
+            <MessageCircle className="h-3 w-3" />
+            Community Voices
+          </div>
           <h2
             id="vision-heading"
-            className="text-4xl font-bold text-foreground mb-4"
+            className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-900 via-indigo-800 to-purple-900 bg-clip-text text-transparent mb-4 leading-tight"
           >
-            Our Vision & Mission
+            What Our Team Says
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Bridging ancient wisdom with modern technology to create a more
-            mindful and compassionate digital world.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Hear directly from our founders and team members about our mission
           </p>
         </header>
 
-        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto list-none">
-          {visionPoints.map((point, index) => {
-            const IconComponent = point.icon;
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {visionPosts.map((post, index) => {
             return (
-              <li
-                key={`vision-point-${point.title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="group hover:shadow-lg transition-all duration-300"
+              <div
+                key={`vision-post-${post.title.toLowerCase().replace(/\s+/g, '-')}`}
+                className="group relative"
               >
-                <Card className="border-border h-full pt-4 bg-card">
-                  <CardContent className="p-8">
-                    <div className="text-center mb-6">
-                      <div
-                        className="inline-flex p-4 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-sm mb-4"
-                        aria-hidden="true"
-                      >
-                        <IconComponent className="h-8 w-8 text-primary-foreground" />
+                {/* Social media style post container */}
+                <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                  
+                  {/* Background gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                  
+                  {/* User profile header */}
+                  <div className="relative z-10 flex items-center gap-3 mb-4">
+                    <img 
+                      src={post.avatar} 
+                      alt={post.author}
+                      className="w-10 h-10 rounded-full object-cover border-2 border-purple-500/20"
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold text-gray-900 text-sm">{post.author}</h3>
+                        <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                        <span className="text-xs text-gray-500 flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {post.timeAgo}
+                        </span>
                       </div>
-                      <h3 className="text-xl font-semibold text-card-foreground mb-3 group-hover:text-primary transition-colors">
-                        {point.title}
-                      </h3>
+                      <p className="text-xs text-purple-600 font-medium">{post.role}</p>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed text-center">
-                      {point.description}
+                  </div>
+
+                  {/* Post content */}
+                  <div className="relative z-10 mb-4">
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      {post.description}
                     </p>
-                  </CardContent>
-                </Card>
-              </li>
+                  </div>
+
+                  {/* Engagement section */}
+                  <div className="relative z-10 flex items-center justify-between pt-3 border-t border-gray-200/50">
+                    <div className="flex items-center gap-4">
+                      <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600 transition-colors text-xs">
+                        <ThumbsUp className="h-4 w-4" />
+                        <span>{post.likes}</span>
+                      </button>
+                      <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600 transition-colors text-xs">
+                        <MessageCircle className="h-4 w-4" />
+                        <span>{post.comments}</span>
+                      </button>
+                      <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600 transition-colors text-xs">
+                        <Share2 className="h-4 w-4" />
+                        <span>Share</span>
+                      </button>
+                    </div>
+                    
+                    {/* Category badge */}
+                    <div className="text-xs bg-purple-100/80 text-purple-700 px-2 py-1 rounded-full font-medium">
+                      {post.title}
+                    </div>
+                  </div>
+                </div>
+              </div>
             );
           })}
-        </ul>
+        </div>
 
-        <aside
-          className="mt-16 text-center"
-          aria-labelledby="community-heading"
-        >
-          <div className="bg-gradient-to-br from-accent/50 to-secondary/50 p-8 rounded-2xl shadow-lg max-w-4xl mx-auto border border-border">
-            <h3 id="community-heading" className="text-2xl font-bold mb-4 text-foreground">
-              Join Our Community
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Pecha.tools is a specialized platform designed for scholars,
-              researchers, and practitioners working with Buddhist manuscripts.
-              Our suite of tools helps streamline the process of translating,
-              transcribing, and proofreading these valuable cultural artifacts.
-            </p>
-            <p className="text-muted-foreground">
-              With a centralized login system, users can seamlessly access all
-              tools and maintain consistency across their projects. Our modern,
-              intuitive interface ensures that users can focus on their work
-              rather than navigating complex software.
-            </p>
-            <nav
-              className="flex flex-col sm:flex-row gap-4 justify-center mt-6"
-              aria-label="Community links"
-            >
+        {/* Community Stats Section */}
+        <aside className="mt-12" aria-labelledby="community-stats">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            
+            {/* Engagement Stats */}
+            <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <ThumbsUp className="h-6 w-6 text-purple-600" />
+              </div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">2.4K+</div>
+              <div className="text-sm text-gray-600">Community Likes</div>
+            </div>
+
+            {/* Comments Stats */}
+            <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <MessageCircle className="h-6 w-6 text-purple-600" />
+              </div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">589</div>
+              <div className="text-sm text-gray-600">Active Discussions</div>
+            </div>
+
+            {/* Community CTA */}
+            <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Users className="h-6 w-6 text-purple-600" />
+              </div>
               <a
                 href="https://forum.openpecha.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-border px-6 py-3 rounded-lg font-semibold hover:bg-accent transition-colors text-center inline-block text-primary"
-                aria-describedby="forum-description"
+                className="block"
               >
-                Join Discussion
+                <div className="text-sm font-medium text-purple-700 hover:text-purple-800 transition-colors">Join Discussion</div>
+                <div className="text-xs text-gray-600 mt-1">Connect with our team</div>
               </a>
-              <span id="forum-description" className="sr-only">
-                Opens OpenPecha forum in a new tab for community discussions
-              </span>
-            </nav>
+            </div>
           </div>
         </aside>
       </div>
