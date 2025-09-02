@@ -124,9 +124,9 @@ const Hero = () => {
              <div className="absolute top-1/3 -left-28 animate-float-medium z-20">
                <div className="floating-comment bg-card/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-border/20 max-w-sm transform rotate-[-8deg] hover:rotate-0 transition-transform duration-300">
                  <div className="flex items-center gap-3">
-                   <img src="https://picsum.photos/48/48?random=8" alt="Tenzin Norbu" className="w-12 h-12 rounded-full object-cover border-2 border-emerald-500/50" />
+                   <img src="https://picsum.photos/48/48?random=8" alt="Tenzin Kalden" className="w-12 h-12 rounded-full object-cover border-2 border-emerald-500/50" />
                    <div>
-                     <div className="font-medium text-card-foreground">Tenzin Norbu</div>
+                     <div className="font-medium text-card-foreground">Tenzin Kalden</div>
                      <div className="text-xs text-muted-foreground">Tibetan Language Expert</div>
                      <div className="text-xs text-green-600">● Online</div>
                    </div>
