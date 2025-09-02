@@ -35,7 +35,7 @@ const visionPosts = [
     likes: 156,
     comments: 31,
     description:
-      "🌍 Envisioning a world where Buddhist wisdom is freely accessible to all seekers, transcending geographical, linguistic, and technological barriers through thoughtfully crafted digital tools.",
+      "💡 We combine cutting-edge technology with traditional scholarship, ensuring our tools honor the depth and nuance of Buddhist teachings while embracing modern learning methods.",
   },
   {
     icon: Lightbulb,
@@ -47,7 +47,7 @@ const visionPosts = [
     likes: 94,
     comments: 19,
     description:
-      "💡 We combine cutting-edge technology with traditional scholarship, ensuring our tools honor the depth and nuance of Buddhist teachings while embracing modern learning methods.",
+      "🌍 Envisioning a world where Buddhist wisdom is freely accessible to all seekers, transcending geographical, linguistic, and technological barriers through thoughtfully crafted digital tools.",
   },
 ];
 
