@@ -124,8 +124,8 @@
   --foreground: var(--color-foreground);
 }
 
-/* Dark mode color mapping */
-@media (prefers-color-scheme: dark) {
+/* Dark mode color mapping - DISABLED for always light mode */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --primary: var(--color-primary-dark);
     --primary-foreground: var(--color-primary-foreground-dark);
@@ -151,7 +151,7 @@
   html {
     color-scheme: dark;
   }
-}
+} */
 
 html {
   scroll-behavior: smooth;
@@ -234,19 +234,61 @@ body {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Image container responsive adjustments */
-.hero-image-container {
-  max-width: min(90vw, 800px);
+/* Enhanced responsive adjustments for scattered layout */
+@media (max-width: 1200px) {
+  /* Adjust positioning for smaller screens */
+  .absolute.-left-36 { left: -20px !important; }
+  .absolute.-right-40 { right: -20px !important; }
+  .absolute.-left-32 { left: -16px !important; }
+  .absolute.-right-32 { right: -16px !important; }
 }
 
 @media (max-width: 768px) {
-  .hero-image-container {
-    max-width: 95vw;
+  /* Mobile adjustments */
+  .floating-comment {
+    max-width: 180px !important;
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
   }
   
-  /* Adjust floating comments for mobile */
+  /* Reduce rotation angles on mobile */
   .floating-comment {
-    max-width: 200px !important;
-    font-size: 0.8rem;
+    transform: rotate(0deg) !important;
+  }
+  
+  /* Hide some elements on very small screens */
+  .absolute.-left-36,
+  .absolute.-right-40,
+  .absolute.-left-32,
+  .absolute.-right-32 {
+    display: none;
+  }
+}
+
+/* Enhanced glassmorphism for scattered elements */
+.floating-comment {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme adjustments for floating elements - DISABLED for light mode */
+/* @media (prefers-color-scheme: dark) {
+  .floating-comment {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+} */
+
+/* Pulsing animation for decorative dots */
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.1);
   }
 }
