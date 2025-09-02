@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm border-b border-border py-4 fixed top-0 left-0 right-0 z-50">
+    <header className=" py-4 fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto flex justify-between items-center px-4">
         <Link to="/" className="flex items-center gap-2">
           <div className="flex items-center gap-2">
@@ -83,12 +83,12 @@ const Header: React.FC = () => {
             </div>
           ) : (
             <Form action="/auth/login" method="post">
-              <Button
+              <button
                 type="submit"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                className="font-bold "
               >
                 Sign in
-              </Button>
+              </button>
             </Form>
           )}
         </div>

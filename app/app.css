@@ -1,5 +1,51 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: monlam-2;
+  src: url('/font/MonlamUniOuChan2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: monlam;
+  src: url('/font/MonlamTBslim.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: google-sans;
+  src: url('/font/ProductSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: europa;
+  src: url('/font/EuropaGrotes.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: almaria-bold;
+  src: url('/font/Almaria-Bold.ttf') format('ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: almaria;
+  src: url('/font/Almaria-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: bornia;
+  src: url('/font/Bornia-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -45,6 +91,14 @@
   --color-ring-dark: #6366f1;
   --color-background-dark: #0f172a;
   --color-foreground-dark: #f8fafc;
+
+  --font-europa: europa;
+  --font-almaria: almaria;
+  --font-almaria-bold: almaria-bold;
+  --font-monlam-2: monlam-2;
+  --font-monlam: monlam;
+  --font-bornia: bornia;
+  --font-google-sans: google-sans;
 }
 
 /* Root color mapping */
@@ -125,4 +179,74 @@ body {
   transform: translateZ(0);
   will-change: transform;
   contain: layout style paint;
+}
+
+/* Floating comment animations */
+@keyframes float-slow {
+  0%, 100% { 
+    transform: translateY(0px) rotate(var(--rotate, 0deg));
+  }
+  50% { 
+    transform: translateY(-20px) rotate(var(--rotate, 0deg));
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% { 
+    transform: translateY(0px) rotate(var(--rotate, 0deg));
+  }
+  50% { 
+    transform: translateY(-15px) rotate(var(--rotate, 0deg));
+  }
+}
+
+@keyframes float-fast {
+  0%, 100% { 
+    transform: translateY(0px) rotate(var(--rotate, 0deg));
+  }
+  50% { 
+    transform: translateY(-10px) rotate(var(--rotate, 0deg));
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 4s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 3s ease-in-out infinite;
+}
+
+/* Hover effects for floating comments */
+.floating-comment {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.floating-comment:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  z-index: 50;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Image container responsive adjustments */
+.hero-image-container {
+  max-width: min(90vw, 800px);
+}
+
+@media (max-width: 768px) {
+  .hero-image-container {
+    max-width: 95vw;
+  }
+  
+  /* Adjust floating comments for mobile */
+  .floating-comment {
+    max-width: 200px !important;
+    font-size: 0.8rem;
+  }
 }
