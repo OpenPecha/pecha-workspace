@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className=" py-4 z-50">
+    <header className=" relative flex flex-col py-4 z-50 bg-transparent">
       <div className="container mx-auto flex justify-between items-center px-4">
         <Link to="/" className="flex items-center gap-2">
           <div className="flex items-center gap-2">

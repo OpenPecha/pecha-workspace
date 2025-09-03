@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 const TypewriterText = () => {
   const words = ["Wisdom", "Knowledge", "Heritage", "Teachings", "Scriptures", "Manuscripts", "Texts", "Pecha", "Buddhist Books"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -54,25 +53,25 @@ const TypewriterText = () => {
 const Hero = () => {
   return (
       <section
-        className="relative min-h-screen flex flex-col bg-gradient-to-br from-background via-primary/5 to-accent/10 overflow-hidden pt-20"
+        className="relative min-h-screen flex flex-col bg-transparent "
         aria-labelledby="hero-heading"
               >
-        
-
-        
         <div className="flex flex-col text-center mt-4 gap-4 relative z-10">
          <span className="text-sm text-gray-500">A platform to manage your</span>
          <span className="text-8xl font-light ">AI Powered Digital Tools</span>
         </div>
         <div className="flex justify-center p-20 mt-10 relative z-10">
          <div className="relative">
-           <img src="/img/macframe.png" alt="MacBook frame showcasing the platform" className="w-[1000px] max-w-5xl h-auto object-contain drop-shadow-2xl" />
+           {/* Gradient blob for glowing light effect behind laptop */}
+           <div className="gradient-light-blob"></div>
+          
+           <img src="/img/macframe.png" alt="MacBook frame showcasing the platform" className="w-[1000px] max-w-5xl h-auto object-contain drop-shadow-2xl relative z-10" />
            
            {/* Diverse Floating Elements - Scattered Design */}
            <div className="absolute inset-0 pointer-events-none">
              
              {/* Profile Avatar 1 - Top Left */}
-             <div className="absolute -top-16 -left-24 animate-float-slow z-20">
+             <div className="absolute -top-16 -left-24 animate-float-slow z-20 ">
                <img 
                  src="https://picsum.photos/64/64?random=6" 
                  alt="Tibetan Scholar Avatar" 

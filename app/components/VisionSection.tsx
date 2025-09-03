@@ -55,7 +55,7 @@ const VisionSection = () => {
   return (
     <section
       id="vision"
-      className="py-16 bg-gradient-to-br from-purple-50/50 via-white to-indigo-50/30 relative overflow-hidden"
+      className="py-16  relative overflow-hidden"
       aria-labelledby="vision-heading"
     >
       {/* Simplified background decorations */}

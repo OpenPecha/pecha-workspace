@@ -9,11 +9,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen bg-background relative">
+    <div className="flex flex-col min-h-screen relative bg-gradient-to-br from-background via-primary/5 to-accent/10">
+   
+      <Header />
       {/* Optimized Particle Background */}
       <ParticlesBackground />
-      
-      <Header />
       <main className="flex-grow relative z-10">
         {children}
       </main>
