@@ -124,34 +124,6 @@
   --foreground: var(--color-foreground);
 }
 
-/* Dark mode color mapping - DISABLED for always light mode */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --primary: var(--color-primary-dark);
-    --primary-foreground: var(--color-primary-foreground-dark);
-    --secondary: var(--color-secondary-dark);
-    --secondary-foreground: var(--color-secondary-foreground-dark);
-    --destructive: var(--color-destructive-dark);
-    --destructive-foreground: var(--color-destructive-foreground-dark);
-    --muted: var(--color-muted-dark);
-    --muted-foreground: var(--color-muted-foreground-dark);
-    --accent: var(--color-accent-dark);
-    --accent-foreground: var(--color-accent-foreground-dark);
-    --popover: var(--color-popover-dark);
-    --popover-foreground: var(--color-popover-foreground-dark);
-    --card: var(--color-card-dark);
-    --card-foreground: var(--color-card-foreground-dark);
-    --border: var(--color-border-dark);
-    --input: var(--color-input-dark);
-    --ring: var(--color-ring-dark);
-    --background: var(--color-background-dark);
-    --foreground: var(--color-foreground-dark);
-  }
-  
-  html {
-    color-scheme: dark;
-  }
-} */
 
 html {
   scroll-behavior: smooth;
