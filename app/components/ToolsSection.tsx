@@ -167,7 +167,7 @@ const ToolsSection = () => {
   return (
     <section
       id="tools"
-      className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5"
+      className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5"
       aria-labelledby="tools-heading"
     >
       {/* Background decoration */}
@@ -177,14 +177,14 @@ const ToolsSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <ScrollFadeIn direction="up" delay={0} triggerOnce={true}>
-          <header className="text-center mb-20">
+          <header className="text-center mb-12 sm:mb-16 md:mb-20">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Sparkles className="h-4 w-4" />
               Our Digital Suite
             </div>
             <h2
               id="tools-heading"
-              className="text-5xl bg-gradient-to-r leading-normal from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6"
             >
               Digital Tools for Buddhist Studies
             </h2>

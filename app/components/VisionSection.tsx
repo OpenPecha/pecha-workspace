@@ -55,7 +55,7 @@ const VisionSection = () => {
   return (
     <section
       id="vision"
-      className="py-16  relative overflow-hidden"
+      className="py-12 sm:py-16 relative overflow-hidden"
       aria-labelledby="vision-heading"
     >
       {/* Simplified background decorations */}
@@ -63,18 +63,18 @@ const VisionSection = () => {
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tl from-blue-100/20 to-purple-100/20 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <header className="text-center mb-12">
+        <header className="text-center mb-8 sm:mb-10 md:mb-12">
           <div className="inline-flex items-center gap-2 bg-purple-100/60 text-purple-700 px-3 py-1 rounded-full text-xs font-medium mb-4 backdrop-blur-sm">
             <MessageCircle className="h-3 w-3" />
             Community Voices
           </div>
           <h2
             id="vision-heading"
-            className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-900 via-indigo-800 to-purple-900 bg-clip-text text-transparent mb-4 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-900 via-indigo-800 to-purple-900 bg-clip-text text-transparent mb-4 leading-tight"
           >
             What Our Team Says
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed px-4">
             Hear directly from our founders and team members about our mission
           </p>
         </header>
@@ -148,7 +148,7 @@ const VisionSection = () => {
         </div>
 
         {/* Community Stats Section */}
-        <aside className="mt-12" aria-labelledby="community-stats">
+        <aside className="mt-8 sm:mt-10 md:mt-12" aria-labelledby="community-stats">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             
             {/* Engagement Stats */}

@@ -34,7 +34,11 @@ const TypewriterText = () => {
           setIsPaused(true);
         }
       },
-      isPaused ? 2000 : isDeleting ? 50 : 100
+      (() => {
+        if (isPaused) return 2000;
+        if (isDeleting) return 50;
+        return 100;
+      })()
     );
 
     return () => clearTimeout(timeout);
@@ -53,22 +57,22 @@ const TypewriterText = () => {
 const Hero = () => {
   return (
       <section
-        className="relative min-h-screen flex flex-col bg-transparent "
+        className="relative hidden md:flex md:min-h-screen   flex-col bg-transparent "
         aria-labelledby="hero-heading"
               >
-        <div className="flex flex-col text-center mt-4 gap-4 relative z-10">
+        <div className="flex flex-col text-center mt-4 gap-4 relative z-10 px-4">
          <span className="text-sm text-gray-500">A platform to manage your</span>
-         <span className="text-8xl font-light ">AI Powered Digital Tools</span>
+         <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight">AI Powered Digital Tools</span>
         </div>
-        <div className="flex justify-center p-20 mt-10 relative z-10">
-         <div className="relative">
+        <div className="flex justify-center p-4 sm:p-8 md:p-12 lg:p-20 mt-6 sm:mt-8 md:mt-10 relative z-10">
+         <div className="relative w-full max-w-5xl">
            {/* Gradient blob for glowing light effect behind laptop */}
            <div className="gradient-light-blob"></div>
           
-           <img src="/img/macframe.png" alt="MacBook frame showcasing the platform" className="w-[1000px] max-w-5xl h-auto object-contain drop-shadow-2xl relative z-10" />
+           <img src="/img/macframe.png" alt="MacBook frame showcasing the platform" className="w-full h-auto object-contain drop-shadow-2xl relative z-10" />
            
-           {/* Diverse Floating Elements - Scattered Design */}
-           <div className="absolute inset-0 pointer-events-none">
+           {/* Diverse Floating Elements - Scattered Design - Hidden on mobile */}
+           <div className="absolute inset-0 pointer-events-none hidden lg:block">
              
              {/* Profile Avatar 1 - Top Left */}
              <div className="absolute -top-16 -left-24 animate-float-slow z-20 ">
