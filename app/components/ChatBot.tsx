@@ -13,7 +13,7 @@ const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Hello! I\'m your AI assistant for Pecha Tools. How can I help you today?',
+      content: 'Hello! Welcome to Pecha Tools. We are currently working on our AI assistant and it will be ready soon. Stay tuned for exciting updates! 🚀',
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -65,21 +65,7 @@ const ChatBot: React.FC = () => {
   };
 
   const generateBotResponse = (userInput: string): string => {
-    const input = userInput.toLowerCase();
-    
-    if (input.includes('help') || input.includes('support')) {
-      return 'I can help you with navigating Pecha Tools, understanding our Buddhist text processing features, or answering questions about our digital manuscript tools. What specifically would you like to know?';
-    } else if (input.includes('tools') || input.includes('features')) {
-      return 'Pecha Tools offers various AI-powered features for Buddhist studies including text analysis, manuscript digitization, translation assistance, and more. You can access these tools from our main dashboard after signing in.';
-    } else if (input.includes('buddhist') || input.includes('dharma') || input.includes('sutra')) {
-      return 'Our platform specializes in Buddhist text processing and preservation. We help scholars and practitioners work with ancient manuscripts, translations, and digital archives. How can I assist you with your Buddhist studies?';
-    } else if (input.includes('login') || input.includes('sign in') || input.includes('account')) {
-      return 'To access our tools, please click the "Sign in" button in the header. You can create an account or log in with your existing credentials. Once logged in, you\'ll have access to all our AI-powered Buddhist study tools.';
-    } else if (input.includes('price') || input.includes('cost') || input.includes('free')) {
-      return 'We offer various pricing tiers including free access to basic features. Premium tools are available for advanced users. Check our tools section to see what\'s available in each tier.';
-    } else {
-      return 'Thank you for your question! I\'m here to help with Pecha Tools and Buddhist text processing. Could you tell me more about what you\'re looking for, or ask about our tools, features, or how to get started?';
-    }
+    return 'Thank you for reaching out! We are currently working on our AI assistant and it will be ready soon. Stay tuned for exciting updates! 🚀';
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -209,12 +195,6 @@ const ChatBot: React.FC = () => {
         </button>
       )}
 
-      {/* Notification Badge */}
-      {!isOpen && messages.length > 1 && (
-        <div className="absolute -top-1 -left-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center animate-pulse">
-          {messages.filter(m => m.sender === 'bot').length}
-        </div>
-      )}
     </div>
   );
 };
