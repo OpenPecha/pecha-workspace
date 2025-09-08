@@ -45,7 +45,7 @@ const Header: React.FC = () => {
               className="rounded-md"
             />
             <span className="text-primary font-bold text-2xl">
-              Pecha AI Tools
+              Pecha AI Studio
             </span>
           </div>
         </Link>

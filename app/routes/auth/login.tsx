@@ -7,7 +7,7 @@ import Layout from '../../components/Layout';
 
 export function meta() {
   return [
-    { title: 'Sign In - Pecha AI Tools' },
+    { title: 'Sign In - Pecha AI Studio' },
     { name: 'description', content: 'Sign in to access our suite of Buddhist study tools and resources.' }
   ];
 }

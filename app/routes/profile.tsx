@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 
 export function meta() {
   return [
-    { title: 'Profile - Pecha AI Tools' },
+    { title: 'Profile - Pecha AI Studio' },
     { name: 'description', content: 'User profile page' }
   ];
 }

@@ -61,8 +61,8 @@ const Hero = () => {
         aria-labelledby="hero-heading"
               >
         <div className="flex flex-col text-center mt-4 gap-4 relative z-10 px-4">
-         <span className="text-sm text-gray-500">A platform to manage your</span>
-         <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight">AI Powered Digital Tools</span>
+         <span className="text-sm text-gray-500">A platform to manage </span>
+         <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">Powering Buddhist AI. Together</span>
         </div>
         <div className="flex justify-center p-4 sm:p-8 md:p-12 lg:p-20 mt-6 sm:mt-8 md:mt-10 relative z-10">
          <div className="relative w-full max-w-5xl">
