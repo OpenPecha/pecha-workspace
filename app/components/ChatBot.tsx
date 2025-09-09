@@ -1,5 +1,44 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
+import { useUserStore } from '~/store/user';
+
+// Simple markdown renderer
+const MarkdownRenderer: React.FC<{ content: string }> = ({ content }) => {
+  const renderMarkdown = (text: string) => {
+    // Replace **bold** with <strong>
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    // Replace *italic* with <em>
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Replace `code` with <code>
+    text = text.replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-xs font-mono">$1</code>');
+    
+    // Replace [link](url) with <a>
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">$1</a>');
+    
+    // Replace line breaks with <br>
+    text = text.replace(/\n/g, '<br>');
+    
+    // Handle headers (# ## ###)
+    text = text.replace(/^### (.*$)/gm, '<h3 class="text-md font-semibold mt-2 mb-1">$1</h3>');
+    text = text.replace(/^## (.*$)/gm, '<h2 class="text-lg font-semibold mt-3 mb-2">$1</h2>');
+    text = text.replace(/^# (.*$)/gm, '<h1 class="text-xl font-bold mt-3 mb-2">$1</h1>');
+    
+    // Handle bullet points
+    text = text.replace(/^- (.*$)/gm, '<li class="ml-4">• $1</li>');
+    text = text.replace(/^(\d+)\. (.*$)/gm, '<li class="ml-4">$1. $2</li>');
+    
+    return text;
+  };
+
+  return (
+    <div 
+      className="prose prose-sm max-w-none"
+      dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
+    />
+  );
+};
 
 interface Message {
   id: string;
@@ -9,11 +48,14 @@ interface Message {
 }
 
 const ChatBot: React.FC = () => {
+  const { user } = useUserStore();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Hello! Welcome to Pecha Tools. We are currently working on our AI assistant and it will be ready soon. Stay tuned for exciting updates! 🚀',
+      content: user 
+        ? 'Hello! I\'m your AI assistant. How can I help you today?' 
+        : 'Hello! Please login first to use the chatbot. Click on the login button in the header to get started.',
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -37,8 +79,32 @@ const ChatBot: React.FC = () => {
     }
   }, [isOpen]);
 
+  // Update initial message when user login state changes
+  useEffect(() => {
+    setMessages([{
+      id: '1',
+      content: user 
+        ? 'Hello! I\'m your AI assistant. How can I help you today?' 
+        : 'Hello! Please login first to use the chatbot. Click on the login button in the header to get started.',
+      sender: 'bot',
+      timestamp: new Date(),
+    }]);
+  }, [user]);
+
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
+
+    // Check if user is logged in
+    if (!user?.email) {
+      const loginReminderMessage: Message = {
+        id: Date.now().toString(),
+        content: 'Please login first to use the chatbot. Click on the login button in the header to get started.',
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, loginReminderMessage]);
+      return;
+    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -48,24 +114,48 @@ const ChatBot: React.FC = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentMessage = inputMessage;
     setInputMessage('');
     setIsTyping(true);
 
-    // Simulate AI response (replace with actual AI integration)
-    setTimeout(() => {
+    try {
+      // Make API call to the webhook
+      const webhookUrl = `https://n8n-service-9z2e.onrender.com/webhook/6f7b288e-1efe-4504-a6fd-660931327269?body=${encodeURIComponent(currentMessage)}&sessiongId=${encodeURIComponent(user.email)}`;
+      
+      const response = await fetch(webhookUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const botResponse = data.output || 'Sorry, I didn\'t receive a proper response.';
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: generateBotResponse(inputMessage),
+        content: botResponse,
         sender: 'bot',
         timestamp: new Date(),
       };
+      
       setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error calling webhook:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: 'Sorry, I encountered an error while processing your request. Please try again later.',
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1000 + Math.random() * 2000);
-  };
-
-  const generateBotResponse = (userInput: string): string => {
-    return 'Thank you for reaching out! We are currently working on our AI assistant and it will be ready soon. Stay tuned for exciting updates! 🚀';
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -114,37 +204,42 @@ const ChatBot: React.FC = () => {
                 key={message.id}
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div
-                  className={`max-w-[80%] rounded-lg px-3 py-2 ${
-                    message.sender === 'user'
-                      ? 'bg-primary text-white'
-                      : 'bg-gray-100 text-gray-900'
-                  }`}
-                >
-                  <div className="flex items-start gap-2">
-                    {message.sender === 'bot' && (
-                      <Bot className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
-                    )}
-                    {message.sender === 'user' && (
+                {message.sender === 'user' ? (
+                  // User message with background
+                  <div className="max-w-[80%] rounded-lg px-3 py-2 bg-primary text-white">
+                    <div className="flex items-start gap-2">
                       <User className="h-4 w-4 mt-0.5 flex-shrink-0 text-white" />
-                    )}
-                    <div className="flex-1">
-                      <p className="text-sm leading-relaxed">{message.content}</p>
-                      <p className={`text-xs mt-1 ${
-                        message.sender === 'user' ? 'text-white/70' : 'text-gray-500'
-                      }`}>
-                        {formatTime(message.timestamp)}
-                      </p>
+                      <div className="flex-1">
+                        <p className="text-sm leading-relaxed">{message.content}</p>
+                        <p className="text-xs mt-1 text-white/70">
+                          {formatTime(message.timestamp)}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  // Bot message without background, with markdown
+                  <div className="max-w-[80%] py-2">
+                    <div className="flex items-start gap-2">
+                      <Bot className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
+                      <div className="flex-1">
+                        <div className="text-sm leading-relaxed text-gray-900">
+                          <MarkdownRenderer content={message.content} />
+                        </div>
+                        <p className="text-xs mt-1 text-gray-500">
+                          {formatTime(message.timestamp)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
             
             {/* Typing Indicator */}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 rounded-lg px-3 py-2">
+                <div className="py-2">
                   <div className="flex items-center gap-2">
                     <Bot className="h-4 w-4 text-primary" />
                     <div className="flex space-x-1">
@@ -168,13 +263,13 @@ const ChatBot: React.FC = () => {
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Type your message..."
+                placeholder={user ? "Type your message..." : "Please login to chat..."}
                 className="flex-1 px-3 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                disabled={isTyping}
+                disabled={isTyping || !user}
               />
               <button
                 onClick={handleSendMessage}
-                disabled={!inputMessage.trim() || isTyping}
+                disabled={!inputMessage.trim() || isTyping || !user}
                 className="w-8 h-8 bg-primary hover:bg-primary/90 disabled:bg-gray-300 disabled:cursor-not-allowed rounded-full flex items-center justify-center transition-colors"
               >
                 <Send className="h-4 w-4 text-white" />
