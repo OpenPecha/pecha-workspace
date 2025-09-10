@@ -180,13 +180,13 @@ const ToolsSection = () => {
           <header className="text-center mb-12 sm:mb-16 md:mb-20">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Sparkles className="h-4 w-4" />
-              Our Digital Suite
+              Our AI Tools
             </div>
             <h2
               id="tools-heading"
-              className="text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6"
+              className="text-3xl font-bold md:font-normal sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6"
             >
-              Digital Tools for Buddhist Studies
+              AI Powered Tools for Buddhist Studies
             </h2>
            
           </header>
