@@ -339,3 +339,16 @@ body {
     transform: scale(1.1);
   }
 }
+
+/* Feedback Button Vertical Text */
+.feedback-button-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Fallback for browsers without writing-mode support */
+@supports not (writing-mode: vertical-rl) {
+  .feedback-button-vertical {
+    writing-mode: tb-rl;
+  }
+}

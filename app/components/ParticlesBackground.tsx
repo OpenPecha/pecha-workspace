@@ -19,7 +19,6 @@ const ParticlesBackground = ({ className = "" }: ParticlesBackgroundProps) => {
   }, []);
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log("Particles loaded successfully:", container);
   };
   
   return (
