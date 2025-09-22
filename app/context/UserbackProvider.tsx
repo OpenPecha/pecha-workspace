@@ -18,12 +18,13 @@ export const UserbackProvider: React.FC<UserbackProviderProps> = ({ children }) 
   const [userback, setUserback] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const { user } = useUserStore();
-  
+
   useEffect(() => {
     const usebackId = "A-fzO9tMbn2LqjINi7r3bhXZKtd";
     
     const init = async () => {
       try {
+      
         const options = {
           user_data: {
             id: user?.sub || 'anonymous',
@@ -33,7 +34,6 @@ export const UserbackProvider: React.FC<UserbackProviderProps> = ({ children }) 
             }
           }
         };
-        
         const instance = await Userback(usebackId, options);
         
         // Wait for the widget to be fully loaded
@@ -68,7 +68,7 @@ export const UserbackProvider: React.FC<UserbackProviderProps> = ({ children }) 
     };
     
     init();
-  }, [user]);
+  }, []);
 
   const contextValue = useMemo(() => ({ userback, isLoaded }), [userback, isLoaded]);
 
