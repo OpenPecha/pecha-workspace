@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import Userback from '@userback/widget';
 import { useUserStore } from '~/store/user';
+import { useLoaderData } from 'react-router';
 
 interface UserbackProviderProps {
   children: React.ReactNode;
@@ -17,43 +18,26 @@ const UserbackContext = createContext<UserbackContextType>({ userback: null, isL
 export const UserbackProvider: React.FC<UserbackProviderProps> = ({ children }) => {
   const [userback, setUserback] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const { user } = useUserStore();
+  const loaderData = useLoaderData();
 
   useEffect(() => {
     const usebackId = "A-fzO9tMbn2LqjINi7r3bhXZKtd";
-    
+    const user= loaderData?.user;    
     const init = async () => {
       try {
-      
         const options = {
           user_data: {
-            id: user?.sub || 'anonymous',
+            id: user?.sub||'anonymous',
             info: {
-              name: user?.name || 'Anonymous User',
+              name: user?.name||'Anonymous User',
               email: user?.email || ''
             }
           }
         };
         const instance = await Userback(usebackId, options);
+        setUserback(instance);
+        setIsLoaded(true);
         
-        // Wait for the widget to be fully loaded
-        const checkLoaded = () => {
-          if (instance && typeof instance.openForm === 'function') {
-            console.log('Userback widget loaded successfully');
-            setUserback(instance);
-            setIsLoaded(true);
-            
-            // Make it available globally with loaded flag
-            (window as any).Userback = instance;
-            (window as any).UserbackLoaded = true;
-          } else {
-            console.log('Userback widget not ready yet, retrying...');
-            setTimeout(checkLoaded, 500); // Retry after 500ms
-          }
-        };
-        
-        // Start checking if loaded
-        checkLoaded();
         
       } catch (error) {
         console.error('Failed to initialize Userback:', error);
