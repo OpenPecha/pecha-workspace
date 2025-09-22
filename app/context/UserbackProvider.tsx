@@ -41,13 +41,6 @@ export const UserbackProvider: React.FC<UserbackProviderProps> = ({ children }) 
         
       } catch (error) {
         console.error('Failed to initialize Userback:', error);
-        // Set a timeout fallback
-        setTimeout(() => {
-          if (!isLoaded) {
-            console.log('Userback failed to load after 5 seconds, using fallback');
-            setIsLoaded(false);
-          }
-        }, 5000);
       }
     };
     
