@@ -15,7 +15,7 @@ const { getSession, commitSession, destroySession } = createCookieSessionStorage
     path: '/',
     sameSite: 'lax',
     secrets: [SESSION_SECRET],
-    secure: true,
+    secure: process.env.ENVIRONMENT === 'production',
   },
 });
 

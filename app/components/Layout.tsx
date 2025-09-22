@@ -10,11 +10,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen relative bg-gradient-to-br from-background via-primary/5 to-accent/10">
+    <div className="flex flex-col min-h-screen relative bg-gradient-to-br from-neutral-50 dark:from-neutral-900 via-primary-50/20 dark:via-primary-900/20 to-secondary-50/20 dark:to-secondary-900/20">
    
       <Header />
       <ParticlesBackground />
-      <main className="flex-grow relative z-10">
+      <main className="flex-grow relative z-10 pt-20">
         {children}
       </main>
       <Footer className="relative z-10" />

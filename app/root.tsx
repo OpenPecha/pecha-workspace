@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import ThemeProvider from "./components/ThemeProvider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,7 +24,16 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: { readonly children: React.ReactNode }) {
+
+
+
+
+  const Quickhunt_Widget_Key = "ckRhV0QxUlhhNUtURkRNbXRKSlpvdz09OjpFcCtJanpFeDRueUZIOWhxQU1TRGxnPT0=";
+
+
+
+
   return (
     <html lang="en">
       <head>
@@ -48,7 +58,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {/* Theme and Appearance */}
         <meta name="theme-color" content="#4f46e5" />
         <meta name="msapplication-TileColor" content="#4f46e5" />
-        
+      
         <Meta />
         <Links />
       </head>
@@ -63,13 +73,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <div className="min-h-screen">
-      <Outlet />
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
+    </ThemeProvider>
   );
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+export function ErrorBoundary({ error }: Readonly<Route.ErrorBoundaryProps>) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;

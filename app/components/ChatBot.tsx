@@ -177,11 +177,11 @@ const ChatBot: React.FC = () => {
     <div className="fixed bottom-4 right-4 z-50">
       {/* Chat Widget */}
       {isOpen && (
-        <div className="mb-4 w-80 sm:w-96 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200/50 flex flex-col overflow-hidden">
+        <div className="mb-4 w-80 sm:w-96 h-96 bg-white rounded-2xl shadow-2xl border border-border/50 flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary to-primary/80 px-4 py-3 flex items-center justify-between">
+          <div className=" bg-primary-300   px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8  bg-primary-300  rounded-full flex items-center justify-center">
                 <Bot className="h-4 w-4 text-white" />
               </div>
               <div>
@@ -191,7 +191,7 @@ const ChatBot: React.FC = () => {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white transition-colors p-1"
+              className="text-white/80  bg-primary-300  hover:text-white transition-colors p-1"
             >
               <X className="h-4 w-4" />
             </button>
@@ -255,7 +255,7 @@ const ChatBot: React.FC = () => {
           </div>
 
           {/* Input */}
-          <div className="border-t border-gray-200 p-3">
+          <div className="border-t border-border p-3">
             <div className="flex items-center gap-2">
               <input
                 ref={inputRef}
@@ -264,13 +264,13 @@ const ChatBot: React.FC = () => {
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder={user ? "Type your message..." : "Please login to chat..."}
-                className="flex-1 px-3 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                className="flex-1 px-3 py-2 border border-input rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary bg-background text-foreground"
                 disabled={isTyping || !user}
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!inputMessage.trim() || isTyping || !user}
-                className="w-8 h-8 bg-primary hover:bg-primary/90 disabled:bg-gray-300 disabled:cursor-not-allowed rounded-full flex items-center justify-center transition-colors"
+                className="w-8 h-8 bg-primary hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed rounded-full flex items-center justify-center transition-colors"
               >
                 <Send className="h-4 w-4 text-white" />
               </button>
@@ -283,7 +283,7 @@ const ChatBot: React.FC = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="w-12 h-12 sm:w-14 sm:h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+          className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-300 dark:bg-primary-700 hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
           aria-label="Open AI Assistant"
         >
           <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />

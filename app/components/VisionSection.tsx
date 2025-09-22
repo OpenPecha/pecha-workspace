@@ -59,22 +59,22 @@ const VisionSection = () => {
       aria-labelledby="vision-heading"
     >
       {/* Simplified background decorations */}
-      <div className="absolute top-0 right-0 w-60 h-60 bg-gradient-to-br from-purple-200/10 to-indigo-200/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tl from-blue-100/20 to-purple-100/20 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-60 h-60 bg-gradient-to-br from-primary-200/20 dark:from-primary-800/20 to-secondary-200/20 dark:to-secondary-800/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tl from-secondary-200/20 dark:from-secondary-800/20 to-primary-200/20 dark:to-primary-800/20 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <header className="text-center mb-8 sm:mb-10 md:mb-12">
-          <div className="inline-flex items-center gap-2 bg-purple-100/60 text-purple-700 px-3 py-1 rounded-full text-xs font-medium mb-4 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 bg-primary-100/60 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 px-3 py-1 rounded-full text-xs font-medium mb-4 backdrop-blur-sm">
             <MessageCircle className="h-3 w-3" />
             Community Voices
           </div>
           <h2
             id="vision-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-900 via-indigo-800 to-purple-900 bg-clip-text text-transparent mb-4 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-600 bg-clip-text text-transparent mb-4 leading-tight"
           >
             What Our Team Says
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed px-4">
+          <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed px-4">
             Hear directly from our founders and team members about our mission
           </p>
         </header>
@@ -87,57 +87,57 @@ const VisionSection = () => {
                 className="group relative"
               >
                 {/* Social media style post container */}
-                <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                <div className="relative bg-neutral-50/60 dark:bg-neutral-800/60 backdrop-blur-xl rounded-2xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-sm hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
                   
                   {/* Background gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-200/10 dark:from-primary-800/20 via-transparent to-secondary-200/10 dark:to-secondary-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                   
                   {/* User profile header */}
                   <div className="relative z-10 flex items-center gap-3 mb-4">
                     <img 
                       src={post.avatar} 
                       alt={post.author}
-                      className="w-10 h-10 rounded-full object-cover border-2 border-purple-500/20"
+                      className="w-10 h-10 rounded-full object-cover border-2 border-primary-400/30 dark:border-primary-500/30"
                     />
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-gray-900 text-sm">{post.author}</h3>
-                        <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
-                        <span className="text-xs text-gray-500 flex items-center gap-1">
+                        <h3 className=" text-neutral-900 dark:text-neutral-100 text-sm">{post.author}</h3>
+                        <span className="w-1 h-1 bg-neutral-600 dark:bg-neutral-400 rounded-full"></span>
+                        <span className="text-xs text-neutral-600 dark:text-neutral-400 flex items-center gap-1">
                           <Clock className="h-3 w-3" />
                           {post.timeAgo}
                         </span>
                       </div>
-                      <p className="text-xs text-purple-600 font-medium">{post.role}</p>
+                      <p className="text-xs text-primary-600 dark:text-neutral-300 font-medium">{post.role}</p>
                     </div>
                   </div>
 
                   {/* Post content */}
                   <div className="relative z-10 mb-4">
-                    <p className="text-sm text-gray-700 leading-relaxed">
+                    <p className="text-sm text-neutral-900 dark:text-neutral-100 leading-relaxed">
                       {post.description}
                     </p>
                   </div>
 
                   {/* Engagement section */}
-                  <div className="relative z-10 flex items-center justify-between pt-3 border-t border-gray-200/50">
+                  <div className="relative z-10 flex items-center justify-between pt-3 border-t border-neutral-200/50 dark:border-neutral-700/50">
                     <div className="flex items-center gap-4">
-                      <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600 transition-colors text-xs">
+                      <button className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs">
                         <ThumbsUp className="h-4 w-4" />
                         <span>{post.likes}</span>
                       </button>
-                      <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600 transition-colors text-xs">
+                      <button className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs">
                         <MessageCircle className="h-4 w-4" />
                         <span>{post.comments}</span>
                       </button>
-                      <button className="flex items-center gap-1 text-gray-500 hover:text-purple-600 transition-colors text-xs">
+                      <button className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs">
                         <Share2 className="h-4 w-4" />
                         <span>Share</span>
                       </button>
                     </div>
                     
                     {/* Category badge */}
-                    <div className="text-xs bg-purple-100/80 text-purple-700 px-2 py-1 rounded-full font-medium">
+                    <div className="text-xs bg-primary-100/60 dark:bg-primary-900/30 text-primary-700 dark:text-neutral-800 px-2 py-1 rounded-full font-medium">
                       {post.title}
                     </div>
                   </div>
@@ -152,27 +152,27 @@ const VisionSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             
             {/* Engagement Stats */}
-            <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <ThumbsUp className="h-6 w-6 text-purple-600" />
+            <div className="relative bg-neutral-50/60 dark:bg-neutral-800/60 backdrop-blur-xl rounded-2xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-sm hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-200/30 dark:from-primary-800/30 to-secondary-200/30 dark:to-secondary-800/30 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <ThumbsUp className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
               </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">2.4K+</div>
-              <div className="text-sm text-gray-600">Community Likes</div>
+              <div className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">2.4K+</div>
+              <div className="text-sm text-neutral-600 dark:text-neutral-400">Community Likes</div>
             </div>
 
             {/* Comments Stats */}
-            <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <MessageCircle className="h-6 w-6 text-purple-600" />
+            <div className="relative bg-neutral-50/60 dark:bg-neutral-800/60 backdrop-blur-xl rounded-2xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-sm hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-200/30 dark:from-primary-800/30 to-secondary-200/30 dark:to-secondary-800/30 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <MessageCircle className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
               </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">589</div>
-              <div className="text-sm text-gray-600">Active Discussions</div>
+              <div className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">589</div>
+              <div className="text-sm text-neutral-600 dark:text-neutral-400">Active Discussions</div>
             </div>
 
             {/* Community CTA */}
-            <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/40 shadow-sm hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <Users className="h-6 w-6 text-purple-600" />
+            <div className="relative bg-neutral-50/60 dark:bg-neutral-800/60 backdrop-blur-xl rounded-2xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-sm hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-200/30 dark:from-primary-800/30 to-secondary-200/30 dark:to-secondary-800/30 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Users className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
               </div>
               <a
                 href="https://forum.openpecha.org"
@@ -180,8 +180,8 @@ const VisionSection = () => {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <div className="text-sm font-medium text-purple-700 hover:text-purple-800 transition-colors">Join Discussion</div>
-                <div className="text-xs text-gray-600 mt-1">Connect with our team</div>
+                <div className="text-sm font-medium text-primary-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 transition-colors">Join Discussion</div>
+                <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Connect with our team</div>
               </a>
             </div>
           </div>

@@ -46,14 +46,14 @@ const ToolCard: React.FC<ToolCardProps> = ({
   return (
     <div className="group relative h-full">
       {/* Modern floating container */}
-      <div className="relative bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-gray-200/40 shadow-sm hover:shadow-xl hover:shadow-black/5 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col overflow-hidden">
+      <div className="relative bg-neutral-100/60 dark:bg-neutral-800/60 backdrop-blur-2xl rounded-3xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-lg shadow-neutral-300 hover:shadow-xl hover:shadow-primary-500/20 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col overflow-hidden">
         
         {/* Background gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-200/10 dark:from-primary-800/20 via-transparent to-secondary-200/10 dark:to-secondary-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
         
         {/* Status indicator */}
         {status !== "Available" && (
-          <div className="absolute top-1 right-2 px-2 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full border border-amber-200">
+          <div className="absolute top-1 right-2 px-2 py-1 bg-secondary-100/60 dark:bg-secondary-900/30 text-secondary-700 dark:text-secondary-300 text-xs font-medium rounded-full border border-secondary-300/30 dark:border-secondary-700/30">
             Coming Soon
           </div>
         )}
@@ -62,22 +62,22 @@ const ToolCard: React.FC<ToolCardProps> = ({
         <div className="relative z-10 mb-6">
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-200/30 dark:from-primary-800/30 to-secondary-200/30 dark:to-secondary-800/30 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 {icon ? (
                   <img src={icon} alt={title} className="h-6 w-6" />
                 ) : (
-                  <Sparkles className="h-6 w-6 text-primary" />
+                  <Sparkles className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
                 )}
               </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-300/40 dark:from-primary-700/40 to-secondary-300/40 dark:to-secondary-700/40 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </div>
             
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">
+              <h3 className="text-lg d text-neutral-900 dark:text-neutral-100  transition-colors duration-300">
                 {title}
               </h3>
               {category && (
-                <span className="text-xs text-gray-500 font-medium uppercase tracking-wide">
+                <span className="text-xs text-neutral-600 dark:text-neutral-400 font-medium uppercase tracking-wide">
                   {category}
                 </span>
               )}
@@ -88,7 +88,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
         {/* Description */}
         {description && (
           <div className="relative z-10 flex-1 mb-6">
-            <p className="text-gray-600 leading-relaxed text-sm">
+            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">
               {description}
             </p>
           </div>
@@ -99,7 +99,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
           <button
             onClick={handleToolClick}
             disabled={isDisabled}
-            className="w-full cursor-pointer group/btn relative overflow-hidden bg-white/80 hover:bg-primary disabled:bg-gray-100 disabled:cursor-not-allowed border border-gray-200 hover:border-primary/50 disabled:border-gray-200 rounded-2xl px-6 py-3 text-sm font-medium text-gray-700 hover:text-white disabled:text-gray-400 transition-all duration-300 flex items-center justify-center gap-2"
+            className="w-full cursor-pointer group/btn relative overflow-hidden bg-neutral-100/80 dark:bg-neutral-700/80 hover:bg-primary-600 dark:hover:bg-primary-600 disabled:bg-neutral-200 dark:disabled:bg-neutral-700 disabled:cursor-not-allowed border border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-400 disabled:border-neutral-300 dark:disabled:border-neutral-600 rounded-2xl px-6 py-3 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-neutral-50 disabled:text-neutral-500 dark:disabled:text-neutral-400 transition-all flex items-center justify-center gap-2"
           >
             <span className="relative z-10">
               {getButtonText()}
@@ -109,7 +109,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
             )}
             
             {/* Button background animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
           </button>
         </div>
       </div>
@@ -167,7 +167,7 @@ const ToolsSection = () => {
   return (
     <section
       id="tools"
-      className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5"
+      className="py-12 sm:py-16 md:py-20 text-neutral-900 dark:text-neutral-100"
       aria-labelledby="tools-heading"
     >
       {/* Background decoration */}
@@ -184,7 +184,7 @@ const ToolsSection = () => {
             </div>
             <h2
               id="tools-heading"
-              className="text-3xl font-bold md:font-normal sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6"
+              className="text-3xl font-bold md:font-normal sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal text-neutral-900 dark:text-neutral-100 bg-clip-text  mb-6"
             >
               AI Powered Tools for Buddhist Studies
             </h2>
