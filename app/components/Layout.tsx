@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import ParticlesBackground from "./ParticlesBackground";
 import ChatBot from "./ChatBot";
 import { UserbackProvider } from "../context/UserbackProvider";
-import { FeedbackButton } from "./FeedbackButton";
 
 
 interface LayoutProps {
@@ -26,7 +25,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* AI Chatbot - Available site-wide */}
       <ChatBot />
       {/* Feedback Button - Available site-wide */}
-      <FeedbackButton />
 
     </div>
     </UserbackProvider>
