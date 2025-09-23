@@ -54,7 +54,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   
   // Get tools data regardless of authentication status
   const tools = await db.tools.findMany();
-  
+  const userbackId = process.env.USERBACK_ID;
   // If this is a logout redirect, don't try to authenticate
   if (isLogout) {
     return {
@@ -63,6 +63,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       isAuthenticated: false,
       isLogout: true,
       tools,
+      userbackId,
     };
   }
   
@@ -78,6 +79,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
         isAuthenticated: true,
         isLogout: false,
         tools,
+        userbackId,
       };
     }
   } catch (error) {

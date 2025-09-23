@@ -29,9 +29,6 @@ export function Layout({ children }: { readonly children: React.ReactNode }) {
 
 
 
-  const Quickhunt_Widget_Key = "ckRhV0QxUlhhNUtURkRNbXRKSlpvdz09OjpFcCtJanpFeDRueUZIOWhxQU1TRGxnPT0=";
-
-
 
 
   return (
