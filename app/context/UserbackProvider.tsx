@@ -10,14 +10,12 @@ interface UserbackProviderProps {
 
 interface UserbackContextType {
   userback: any;
-  isLoaded: boolean;
 }
 
-const UserbackContext = createContext<UserbackContextType>({ userback: null, isLoaded: false });
+const UserbackContext = createContext<UserbackContextType>({ userback: null });
 
 export const UserbackProvider: React.FC<UserbackProviderProps> = ({ children }) => {
   const [userback, setUserback] = useState<any>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const loaderData = useLoaderData();
 
   useEffect(() => {
@@ -35,19 +33,27 @@ export const UserbackProvider: React.FC<UserbackProviderProps> = ({ children }) 
           }
         };
         const instance = await Userback(usebackId, options);
+        console.log('Userback initialized successfully:', instance);
+ 
         setUserback(instance);
-        setIsLoaded(true);
         
         
       } catch (error) {
         console.error('Failed to initialize Userback:', error);
+        // Add more detailed error information
+        console.error('Error details:', {
+          message: error?.message,
+          stack: error?.stack,
+          userbackId: usebackId,
+          userData: user
+        });
       }
     };
     
     init();
-  }, []);
+  }, [loaderData]);
 
-  const contextValue = useMemo(() => ({ userback, isLoaded }), [userback, isLoaded]);
+  const contextValue = useMemo(() => ({ userback }), [userback]);
 
   return (
     <UserbackContext.Provider value={contextValue}>
