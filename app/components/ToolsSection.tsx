@@ -13,9 +13,10 @@ interface ToolCardProps {
   description?: string;
   status?: string;
   price?: number;
+  loginRequired?: boolean;
 }
 
-
+const LoginNotRequiredList=['Challenge Us']
 
 const ToolCard: React.FC<ToolCardProps> = ({
   title,
@@ -26,11 +27,16 @@ const ToolCard: React.FC<ToolCardProps> = ({
   description,
   status = "Available",
   price,
+  loginRequired,
 }) => {
   const { user } = useUserStore();
   const isAuthenticated = !!user;
 
   const handleToolClick = () => {
+    if(!loginRequired) {
+      window.location.href = path;
+      return;
+    }
     // Redirect to the appropriate URL
     const redirectUrl = isAuthenticated ? path : "/auth/login";
     window.location.href = redirectUrl;
@@ -38,9 +44,10 @@ const ToolCard: React.FC<ToolCardProps> = ({
 
   const isDisabled = status !== "Available";
   
-  const getButtonText = (): string => {
+  const getButtonText = (loginRequired: boolean|undefined): string => {
     if (isDisabled) return "Coming Soon";
-    return isAuthenticated ? "Access Tool" : "Login to Access";
+    if(!loginRequired) return "Access Tool";
+    return isAuthenticated ? "Access Tool" : "Login to Access" ;
   };
 
   return (
@@ -102,7 +109,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
             className="w-full cursor-pointer group/btn relative overflow-hidden bg-neutral-100/80 dark:bg-neutral-700/80 hover:bg-primary-600 dark:hover:bg-primary-600 disabled:bg-neutral-200 dark:disabled:bg-neutral-700 disabled:cursor-not-allowed border border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-400 disabled:border-neutral-300 dark:disabled:border-neutral-600 rounded-2xl px-6 py-3 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-neutral-50 disabled:text-neutral-500 dark:disabled:text-neutral-400 transition-all flex items-center justify-center gap-2"
           >
             <span className="relative z-10">
-              {getButtonText()}
+              {getButtonText(loginRequired)}
             </span>
             {!isDisabled && (
               <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300 relative z-10" />
@@ -191,7 +198,6 @@ const ToolsSection = () => {
            
           </header>
         </ScrollFadeIn>
-
         {/* Modern tools grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {tools && tools.length > 0 ? (
@@ -213,6 +219,7 @@ const ToolsSection = () => {
                     description={tool.description}
                     status={tool.status}
                     price={tool.price}
+                    loginRequired={!LoginNotRequiredList.includes(tool.title)}
                   />
                 </ScrollFadeIn>
               );
