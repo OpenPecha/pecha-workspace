@@ -62,7 +62,7 @@ const Hero = () => {
               >
         <div className="flex flex-col text-center mt-12 gap-4 relative z-10 px-4">
          <span className="text-sm text-neutral-600 dark:text-neutral-400">A platform to manage </span>
-         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-neutral-900 dark:text-neutral-300">Powering Buddhist AI. Together</h1>
+         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-neutral-900 dark:text-neutral-300">Powering Buddhist AI Together</h1>
         </div>
         <div className="flex justify-center p-4 sm:p-8 md:p-12 lg:p-20 mt-6 sm:mt-8 md:mt-10 relative z-10">
          <div className="relative w-full max-w-5xl">
