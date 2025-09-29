@@ -24,10 +24,10 @@ export const SEOHead = ({ metadata }: SEOHeadProps) => {
       {/* Additional Open Graph tags for better social sharing */}
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Pecha.tools - Buddhist AI Platform Logo" />
+      <meta property="og:image:alt" content="Buddhist ai Studio - Buddhist AI Platform Logo" />
       
       {/* Additional Twitter tags */}
-      <meta name="twitter:image:alt" content="Pecha.tools - Buddhist AI Platform Logo" />
+      <meta name="twitter:image:alt" content="Buddhist ai Studio  - Buddhist AI Platform Logo" />
       
       {/* Geo and location tags for Buddhist content */}
       <meta name="geo.region" content="Global" />
@@ -42,8 +42,8 @@ export const SEOHead = ({ metadata }: SEOHeadProps) => {
       <meta name="category" content="Buddhist Studies, AI Tools, Digital Preservation" />
       
       {/* Copyright and ownership */}
-      <meta name="copyright" content="Pecha.tools 2024" />
-      <meta name="owner" content="Pecha.tools" />
+      <meta name="copyright" content="Buddhist ai Studio 2024" />
+      <meta name="owner" content="Buddhist ai Studio " />
     </>
   );
 };

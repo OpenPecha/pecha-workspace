@@ -50,7 +50,7 @@ export function Layout({ children }: { readonly children: React.ReactNode }) {
         <meta name="robots" content="index, follow" />
         <meta name="language" content="en" />
         <meta name="revisit-after" content="7 days" />
-        <meta name="author" content="Pecha.tools" />
+        <meta name="author" content="Buddhist.ai.studio" />
         
         {/* Theme and Appearance */}
         <meta name="theme-color" content="#4f46e5" />

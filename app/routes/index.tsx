@@ -39,8 +39,8 @@ export function meta() {
     
     // Additional SEO Meta Tags
     { name: 'canonical', content: seoData.openGraph.url },
-    { name: 'application-name', content: 'Pecha.tools' },
-    { name: 'apple-mobile-web-app-title', content: 'Pecha.tools' },
+    { name: 'application-name', content: 'Buddhist ai Studio ' },
+    { name: 'apple-mobile-web-app-title', content: 'Buddhist ai Studio ' },
     
     // JSON-LD Structured Data
     {

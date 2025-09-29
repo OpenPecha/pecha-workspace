@@ -4,20 +4,20 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://workspace.pecha.tools/</loc>
+    <loc>https://studio.pecha.ai/</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://workspace.pecha.tools/icon_logo.png</image:loc>
-      <image:title>Pecha.tools - Buddhist AI Platform Logo</image:title>
+      <image:loc>https://studio.pecha.ai/icon_logo.png</image:loc>
+      <image:title>Buddhist ai Studio - Buddhist AI Platform Logo</image:title>
       <image:caption>AI-powered tools for Buddhist manuscript collection and translation</image:caption>
     </image:image>
   </url>
   
   <!-- Tools Section -->
   <url>
-    <loc>https://workspace.pecha.tools/tools</loc>
+    <loc>https://studio.pecha.ai/tools</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -25,7 +25,7 @@
   
   <!-- Profile/User Pages -->
   <url>
-    <loc>https://workspace.pecha.tools/profile</loc>
+    <loc>https://studio.pecha.ai/profile</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -33,7 +33,7 @@
   
   <!-- Authentication Pages (lower priority) -->
   <url>
-    <loc>https://workspace.pecha.tools/login</loc>
+    <loc>https://studio.pecha.ai/login</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

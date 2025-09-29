@@ -47,7 +47,7 @@ const Header: React.FC = () => {
               className="rounded-md"
             />
             <span className=" font-bold text-2xl">
-              Pecha AI Studio
+              Buddhist AI Studio
             </span>
           </div>
         </Link>

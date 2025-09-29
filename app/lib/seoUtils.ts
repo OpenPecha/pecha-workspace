@@ -1,5 +1,5 @@
 /**
- * SEO Utility functions for Pecha.tools Buddhist AI Platform
+ * SEO Utility functions for Buddhist ai Studio Buddhist AI Platform
  * These utilities help generate dynamic SEO content and structured data
  */
 
@@ -60,7 +60,7 @@ export const generateFAQSchema = (faqs: Array<{question: string, answer: string}
 export const generateArticleSchema = (
   title: string,
   description: string,
-  author: string = 'Pecha.tools',
+  author: string = 'Buddhist ai Studio ',
   publishDate: string = new Date().toISOString()
 ) => {
   return {
@@ -106,7 +106,7 @@ export const generateOrganizationSchema = () => {
     "foundingDate": "2024",
     "founder": {
       "@type": "Organization",
-      "name": "Pecha.tools Team"
+      "name": "Buddhist ai Studio  Team"
     },
     "area_served": "Global",
     "audience": {
@@ -149,7 +149,7 @@ export const generateSoftwareSchema = () => {
     },
     "creator": {
       "@type": "Organization", 
-      "name": "Pecha.tools"
+      "name": "Buddhist ai Studio "
     },
     "screenshot": `${SITE_INFO.url}/og-image.png`,
     "softwareVersion": "1.0",

@@ -15,13 +15,13 @@ const Footer = ({ className = "" }: FooterProps) => {
               <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
                 <img
                   src="/icon_logo.png"
-                  alt="pecha.tools"
+                  alt="Buddhist ai Studio "
                   width={32}
                   height={32}
                 />
               </div>
               <div>
-                <h3 className="text-2xl font-bold ">pecha.tools</h3>
+                <h3 className="text-2xl font-bold ">Buddhist ai Studio  </h3>
                 <p className="text-sm ">
                   AI-Enhanced Buddhist Manuscript Tools
                 </p>
@@ -132,7 +132,7 @@ const Footer = ({ className = "" }: FooterProps) => {
         {/* Bottom Section */}
         <div className="border-t border-white/10 mt-12 pt-8 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="/60 text-sm">&copy; 2025 pecha.tools.</p>
+            <p className="/60 text-sm">&copy; 2025 Buddhist ai Studio .</p>
             <div className="flex items-center space-x-6 text-sm /60">
               <span>Made with</span>
               <Heart className="h-4 w-4 text-red-400" />

@@ -1,4 +1,4 @@
-// Centralized SEO metadata for Pecha.tools - Buddhist AI Platform
+
 export interface SEOMetadata {
   title: string;
   description: string;
@@ -52,8 +52,8 @@ export const CORE_KEYWORDS = [
 
 // Base site information
 export const SITE_INFO = {
-  name: 'Pecha.tools - Buddhist AI Platform',
-  url: 'https://workspace.pecha.tools',
+  name: 'Buddhist ai Studio ',
+  url: 'https://studio.pecha.ai',
   description: 'A comprehensive collection of AI tools for modern Buddhist text collection, translation, and preservation. Specialized platform for Pecha Tibetan manuscripts, ancient Buddhist scriptures, and Dharma text processing.',
   logo: '/icon_logo.png',
   twitterHandle: '@pechatools'
@@ -94,7 +94,7 @@ export const DEFAULT_SEO_METADATA: SEOMetadata = {
     },
     "creator": {
       "@type": "Organization",
-      "name": "Pecha.tools",
+      "name": "Buddhist ai Studio",
       "url": SITE_INFO.url
     },
     "about": [
