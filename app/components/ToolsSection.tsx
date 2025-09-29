@@ -320,11 +320,17 @@ const ToolsSection = () => {
         {/* LEGACY TOOLS SECTION */}
         {oldTools && oldTools.length > 0 && (
           <div className="mb-16">
-              <h2
-              id="tools-heading"
-              className="text-3xl font-bold md:font-normal sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal text-neutral-900 dark:text-neutral-100 bg-clip-text  mb-6"
-            >    Legacy Tools
-              </h2>
+              <div className="flex items-center gap-3 mb-6">
+                <h2
+                  id="tools-heading"
+                  className="text-3xl font-bold md:font-normal sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal text-neutral-900 dark:text-neutral-100 bg-clip-text"
+                >
+                  Legacy Tools
+                </h2>
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-semibold border border-yellow-200">
+                  for annotators only
+                </span>
+              </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {oldTools.map((tool, index: number) => (
