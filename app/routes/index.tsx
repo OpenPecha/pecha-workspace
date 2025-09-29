@@ -55,7 +55,7 @@ interface LoaderData {
   isAuthenticated: boolean;
   isLogout: boolean;
   tools: Tool[];
-  oldTools: OldTool[];
+  oldTools: Tool[];
   userbackId?: string;
 }
 
@@ -80,7 +80,7 @@ export async function loader({ request }: LoaderFunctionArgs): Promise<LoaderDat
       active:true
     }
   });
-  const modifiedRawOldTools = rawOldTools.map((tool: OldTool) => ({
+  const modifiedRawOldTools= rawOldTools.map((tool: OldTool) => ({
     id: tool.id,
     title: tool.name ? tool.name.replaceAll("_", " ") : "",
     name: tool.name,
