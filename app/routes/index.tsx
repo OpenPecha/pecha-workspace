@@ -75,8 +75,21 @@ export async function loader({ request }: LoaderFunctionArgs): Promise<LoaderDat
   
   // Get tools data regardless of authentication status
   const tools = await db.tools.findMany();
-  const rawOldTools = await db.oldTools.findMany();
-
+  const rawOldTools = await db.oldTools.findMany({
+    where:{
+      active:true
+    }
+  });
+  const modifiedRawOldTools = rawOldTools.map((tool: OldTool) => ({
+    id: tool.id,
+    title: tool.name ? tool.name.replaceAll("_", " ") : "",
+    name: tool.name,
+    description: tool.description || undefined,
+    path:undefined,
+    icon: tool.icon || undefined,
+    demo: tool.demo || undefined,
+    department: tool.department,
+  }));
  
   
 
@@ -89,7 +102,7 @@ export async function loader({ request }: LoaderFunctionArgs): Promise<LoaderDat
       isAuthenticated: false,
       isLogout: true,
       tools,
-      oldTools:rawOldTools,
+      oldTools:modifiedRawOldTools,
       userbackId,
     };
   }
@@ -104,7 +117,6 @@ export async function loader({ request }: LoaderFunctionArgs): Promise<LoaderDat
 // If department exists and tool.url is present, update path with department mapping API response
     const oldTools = await Promise.all(
   rawOldTools
-    ?.filter((tool: OldTool) => tool.active !== false)
     ?.map(async (tool: OldTool) => {
       let path = tool.url || undefined;
       // If department exists and user email is available, update path with mapping API response
@@ -129,7 +141,6 @@ export async function loader({ request }: LoaderFunctionArgs): Promise<LoaderDat
         icon: tool.icon || undefined,
         demo: tool.demo || undefined,
         department: tool.department,
-        active: tool.active || undefined,
       };
     }) || []
    )   || [];
@@ -158,7 +169,7 @@ export async function loader({ request }: LoaderFunctionArgs): Promise<LoaderDat
     isAuthenticated: false,
     isLogout: false,
     tools,
-    oldTools:rawOldTools,
+    oldTools:modifiedRawOldTools,
   };
 }
 
