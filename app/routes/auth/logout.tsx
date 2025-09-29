@@ -12,15 +12,18 @@ export async function loader({ request }: { request: Request }) {
   const session = await getSession(request.headers.get('Cookie'));
   const headers = new Headers();
 
-  // Clean session
-  await auth0Service['cleanSession'](session);
+  // Use the proper logout method that revokes tokens
+  await auth0Service.logout(session);
 
-  // Commit empty session
   headers.append('Set-Cookie', await destroySession(session));
-
-
-  // Redirect to Auth0 logout
-  return Response.redirect(auth0Service.getLogoutUrl(), 302, { headers });
+  return new Response(null, {
+    status: 302,
+    headers: {
+      ...headers,
+      // Use federated logout to ensure complete logout from Auth0 and all identity providers
+      Location: auth0Service.getLogoutUrl(true)
+    }
+  });
 }
 
 

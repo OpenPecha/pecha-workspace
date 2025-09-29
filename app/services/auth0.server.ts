@@ -115,15 +115,22 @@ export class Auth0Service {
 
   /**
    * Generates the URL for logging out of Auth0
+   * @param federated - Whether to log out from federated identity providers as well
    * @returns Full URL for Auth0 logout endpoint
    */
-  getLogoutUrl(): string {
+  getLogoutUrl(federated: boolean = true): string {
     const baseUrl = new URL(auth0Config.callbackUrl).origin;
     const returnTo = `${baseUrl}/?logout=true`;
     const params = new URLSearchParams({
       client_id: auth0Config.clientId,
       returnTo: returnTo,
     });
+    
+    // Add federated logout to ensure complete logout from all identity providers
+    if (federated) {
+      params.append('federated', '');
+    }
+    
     return `${this.auth0Url}/v2/logout?${params.toString()}`;
   }
 
@@ -424,8 +431,72 @@ export class Auth0Service {
   private async cleanSession(session: any): Promise<void> {
     session.unset('accessToken');
     session.unset('user');
+    session.unset('refreshToken');
     await commitSession(session);
     log('Session cleaned', 'debug');
+  }
+
+  /**
+   * Revokes an access token with Auth0
+   * @param token - The access token to revoke
+   */
+  private async revokeAccessToken(token: string): Promise<void> {
+    await this.auth0Api.post('/oauth/revoke', {
+      client_id: auth0Config.clientId,
+      client_secret: auth0Config.clientSecret,
+      token,
+      token_type_hint: 'access_token',
+    });
+  }
+
+  /**
+   * Performs complete logout including token revocation and session cleanup
+   * @param session - The session object to logout
+   * @returns Promise that resolves when logout is complete
+   */
+  async logout(session: any): Promise<void> {
+    try {
+      // Get tokens from session before cleaning
+      const accessToken = session.get('accessToken');
+      const refreshToken = session.get('refreshToken');
+
+      // Revoke both access and refresh tokens if they exist
+      if (accessToken) {
+        try {
+          log('Revoking access token during logout...', 'debug');
+          await this.revokeAccessToken(accessToken);
+        } catch (error) {
+          log('Failed to revoke access token during logout', 'error');
+          // Continue with logout even if revocation fails
+        }
+      }
+
+      if (refreshToken) {
+        try {
+          log('Revoking refresh token during logout...', 'debug');
+          await this.revokeRefreshToken(refreshToken);
+        } catch (error) {
+          log('Failed to revoke refresh token during logout', 'error');
+          // Continue with logout even if revocation fails
+        }
+      }
+
+      // Remove from token cache if present
+      if (accessToken && this.tokenCache.has(accessToken)) {
+        log('Removing token from cache during logout', 'debug');
+        this.tokenCache.delete(accessToken);
+      }
+
+      // Clean the session
+      await this.cleanSession(session);
+      
+      log('Complete logout successful', 'debug');
+    } catch (error) {
+      log('Error during logout process', 'error');
+      // Always clean session even if other steps fail
+      await this.cleanSession(session);
+      throw error;
+    }
   }
 
   /**
