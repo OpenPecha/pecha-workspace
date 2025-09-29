@@ -321,7 +321,7 @@ const ToolsSection = () => {
                   id="tools-heading"
                   className="text-3xl font-bold md:font-normal sm:text-4xl md:text-5xl bg-gradient-to-r leading-normal text-neutral-900 dark:text-neutral-100 bg-clip-text"
                 >
-                  Legacy Tools
+                  Training Data Tools
                 </h2>
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-semibold border border-yellow-200">
                   for annotators only
