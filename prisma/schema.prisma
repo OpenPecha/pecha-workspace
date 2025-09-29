@@ -24,13 +24,12 @@ model Tools {
   description String?
   category    String?
   price       Float?
+  icon        String?
   link        String?
   demo        String?
-  icon        String?
 
   @@map("tools")
 }
-
 
 model oldTools {
   id          Int      @id @default(autoincrement())
