@@ -68,13 +68,11 @@ const ToolCard: React.FC<ToolCardProps> = ({
         <div className="relative z-10 mb-6">
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-200/30 dark:from-primary-800/30 to-secondary-200/30 dark:to-secondary-800/30 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 {icon ? (
-                  <img src={icon} alt={title} className="h-6 w-6" />
+                  <img src={icon} alt={title} className="h-10 w-10" />
                 ) : (
                   <Sparkles className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
                 )}
-              </div>
               <div className="absolute inset-0 bg-gradient-to-br from-primary-300/40 dark:from-primary-700/40 to-secondary-300/40 dark:to-secondary-700/40 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </div>
             
@@ -168,13 +166,11 @@ const OldToolCard: React.FC<ToolCardProps> = ({
         <div className="relative z-10 mb-6">
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-200/30 dark:from-primary-800/30 to-secondary-200/30 dark:to-secondary-800/30 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 {icon ? (
-                  <img src={icon} alt={title} className="h-6 w-6" />
+                  <img src={icon} alt={title} className="h-8 w-8" />
                 ) : (
                   <Sparkles className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
                 )}
-              </div>
               <div className="absolute inset-0 bg-gradient-to-br from-primary-300/40 dark:from-primary-700/40 to-secondary-300/40 dark:to-secondary-700/40 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </div>
             
