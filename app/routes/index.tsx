@@ -7,6 +7,7 @@ import Hero from '../components/Hero';
 import ToolsSection from '../components/ToolsSection';
 import VisionSection from '../components/VisionSection';
 import type { User } from '../types/User';
+import type { Tool, OldTool } from '../types/Tools';
 import { db } from '~/lib/prisma';
 import { DEFAULT_SEO_METADATA } from '../lib/seoMetadata';
 
@@ -48,12 +49,37 @@ export function meta() {
   ];
 }
 
-export async function loader({ request }: LoaderFunctionArgs) {
+interface LoaderData {
+  user: User | null;
+  accessToken: string | null;
+  isAuthenticated: boolean;
+  isLogout: boolean;
+  tools: Tool[];
+  oldTools: OldTool[];
+  userbackId?: string;
+}
+
+export const getUrl=async (url: string|undefined,email: string)=> {
+  if(url) return url;
+  try {
+    const res = await fetch(`https://stt.pecha.tools/api/mapping/${email}`);
+    const mappedUrl = await res.json();
+    return mappedUrl;
+  } catch (err) {
+  }
+}
+
+export async function loader({ request }: LoaderFunctionArgs): Promise<LoaderData> {
   const url = new URL(request.url);
   const isLogout = url.searchParams.get('logout') === 'true';
   
   // Get tools data regardless of authentication status
   const tools = await db.tools.findMany();
+  const rawOldTools = await db.oldTools.findMany();
+
+ 
+  
+
   const userbackId = process.env.USERBACK_ID;
   // If this is a logout redirect, don't try to authenticate
   if (isLogout) {
@@ -63,22 +89,60 @@ export async function loader({ request }: LoaderFunctionArgs) {
       isAuthenticated: false,
       isLogout: true,
       tools,
+      oldTools:rawOldTools,
       userbackId,
     };
   }
   
   try {
-    // Check if user is authenticated, but don't redirect if not
     const isAuthenticated = await auth0Service.verifySession(request);
+    const accessToken = await auth0Service.getAccessToken(request);
+    const userInfo = await auth0Service.getUserInfo(accessToken);
+    
+    // Check if user is authenticated, but don't redirect if not
     if (isAuthenticated) {
-      const accessToken = await auth0Service.getAccessToken(request);
-      const userInfo = await auth0Service.getUserInfo(accessToken);
+// If department exists and tool.url is present, update path with department mapping API response
+    const oldTools = await Promise.all(
+  rawOldTools
+    ?.filter((tool: OldTool) => tool.active !== false)
+    ?.map(async (tool: OldTool) => {
+      let path = tool.url || undefined;
+      // If department exists and user email is available, update path with mapping API response
+      if ( !tool.url && tool.department && userInfo.email) {
+        try {
+         const mappedUrl = await getUrl(path,userInfo.email);
+        path = mappedUrl;
+        } catch (err) {
+          // Do nothing on error, keep original path
+        }
+      }else if(tool.url && userInfo.email){
+        path = tool.url+"?"+`session=${encodeURIComponent(userInfo.email)}`;
+      }else {
+        path= undefined;
+      }
+      return {
+        id: tool.id,
+        title: tool.name ? tool.name.replaceAll("_", " ") : "",
+        name: tool.name,
+        description: tool.description || undefined,
+        path,
+        icon: tool.icon || undefined,
+        demo: tool.demo || undefined,
+        department: tool.department,
+        active: tool.active || undefined,
+      };
+    }) || []
+   )   || [];
+
+
+
       return {
         user: userInfo,
         accessToken,
         isAuthenticated: true,
         isLogout: false,
         tools,
+        oldTools,
         userbackId,
       };
     }
@@ -94,10 +158,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
     isAuthenticated: false,
     isLogout: false,
     tools,
+    oldTools:rawOldTools,
   };
 }
 
-export default function Home({ loaderData }: { readonly loaderData?: { user: User | null; accessToken: string | null; isAuthenticated: boolean; isLogout: boolean; tools: any[] } }) {
+export default function Home({ loaderData }: { readonly loaderData?: LoaderData }) {
   const { setUser, setAccessToken, clearUser } = useUserStore();
   
   useEffect(() => {

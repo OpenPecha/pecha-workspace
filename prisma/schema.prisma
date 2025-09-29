@@ -30,3 +30,15 @@ model Tools {
 
   @@map("tools")
 }
+
+
+model oldTools {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  url         String?
+  demo        String?
+  icon        String?
+  department  String[]
+  active      Boolean?
+}
