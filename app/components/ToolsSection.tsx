@@ -52,7 +52,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
   return (
     <div className="group relative h-full">
       {/* Modern floating container */}
-      <div className="relative bg-neutral-100/60 dark:bg-neutral-800/60 backdrop-blur-2xl rounded-3xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-lg shadow-neutral-300 hover:shadow-xl hover:shadow-primary-500/20 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col overflow-hidden">
+      <div className="relative bg-neutral-100/60 dark:bg-neutral-800/60 backdrop-blur-2xl rounded-3xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-lg shadow-neutral-300 dark:shadow-lg dark:shadow-neutral-900/60 hover:shadow-xl hover:shadow-primary-500/20 dark:hover:shadow-xl dark:hover:shadow-primary-900/30 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col overflow-hidden">
         
         {/* Background gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-200/10 dark:from-primary-800/20 via-transparent to-secondary-200/10 dark:to-secondary-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
@@ -150,7 +150,7 @@ const OldToolCard: React.FC<ToolCardProps> = ({
   return (
     <div className="group relative h-full">
       {/* Modern floating container */}
-      <div className="relative bg-neutral-100/60 dark:bg-neutral-800/60 backdrop-blur-2xl rounded-3xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-lg shadow-neutral-300 hover:shadow-xl hover:shadow-primary-500/20 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col overflow-hidden">
+      <div className="relative bg-neutral-100/60 dark:bg-neutral-800/60 backdrop-blur-2xl rounded-3xl p-6 border border-neutral-200/40 dark:border-neutral-700/40 shadow-lg shadow-neutral-300 dark:shadow-neutral-900/60 hover:shadow-xl hover:shadow-primary-500/20 dark:hover:shadow-primary-900/30 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col overflow-hidden">
         
         {/* Background gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-200/10 dark:from-primary-800/20 via-transparent to-secondary-200/10 dark:to-secondary-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
