@@ -61,8 +61,7 @@ const Hero = () => {
         aria-labelledby="hero-heading"
               >
         <div className="flex flex-col text-center mt-12 gap-4 relative z-10 px-4">
-         <span className="text-sm text-neutral-600 dark:text-neutral-400">A platform to manage </span>
-         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-neutral-900 dark:text-neutral-300">Building Buddhist AI. Together.</h1>
+         <h1 className="text-3xl font-bold sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight text-neutral-900 dark:text-neutral-300">Building Buddhist AI. Together</h1>
         </div>
         <div className="flex justify-center p-4 sm:p-8 md:p-12 lg:p-20 mt-6 sm:mt-8 md:mt-10 relative z-10">
          <div className="relative w-full max-w-5xl">
@@ -84,10 +83,10 @@ const Hero = () => {
              </div>
 
              {/* Statistics Card - Top Center */}
-             <div className="absolute -top-20 left-1/4 animate-float-medium z-20">
+             <div className="absolute -top-10 left-1/4 animate-float-medium z-20">
                <div className="floating-comment bg-neutral-50/90 dark:bg-neutral-800/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-neutral-200/20 dark:border-neutral-700/20 transform rotate-[8deg] hover:rotate-0 transition-transform duration-300">
                  <div className="text-center">
-                   <div className="text-2xl font-bold text-primary-600 dark:text-neutral-300">2.5K+</div>
+                   <div className="text-2xl font-bold text-primary-600 dark:text-neutral-300">1K+</div>
                    <div className="text-xs text-neutral-600 dark:text-neutral-400">Manuscripts Processed</div>
                  </div>
                </div>
@@ -150,17 +149,7 @@ const Hero = () => {
 
              {/* Circular Progress - Right Center */}
              <div className="absolute top-1/2 -right-24 animate-float-slow z-20">
-               <div className="floating-comment bg-neutral-50/90 dark:bg-neutral-800/90 backdrop-blur-sm rounded-full w-20 h-20 shadow-lg border border-neutral-200/20 dark:border-neutral-700/20 flex items-center justify-center transform rotate-[-10deg] hover:rotate-0 transition-transform duration-300">
-                 <div className="text-center">
-                   <div className="text-lg font-bold text-primary-600 dark:text-neutral-300">98%</div>
-                   <div className="text-xs text-neutral-600 dark:text-neutral-400">OCR</div>
-                 </div>
-               </div>
-             </div>
-
-             {/* Mini Chat Interface - Bottom Left */}
-             <div className="absolute -bottom-12 -left-32 animate-float-medium z-20">
-               <div className="floating-comment bg-neutral-50/90 dark:bg-neutral-800/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-neutral-200/20 dark:border-neutral-700/20 max-w-xs transform rotate-[7deg] hover:rotate-0 transition-transform duration-300">
+             <div className="floating-comment bg-neutral-50/90 dark:bg-neutral-800/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-neutral-200/20 dark:border-neutral-700/20 max-w-xs transform rotate-[7deg] hover:rotate-0 transition-transform duration-300">
                  <div className="space-y-2">
                    <div className="bg-primary-100 dark:bg-primary-900/30 rounded-lg px-3 py-1">
                      <div className="text-xs text-neutral-900 dark:text-neutral-100">Translate this text</div>
@@ -177,33 +166,6 @@ const Hero = () => {
                </div>
              </div>
 
-             {/* Achievement Badge - Bottom Center */}
-             <div className="absolute -bottom-8 left-1/3 animate-float-fast z-20">
-               <div className="floating-comment bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl px-4 py-3 shadow-lg text-neutral-50 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
-                 <div className="flex items-center gap-2">
-                   <span className="text-lg">🏆</span>
-                   <div>
-                     <div className="text-sm font-bold">Expert Level</div>
-                     <div className="text-xs opacity-90">1000+ texts processed</div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-
-             {/* Profile Grid - Bottom Right */}
-             <div className="absolute -bottom-16 -right-28 animate-float-slow z-20">
-               <div className="floating-comment bg-neutral-50/90 dark:bg-neutral-800/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-neutral-200/20 dark:border-neutral-700/20 transform rotate-[9deg] hover:rotate-0 transition-transform duration-300">
-                 <div className="grid grid-cols-3 gap-1">
-                   <img src="https://picsum.photos/32/32?random=1" alt="User 1" className="w-8 h-8 rounded-full object-cover" />
-                   <img src="https://picsum.photos/32/32?random=2" alt="User 2" className="w-8 h-8 rounded-full object-cover" />
-                   <img src="https://picsum.photos/32/32?random=3" alt="User 3" className="w-8 h-8 rounded-full object-cover" />
-                   <img src="https://picsum.photos/32/32?random=4" alt="User 4" className="w-8 h-8 rounded-full object-cover" />
-                   <img src="https://picsum.photos/32/32?random=5" alt="User 5" className="w-8 h-8 rounded-full object-cover" />
-                   <div className="w-8 h-8 rounded-full bg-gradient-to-r from-secondary-500 to-primary-500 flex items-center justify-center text-neutral-50 text-xs font-bold">+</div>
-                 </div>
-                 <div className="text-xs text-center text-neutral-600 dark:text-neutral-400 mt-2">Active translators</div>
-               </div>
-             </div>
 
              {/* Floating Decorative Elements */}
              <div className="absolute top-20 left-1/5 animate-pulse z-10">
