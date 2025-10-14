@@ -3,9 +3,31 @@ import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import ToolsSection from '@/components/ToolsSection';
 import VisionSection from '@/components/VisionSection';
-import type { Tool, TransformedTool, TransformedOldTool } from '@/types/Tools';
+import type { Tool, TransformedTool,  OldTool } from '@/types/Tools';
+import { getSession } from '@auth0/nextjs-auth0';
+
+export const dynamic = 'force-dynamic';
+
+export const getUrl=async (url: string|undefined,email: string)=> {
+  if(url) return url;
+  try {
+    const res = await fetch(`https://stt.pecha.tools/api/mapping/${email}`);
+    const mappedUrl = await res.json();
+    if(mappedUrl.error){
+      return mappedUrl.error
+    }
+    return mappedUrl;
+  } catch (err) {
+    console.error('Error fetching mapping:', err);
+    return undefined;
+  }
+}
+
+
 
 async function getData() {
+  const session = await getSession();
+  const userInfo = session?.user;
   try {
     // Get tools data
     const tools = await db.tools.findMany();
@@ -14,19 +36,7 @@ async function getData() {
         active: true
       }
     });
-
-    // Transform old tools for non-authenticated users
-    const modifiedRawOldTools: TransformedOldTool[] = rawOldTools.map((tool) => ({
-      id: tool.id,
-      title: tool.name ? tool.name.replaceAll("_", " ") : "",
-      name: tool.name,
-      description: tool.description || undefined,
-      path: undefined,
-      icon: tool.icon || undefined,
-      demo: tool.demo || undefined,
-      department: tool.department,
-    }));
-
+ 
     // Transform new tools data
     const transformedTools: TransformedTool[] = tools
       .map((tool: Tool): TransformedTool => ({
@@ -56,9 +66,42 @@ async function getData() {
         return 0;
       });
 
+
+     const oldTools = await Promise.all(
+        rawOldTools
+          ?.map(async (tool: OldTool) => {
+            let path = tool.url || undefined;
+            // If department exists and user email is available, update path with mapping API response
+            if ( !tool.url && tool.department && userInfo?.email) {
+              try {
+               const mappedUrl = await getUrl(path,userInfo.email);
+              path = mappedUrl;
+              } catch (err) {
+                // Do nothing on error, keep original path
+              }
+            }else if(tool.url && userInfo?.email){
+              path = tool.url+"?"+`session=${encodeURIComponent(userInfo.email)}`;
+            }else {
+              path= undefined;
+            }
+            return {
+              id: tool.id,
+              title: tool.name ? tool.name.replaceAll("_", " ") : "",
+              name: tool.name,
+              description: tool.description || undefined,
+              path,
+              icon: tool.icon || undefined,
+              demo: tool.demo || undefined,
+              department: tool.department,
+            };
+          }) || []
+         )   || [];
+      
+   console.log(oldTools)
+
     return {
       tools: transformedTools,
-      oldTools: modifiedRawOldTools,
+      oldTools,
     };
   } catch (error) {
     console.error('Error fetching data:', error);

@@ -142,7 +142,6 @@ const OldToolCard: React.FC<OldToolCardProps> = ({
   const authUser = useUser();
   const user= authUser?.user||null;
   const isAuthenticated = !!user;
-  
   const handleToolClick = async () => {
     if (!path) return;
 
@@ -150,6 +149,7 @@ const OldToolCard: React.FC<OldToolCardProps> = ({
       window.location.href = path;
       return;
     }
+    console.log(isAuthenticated)
     // Redirect to the appropriate URL
     const redirectUrl = isAuthenticated ? path : "/api/auth/login";
     window.open(redirectUrl, "_blank");
