@@ -1,26 +1,330 @@
-html,
+
+
+@font-face {
+  font-family: monlam-2;
+  src: url('/font/MonlamUniOuChan2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: monlam;
+  src: url('/font/MonlamTBslim.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: google-sans;
+  src: url('/font/ProductSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+
+/* Smooth performance optimizations */
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow-x: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
+/* Smooth scrolling optimization */
 * {
-  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Performance optimization for particles */
+#tsparticles {
+  transform: translateZ(0);
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* Floating comment animations */
+@keyframes float-slow {
+  0%, 100% { 
+    transform: translateY(0px) rotate(var(--rotate, 0deg));
   }
-  body {
-    color: white;
-    background: black;
+  50% { 
+    transform: translateY(-20px) rotate(var(--rotate, 0deg));
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% { 
+    transform: translateY(0px) rotate(var(--rotate, 0deg));
+  }
+  50% { 
+    transform: translateY(-15px) rotate(var(--rotate, 0deg));
+  }
+}
+
+@keyframes float-fast {
+  0%, 100% { 
+    transform: translateY(0px) rotate(var(--rotate, 0deg));
+  }
+  50% { 
+    transform: translateY(-10px) rotate(var(--rotate, 0deg));
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 4s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 3s ease-in-out infinite;
+}
+
+/* Hover effects for floating comments */
+.floating-comment {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+.floating-comment:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  z-index: 50;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient Light Blob - Glowing effect behind laptop */
+.gradient-light-blob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1200px;
+  height: 900px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  
+  /* Multi-layered gradient for realistic light effect */
+  background: radial-gradient(
+    ellipse 80% 60% at center,
+    rgba(99, 102, 241, 0.4) 0%,
+    rgba(139, 92, 246, 0.3) 20%,
+    rgba(59, 130, 246, 0.25) 40%,
+    rgba(6, 182, 212, 0.15) 60%,
+    rgba(16, 185, 129, 0.1) 80%,
+    transparent 100%
+  );
+  
+  /* Glow effect with multiple shadows */
+  filter: blur(40px);
+  opacity: 0.8;
+  
+  /* Gentle floating animation */
+  animation: light-glow 8s ease-in-out infinite;
+}
+
+/* Additional glow layers for enhanced light effect */
+.gradient-light-blob::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(99, 102, 241, 0.2) 30%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  animation: light-pulse 6s ease-in-out infinite;
+}
+
+.gradient-light-blob::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  right: 20%;
+  bottom: 20%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(139, 92, 246, 0.15) 40%,
+    transparent 80%
+  );
+  filter: blur(15px);
+  animation: light-shimmer 10s ease-in-out infinite reverse;
+}
+
+/* Keyframes for light animations */
+@keyframes light-glow {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translate(-50%, -50%) scale(1.05) rotate(1deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
+    opacity: 0.85;
+  }
+  75% {
+    transform: translate(-50%, -50%) scale(1.03) rotate(-1deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes light-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes light-shimmer {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  33% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  66% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments for gradient light blob */
+@media (max-width: 1024px) {
+  .gradient-light-blob {
+    /* Adjust size for tablets */
+    width: 900px;
+    height: 675px;
+    filter: blur(35px);
+    opacity: 0.7;
+  }
+  
+  .gradient-light-blob::before,
+  .gradient-light-blob::after {
+    /* Reduce glow intensity on smaller screens */
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 768px) {
+  .gradient-light-blob {
+    /* Mobile adjustments - larger but simpler */
+    width: 600px;
+    height: 450px;
+    filter: blur(25px);
+    opacity: 0.6;
+    animation: none; /* Disable animations on mobile for performance */
+  }
+  
+  .gradient-light-blob::before,
+  .gradient-light-blob::after {
+    /* Disable extra glow layers on mobile */
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .gradient-light-blob {
+    /* Extra small screens */
+    width: 450px;
+    height: 300px;
+    filter: blur(20px);
+    opacity: 0.5;
+  }
+}
+
+
+/* Enhanced responsive adjustments for scattered layout */
+@media (max-width: 1200px) {
+  /* Adjust positioning for smaller screens */
+  .absolute.-left-36 { left: -20px !important; }
+  .absolute.-right-40 { right: -20px !important; }
+  .absolute.-left-32 { left: -16px !important; }
+  .absolute.-right-32 { right: -16px !important; }
+}
+
+@media (max-width: 768px) {
+  /* Mobile adjustments */
+  .floating-comment {
+    max-width: 180px !important;
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+  }
+  
+  /* Reduce rotation angles on mobile */
+  .floating-comment {
+    transform: rotate(0deg) !important;
+  }
+  
+  /* Hide some elements on very small screens */
+  .absolute.-left-36,
+  .absolute.-right-40,
+  .absolute.-left-32,
+  .absolute.-right-32 {
+    display: none;
+  }
+}
+
+/* Enhanced glassmorphism for scattered elements */
+.floating-comment {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme adjustments for floating elements - DISABLED for light mode */
+/* @media (prefers-color-scheme: dark) {
+  .floating-comment {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+} */
+
+/* Pulsing animation for decorative dots */
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Feedback Button Vertical Text */
+.feedback-button-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Fallback for browsers without writing-mode support */
+@supports not (writing-mode: vertical-rl) {
+  .feedback-button-vertical {
+    writing-mode: tb-rl;
   }
 }

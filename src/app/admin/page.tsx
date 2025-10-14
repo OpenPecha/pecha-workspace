@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import React from "react";
-import { CodeSnippet } from "@/components/code-snippet";
 import { getAdminMessage } from "@/services/message.service";
 
 const Admin: NextPage = async () => {
@@ -23,7 +22,6 @@ const Admin: NextPage = async () => {
             </strong>
           </span>
         </p>
-        <CodeSnippet title="Admin Message" code={text} />
       </div>
     </div>
   );
