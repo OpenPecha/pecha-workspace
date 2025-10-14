@@ -7,6 +7,7 @@ import type { TransformedTool, TransformedOldTool } from "@/types/Tools";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ToolCardProps {
   title: string;
@@ -38,17 +39,31 @@ const ToolCard: React.FC<ToolCardProps> = ({
 
   const isAuthenticated = !!user;
 
-  const handleToolClick = () => {
-    if (!loginRequired) {
-      window.location.href = path;
-      return;
+  const isDisabled = status !== "Available";
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // If login is required, we handle navigation manually
+    if (loginRequired) {
+      e.preventDefault();
+      const redirectUrl = isAuthenticated ? path : "/api/auth/login";
+      window.location.href = redirectUrl;
     }
-    // Redirect to the appropriate URL
-    const redirectUrl = isAuthenticated ? path : "/api/auth/login";
-    window.location.href = redirectUrl;
+    // If login is not required, let the Link component handle navigation to href={path}
   };
 
-  const isDisabled = status !== "Available";
+  const buttonContent = (
+    <>
+      <span className="relative z-10">
+        <LoginToAccess loginRequired={loginRequired || false} status={status} />
+      </span>
+      {!isDisabled && (
+        <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300 relative z-10" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+    </>
+  );
+
+  const buttonClassName = "w-full cursor-pointer group/btn relative overflow-hidden bg-neutral-100/80 dark:bg-neutral-700/80 hover:bg-primary-600 dark:hover:bg-primary-600 disabled:bg-neutral-200 dark:disabled:bg-neutral-700 disabled:cursor-not-allowed border border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-400 disabled:border-neutral-300 dark:disabled:border-neutral-600 rounded-2xl px-6 py-3 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-neutral-50 disabled:text-neutral-500 dark:disabled:text-neutral-400 transition-all flex items-center justify-center gap-2";
 
   return (
     <div className="group relative h-full">
@@ -101,21 +116,22 @@ const ToolCard: React.FC<ToolCardProps> = ({
 
         {/* Modern button */}
         <div className="relative z-10 mt-auto">
-          <button
-            onClick={handleToolClick}
-            disabled={isDisabled}
-            className="w-full cursor-pointer group/btn relative overflow-hidden bg-neutral-100/80 dark:bg-neutral-700/80 hover:bg-primary-600 dark:hover:bg-primary-600 disabled:bg-neutral-200 dark:disabled:bg-neutral-700 disabled:cursor-not-allowed border border-neutral-300 dark:border-neutral-600 hover:border-primary-500 dark:hover:border-primary-400 disabled:border-neutral-300 dark:disabled:border-neutral-600 rounded-2xl px-6 py-3 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-neutral-50 disabled:text-neutral-500 dark:disabled:text-neutral-400 transition-all flex items-center justify-center gap-2"
-          >
-            <span className="relative z-10">
-              <LoginToAccess loginRequired={loginRequired || false} status={status} />
-            </span>
-            {!isDisabled && (
-              <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300 relative z-10" />
-            )}
-            
-            {/* Button background animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-          </button>
+          {isDisabled ? (
+            <button
+              disabled
+              className={buttonClassName}
+            >
+              {buttonContent}
+            </button>
+          ) : (
+            <Link
+              href={path}
+              onClick={handleClick}
+              className={buttonClassName}
+            >
+              {buttonContent}
+            </Link>
+          )}
         </div>
       </div>
     </div>
