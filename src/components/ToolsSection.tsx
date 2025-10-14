@@ -152,11 +152,7 @@ const OldToolCard: React.FC<OldToolCardProps> = ({
       return;
     }
 
-    if (department && department.length > 0) {
-      router.push(`/tools/${encodeURIComponent(title)}`);
-    } else if (path && path !== '#') {
-      window.open(path, "_blank");
-    }
+      router.push(`/tools/${encodeURIComponent(title)}`);    
   };
 
   const isDisabled = status !== "Available";

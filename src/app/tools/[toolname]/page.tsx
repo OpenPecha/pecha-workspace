@@ -3,7 +3,7 @@ import { getSession } from '@auth0/nextjs-auth0';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-
+import { cookies } from 'next/headers';
 // Server-side function to get the tool URL
 async function getUrlFromMapping(email: string): Promise<string | undefined> {
     try {
@@ -65,12 +65,18 @@ function ToolViewer({ toolName, toolUrl }: ToolViewerProps) {
                 </div>
             </header>
             <div className="flex-1">
+            {!toolUrl ? (
+    <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 dark:bg-neutral-900">
+      <h1 className="text-2xl font-bold text-neutral-800 dark:text-neutral-200">Tool not found</h1>
+      <div>contact admin to get access</div>
+    </div>):(
                 <iframe
                 src={toolUrl}
                 className="w-full h-full border-0"
                 title={toolName}
                 sandbox="allow-scripts allow-same-origin allow-forms"
                 />
+            )}
             </div>
         </div>
     );
@@ -82,6 +88,7 @@ interface PageProps {
 
 // Main Page Component (Server Component)
 export default async function ToolPage({ params }: PageProps) {
+  await cookies();
   const resolvedParams = await params;
   const toolname = decodeURIComponent(resolvedParams.toolname);
   const session = await getSession();
@@ -101,12 +108,7 @@ export default async function ToolPage({ params }: PageProps) {
   
   const toolUrl = await getToolUrl(toolname, user);
 
-  if (!toolUrl) {
-    return <div className="flex flex-col items-center justify-center h-screen bg-neutral-100 dark:bg-neutral-900">
-      <h1 className="text-2xl font-bold text-neutral-800 dark:text-neutral-200">Tool not found</h1>
-      <div>contact admin to get access</div>
-    </div>;
-  }
+ 
 
   return <ToolViewer toolName={toolname} toolUrl={toolUrl} />;
 }
