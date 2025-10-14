@@ -2,15 +2,17 @@ import { db } from '@/lib/prisma';
 import { getSession } from '@auth0/nextjs-auth0';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import React from 'react';
 
 // Server-side function to get the tool URL
 async function getUrlFromMapping(email: string): Promise<string | undefined> {
     try {
         const res = await fetch(`https://stt.pecha.tools/api/mapping/${email}`);
+        if (!res.ok) {
+            console.error('Error fetching mapping: response not ok', res.status);
+            return undefined;
+        }
         const mappedUrl = await res.json();
-        if(mappedUrl.error) return mappedUrl.error;
         return mappedUrl.error ? undefined : mappedUrl;
     } catch (err) {
         console.error('Error fetching mapping:', err);
@@ -34,7 +36,7 @@ async function getToolUrl(toolName: string, user: any): Promise<string | undefin
 
   // If URL is missing and department is present, fetch from mapping
   if (!path && tool.department?.length > 0) {
-    path = await getUrlFromMapping(user.email)||null;
+    path = await getUrlFromMapping(user.email) ?? null;
   } else if (path) {
     // Append session info to existing URL
     path = `${path}?session=${encodeURIComponent(user.email)}`;
@@ -74,10 +76,14 @@ function ToolViewer({ toolName, toolUrl }: ToolViewerProps) {
     );
 }
 
+interface PageProps {
+  readonly params: Promise<{ readonly toolname: string }>; // Assuming 'toolname' is your dynamic route segment
+}
 
 // Main Page Component (Server Component)
-export default async function ToolPage({ params }: { readonly params: { readonly toolname: string } }) {
-  const toolname = decodeURIComponent(params.toolname);
+export default async function ToolPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const toolname = decodeURIComponent(resolvedParams.toolname);
   const session = await getSession();
   const user = session?.user;
 
