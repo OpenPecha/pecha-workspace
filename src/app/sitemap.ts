@@ -1,7 +1,6 @@
 import { db } from '@/lib/prisma';
 import { MetadataRoute } from 'next';
 
-const URL = 'https://buddhistai.tools';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const tools = await db.tools.findMany({
@@ -23,27 +22,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
 
         return {
-            url: `${URL}${path}`,
+            url: `${path}`,
             lastModified: new Date(),
         };
     })
     .filter(Boolean) as MetadataRoute.Sitemap;
 
-  const staticToolUrls = [
-    'https://translation.buddhistai.tools',
-    'https://arena.buddhistai.tools',
-    'https://cataloger.buddhistai.tools',
-  ].map(url => ({
-    url,
-    lastModified: new Date(),
-  }));
 
-  return [
-    {
-      url: URL,
-      lastModified: new Date(),
-    },
-    ...toolUrls,
-    ...staticToolUrls,
-  ];
+
+  return toolUrls;
 }
