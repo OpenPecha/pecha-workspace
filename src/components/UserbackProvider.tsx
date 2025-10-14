@@ -40,12 +40,14 @@ export const UserbackProvider: React.FC<UserbackProviderProps> = ({userbackId, c
       } catch (error) {
         console.error('Failed to initialize Userback:', error);
         // Add more detailed error information
+        if(error instanceof Error){
         console.error('Error details:', {
-          message: error?.message,
-          stack: error?.stack,
+          message: error.message,
+          stack: error.stack,
           userbackId: usebackId,
           userData: user
         });
+        }
       }
     };
     
