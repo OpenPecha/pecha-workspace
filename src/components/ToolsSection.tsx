@@ -5,6 +5,8 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import ScrollFadeIn from "./ScrollFadeIn";
 import type { TransformedTool, TransformedOldTool } from "@/types/Tools";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ToolCardProps {
   title: string;
@@ -68,7 +70,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
               {icon ? (
-                <img src={icon} alt={title} className="h-10 w-10" />
+                <Image src={icon} alt={title} width={40} height={40} className="h-10 w-10" />
               ) : (
                 <Sparkles className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
               )}
@@ -142,17 +144,19 @@ const OldToolCard: React.FC<OldToolCardProps> = ({
   const authUser = useUser();
   const user= authUser?.user||null;
   const isAuthenticated = !!user;
-  const handleToolClick = async () => {
-    if (!path) return;
+  const router = useRouter();
 
-    if (!loginRequired) {
-      window.location.href = path;
+  const handleToolClick = async () => {
+    if (!isAuthenticated) {
+      router.push('/api/auth/login');
       return;
     }
-    console.log(isAuthenticated)
-    // Redirect to the appropriate URL
-    const redirectUrl = isAuthenticated ? path : "/api/auth/login";
-    window.open(redirectUrl, "_blank");
+
+    if (department && department.length > 0) {
+      router.push(`/tools/${encodeURIComponent(title)}`);
+    } else if (path && path !== '#') {
+      window.open(path, "_blank");
+    }
   };
 
   const isDisabled = status !== "Available";
@@ -177,7 +181,7 @@ const OldToolCard: React.FC<OldToolCardProps> = ({
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
               {icon ? (
-                <img src={icon} alt={title} className="h-8 w-8" />
+                <Image src={icon} alt={title} width={32} height={32} className="h-8 w-8" />
               ) : (
                 <Sparkles className="h-6 w-6 text-primary-600 dark:text-neutral-300" />
               )}
