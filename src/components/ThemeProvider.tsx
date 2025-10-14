@@ -1,11 +1,10 @@
 'use client';
 
+import { useTheme } from '@/hooks/useTheme';
 import { useEffect } from 'react';
-import { useThemeStore } from '@/store/theme';
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const { theme } = useThemeStore();
-
+  const { theme } = useTheme();
   useEffect(() => {
     // Apply theme on mount
     if (typeof document !== 'undefined') {

@@ -4,7 +4,8 @@ import ClientWrapper from '@/components/ClientWrapper';
 import "@/styles/globals.css";
 import "@/styles/tailwind.css";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
-
+import { UserbackProvider } from '@/components/UserbackProvider';
+const userbackId = process.env.USERBACK_ID||"";
 
 export const metadata: Metadata = {
   title: DEFAULT_SEO_METADATA.title,
@@ -53,9 +54,12 @@ export default function RootLayout({
       </head>
       <body>
         <UserProvider>
+          <UserbackProvider userbackId={userbackId}>
+
           <ClientWrapper>
             {children}
           </ClientWrapper>
+          </UserbackProvider>
         </UserProvider>
       </body>
     </html>
