@@ -110,5 +110,5 @@ export default async function ToolPage({ params }: PageProps) {
 
  
 
-  return <ToolViewer toolName={toolname} toolUrl={toolUrl} />;
+  return <ToolViewer toolName={toolname} toolUrl={toolUrl ?? ""} />;
 }
