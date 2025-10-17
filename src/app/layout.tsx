@@ -6,6 +6,8 @@ import "@/styles/tailwind.css";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { UserbackProvider } from '@/components/UserbackProvider';
 const userbackId = process.env.USERBACK_ID||"";
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 
 export const metadata: Metadata = {
   title: DEFAULT_SEO_METADATA.title,
@@ -61,7 +63,9 @@ export default function RootLayout({
           </ClientWrapper>
           </UserbackProvider>
         </UserProvider>
+        <GoogleAnalytics gaId="G-WVJLMRDJLR" />
       </body>
     </html>
   )
 }
+

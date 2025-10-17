@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.2.0",
+    "@next/third-parties": "^15.5.6",
     "@prisma/client": "^6.17.1",
     "@tailwindcss/postcss": "^4",
     "@tsparticles/react": "^3.0.0",
