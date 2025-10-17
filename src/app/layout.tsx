@@ -63,7 +63,7 @@ export default function RootLayout({
           </ClientWrapper>
           </UserbackProvider>
         </UserProvider>
-        <GoogleTagManager gtmId="GTM-PH3KCT6B" />
+        <GoogleTagManager gtmId="GTM-PH3KCT6B"  />
       </body>
     </html>
   )
