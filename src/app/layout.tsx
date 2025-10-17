@@ -6,7 +6,7 @@ import "@/styles/tailwind.css";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { UserbackProvider } from '@/components/UserbackProvider';
 const userbackId = process.env.USERBACK_ID||"";
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 
 export const metadata: Metadata = {
@@ -63,7 +63,7 @@ export default function RootLayout({
           </ClientWrapper>
           </UserbackProvider>
         </UserProvider>
-        <GoogleAnalytics gaId="G-WVJLMRDJLR" />
+        <GoogleTagManager gtmId="GTM-PH3KCT6B" />
       </body>
     </html>
   )
