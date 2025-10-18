@@ -124,7 +124,7 @@ const Header: React.FC = () => {
           ) : (
             <a
               href="/api/auth/login"
-              className="font-bold text-primary-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300"
+              className=" text-primary-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300"
             >
               Sign in
             </a>

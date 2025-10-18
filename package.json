@@ -13,8 +13,6 @@
     "@next/third-parties": "^15.5.6",
     "@prisma/client": "^6.17.1",
     "@tailwindcss/postcss": "^4",
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.9.1",
     "@userback/widget": "^0.3.11",
     "axios": "^1.6.0",
     "class-variance-authority": "^0.7.1",
