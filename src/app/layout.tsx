@@ -7,7 +7,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { UserbackProvider } from '@/components/UserbackProvider';
 import Script from 'next/script';
 const userbackId = process.env.USERBACK_ID||"";
-
+import { ReactLenis } from '@/lib/lenis';
 
 export const metadata: Metadata = {
   title: DEFAULT_SEO_METADATA.title,
@@ -66,6 +66,8 @@ export default function RootLayout({
         />
  
       </head>
+      <ReactLenis root>
+
       <body>
         {/* Google Tag Manager (noscript) */}
         <noscript>
@@ -87,6 +89,8 @@ export default function RootLayout({
           </UserbackProvider>
         </UserProvider>
       </body>
+      </ReactLenis>
+
     </html>
   )
 }

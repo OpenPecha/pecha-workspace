@@ -258,7 +258,6 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-100/30 to-blue-100/30 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <ScrollFadeIn direction="up" delay={0} triggerOnce={true}>
           <header className="text-center mb-12 sm:mb-16 md:mb-20">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Sparkles className="h-4 w-4" />
@@ -271,21 +270,15 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
               AI Powered Tools for Buddhist Studies
             </h2>
           </header>
-        </ScrollFadeIn>
 
         {/* NEW TOOLS SECTION */}
         {tools && tools.length > 0 && (
           <div className="mb-16">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {tools.map((tool, index: number) => (
-                <ScrollFadeIn
-                  key={tool.id || tool.title}
-                  direction="up"
-                  delay={index * 100}
-                  threshold={0.1}
-                  triggerOnce={false}
-                >
+              
                   <ToolCard
+                  key={tool.id || tool.title}
                     title={tool.title}
                     icon={tool.icon || ""}
                     path={tool.path || "#"}
@@ -296,7 +289,6 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
                     price={tool.price || 0}
                     loginRequired={!LoginNotRequiredList.includes(tool.title)}
                   />
-                </ScrollFadeIn>
               ))}
             </div>
           </div>
@@ -319,14 +311,9 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {oldTools.map((tool, index: number) => (
-                <ScrollFadeIn
-                  key={tool.id}
-                  direction="up"
-                  delay={index * 100}
-                  threshold={0.1}
-                  triggerOnce={false}
-                >
+              
                   <OldToolCard 
+                    key={tool.id || tool.title}
                     title={tool.title} 
                     icon={tool.icon || ""} 
                     path={tool.path || "#"}
@@ -334,7 +321,6 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
                     description={tool.description || ""}
                     loginRequired={!LoginNotRequiredList.includes(tool.title)}
                   />
-                </ScrollFadeIn>
               ))}
             </div>
           </div>

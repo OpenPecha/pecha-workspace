@@ -4,7 +4,6 @@ import Hero from '@/components/Hero';
 import ToolsSection from '@/components/ToolsSection';
 import VisionSection from '@/components/VisionSection';
 import type { Tool, TransformedTool, OldTool } from '@/types/Tools';
-
 export const dynamic = 'force-dynamic';
 
 async function getData() {
@@ -69,6 +68,8 @@ async function getData() {
 
 export default async function Home() {
   const { tools, oldTools } = await getData();
+
+
 
   return (
     <Layout>
