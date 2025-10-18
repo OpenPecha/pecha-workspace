@@ -183,9 +183,9 @@ const ChatBot: React.FC = () => {
       {isOpen && (
         <div className="mb-4 w-80 sm:w-96 h-96 bg-white rounded-2xl shadow-2xl border border-border/50 flex flex-col overflow-hidden">
           {/* Header */}
-          <div className=" bg-primary-300   px-4 py-3 flex items-center justify-between">
+          <div className=" bg-primary-500   px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8  bg-primary-300  rounded-full flex items-center justify-center">
+              <div className="w-8 h-8    rounded-full flex items-center justify-center">
                 <Bot className="h-4 w-4 text-white" />
               </div>
               <div>
@@ -195,7 +195,7 @@ const ChatBot: React.FC = () => {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/80  bg-primary-300  hover:text-white transition-colors p-1"
+              className="text-white/80   hover:text-white transition-colors p-1"
             >
               <X className="h-4 w-4" />
             </button>
@@ -287,7 +287,7 @@ const ChatBot: React.FC = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-300 dark:bg-primary-700 hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+          className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-700 dark:bg-primary-700 hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
           aria-label="Open AI Assistant"
         >
           <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />

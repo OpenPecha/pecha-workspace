@@ -137,7 +137,7 @@ const VisionSection = () => {
                     </div>
                     
                     {/* Category badge */}
-                    <div className="text-xs bg-primary-100/60 dark:bg-primary-900/30 text-primary-700 dark:text-neutral-800 px-2 py-1 rounded-full font-medium">
+                    <div className="text-xs bg-primary-100/60 dark:bg-primary-400/30 text-primary-700 dark:text-primary-300 px-2 py-1 rounded-full font-medium">
                       {post.title}
                     </div>
                   </div>
