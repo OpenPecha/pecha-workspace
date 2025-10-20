@@ -4,7 +4,9 @@ import React, { useEffect } from 'react'
 
 function page() {
     useEffect(()=>{
-        redirect('/api/auth/logout')
+      setTimeout(()=>{
+        window.location.href = '/api/auth/logout'
+      },1000)
     },[])
   return (
     <div>
