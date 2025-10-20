@@ -2,7 +2,6 @@
 
 import React from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
-import ScrollFadeIn from "./ScrollFadeIn";
 import type { TransformedTool, TransformedOldTool } from "@/types/Tools";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/navigation";
