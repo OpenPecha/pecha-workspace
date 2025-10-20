@@ -3,7 +3,6 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import ParticlesBackground from "./ParticlesBackground";
 import ChatBot from "./ChatBot";
 
 interface LayoutProps {
