@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation'
 import React, { useEffect } from 'react'
 
-function page() {
+function Page() {
     useEffect(()=>{
       setTimeout(()=>{
         window.location.href = '/api/auth/logout'
@@ -15,4 +15,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
