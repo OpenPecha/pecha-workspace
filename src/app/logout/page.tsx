@@ -8,7 +8,7 @@ function page() {
     },[])
   return (
     <div>
-      hi
+      logging out
     </div>
   )
 }
